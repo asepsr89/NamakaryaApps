@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <h4 class="card-header mt-0">No Fasilitas : {{ $data->noFasilitas }}</h4>
                     <hr>
-                    @if ($data->status == 3)
+                    @if ($data->status == 2)
                         <a href="{{ route('fasilitas.index') }}" class="btn btn-secondary btn-xl mb-03">Back</a>
                         <a href="{{ route('fasilitas.approve', $data->id) }}" class="btn btn-primary btn-xl">Approve
                             Fasilitas</a>
@@ -353,12 +353,16 @@
                     <h4 class="modal-title" id="modelHeading"></h4>
                 </div>
                 <div class="modal-body">
-                    <form id="noteForm" name="noteForm" class="form-horizontal">
+                    <form id="revisi" name="revisi" action="{{ route('fasilitas.revisi', $data->id) }}"
+                        class="form-horizontal" method="POST">
+                        @csrf
+                        @if ($data->id)
+                            @method('PUT')
+                        @endif
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Note Revisi</label>
                             <div class="col-sm-12">
-                                <textarea id="detail" name="detail" required="" placeholder="Enter Details"
-                                    class="form-control form-control-lg mb-3"></textarea>
+                                <textarea id="note" name="note" placeholder="Enter Details" class="form-control form-control-lg mb-3"></textarea>
                             </div>
                         </div>
 
@@ -391,31 +395,12 @@
 
         });
 
-        $('#saveBtn').click(function(e) {
-            e.preventDefault();
-            $(this).html('Sending..');
 
-            $.ajax({
-                data: $('#noteForm').serialize(),
-                url: `{{ url('fasilitas/') }}/${id}/revisi `,
-                type: "POST",
-                dataType: 'json',
-                success: function(data) {
-
-                    $('#productForm').trigger("reset");
-                    $('#ajaxModel').modal('hide');
-                },
-                error: function(data) {
-                    console.log('Error:', data);
-                    $('#saveBtn').html('Save Changes');
-                }
-            });
-        });
 
         $(document).ready(function() {
-            if ($("#detail").length > 0) {
+            if ($("#note").length > 0) {
                 tinymce.init({
-                    selector: "textarea#detail",
+                    selector: "textarea#note",
                     theme: "modern",
                     height: 300,
                     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l      ink image | print preview media fullpage | forecolor backcolor emoticons",

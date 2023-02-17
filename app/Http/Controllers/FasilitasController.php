@@ -67,8 +67,10 @@ class FasilitasController extends Controller
                 $kirimMitra .=  ' <a href="fasilitas/'.$data->id.'/cekFasilitas" data-toggle="tooltip" data-id="'.$data->id.'" 
                     class="edit btn btn-secondary btn-sm ">Info Fasiitas</a>';
 
-                if($data->status == 3){
+                if($data->status == 2){
                     return $cekfasilitas;
+                }elseif($data->status == 3){
+                    return '<span class="badge badge-danger">Revisi Cabang</span>';
                 }elseif($data->status == 4){
                     return $kirimMitra;
                 }elseif($data->status == 5){
@@ -81,13 +83,16 @@ class FasilitasController extends Controller
                 $otorisasi = '<a href="fasilitas/'.$data->id.'/otorisasi" data-toggle="tooltip" data-id="'.$data->id.'"
                         class="edit btn btn-success btn-sm ">Otorisasi Fasilitas</a>';
 
+                $revisi = '<a href="fasilitas/'.$data->id.'/revisifasilitas" data-toggle="tooltip" data-id="'.$data->id.'"
+                        class="edit btn btn-success btn-sm ">Revisi Fasilitas</a>';
+
                 
                     if($data->status == 1){
                         return $otorisasi;
                     }elseif($data->status == 2){
-                        return '<span class="badge badge-info">Revisi Berkas</span>';
+                        return '<span class="badge badge-info">Cek Fasilitas Pusat</span>';
                     }elseif($data->status == 3){
-                        return '<span class="badge badge-info">Approve Cabang</span>';
+                        return $revisi;
                     }elseif($data->status == 4){
                         return '<span class="badge badge-success">Approve Pusat</span>';
                     }elseif($data->status == 5){
@@ -194,10 +199,20 @@ class FasilitasController extends Controller
 
     }
 
+    Public function revisifasilitas(Request $request,$id)
+    {
+        $data = Fasilitas::find($id);
+        $debitur_id = $data->debitur_id;
+
+        $debitur = Debitur::find($debitur_id);
+
+        return view('fasilitas.revisifasilitas',compact('data','debitur'));
+    }
+
     public function otorisasi(Fasilitas $fasilitas,$id)
     {
         $fasilitas=Fasilitas::findOrFail($id);
-        $fasilitas->status='3';
+        $fasilitas->status='2';
         $fasilitas->save();
 
         $debitur_id = $fasilitas->debitur_id;
@@ -262,9 +277,14 @@ class FasilitasController extends Controller
         return redirect('debitur')->with('success','Fasilitas Reject');
 
     }
-    public function revisi(Fasilitas $fasilitas,$id)
+    public function revisi(Request $request,$id)
     {
-        return '<alert>tes<alert>';
+        $fasilitas = Fasilitas::find($id);
+        $fasilitas->note = $request->note;
+        $fasilitas->status = '3';
+        $fasilitas->save();
+
+         return redirect('fasilitas')->with('success','Revisi Fasilitas Berhasil disimpan');
     }   
 
     public function kirimmitra(Fasilitas $fasilitas,$id)

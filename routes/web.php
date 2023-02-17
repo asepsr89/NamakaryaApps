@@ -73,5 +73,6 @@ Route::middleware('auth')->group(function(){
     Route::get('fasilitas/{id}/approve',[FasilitasController::class,'approve'])->name('fasilitas.approve');
     Route::get('fasilitas/{id}/reject',[FasilitasController::class,'reject'])->name('fasilitas.reject');
     Route::get('fasilitas/{id}/kirimmitra',[FasilitasController::class,'kirimmitra'])->name('fasilitas.kirimmitra');
-    Route::get('fasilitas/{id}/revisi',[FasilitasController::class,'revisi'])->name('fasilitas.revisi');
+    Route::put('fasilitas/{id}/revisi',[FasilitasController::class,'revisi'])->name('fasilitas.revisi');
+    Route::get('fasilitas/{id}/revisifasilitas',[FasilitasController::class,'revisifasilitas'])->name('fasilitas.revisifasilitas');
 });
