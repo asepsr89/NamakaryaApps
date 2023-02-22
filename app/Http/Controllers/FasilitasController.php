@@ -196,7 +196,105 @@ class FasilitasController extends Controller
      */
     public function update(Request $request,$id)
     {
-        
+        $fasilitas = Fasilitas::find($id);
+
+        if($request->hasFile('fileBerkas')){
+            $fasilitas->clearMediaCollection('docs');
+            $fasilitas->addMediaFromRequest('fileBerkas')->usingName($fasilitas->noFasilitas)->toMediaCollection('docs');
+            $fasilitas->debitur_id = $request->debitur_id;
+            $fasilitas->cabang_id = $request->cabang_id;
+            $fasilitas->noFasilitas = $request->noFasilitas;
+            $fasilitas->noDebitur = $request->noDebitur;
+            $fasilitas->tglLahir = $request->tglLahir;
+            $fasilitas->tmpLahir = $request->tmpLahir;
+            $fasilitas->namaPasangan = $request->namaPasangan;
+            $fasilitas->tglLahirPasangan = $request->tglLahirPasangan;
+            $fasilitas->pendidikan = $request->pendidikan;
+            $fasilitas->stsKawin = $request->stsKawin;
+            $fasilitas->npwp = $request->npwp;
+            $fasilitas->alamatSkrng = $request->alamatSkrng;
+            $fasilitas->stsTinggal = $request->stsTinggal;
+            $fasilitas->jnsPekerjaan = $request->jnsPekerjaan;
+            $fasilitas->namaPerusahaan = $request->namaPerusahaan;
+            $fasilitas->tlpPerusahaan = $request->tlpPerusahaan;
+            $fasilitas->lamaBekerja = $request->lamaBekerja;
+            $fasilitas->penghasilan = $request->penghasilan;
+            $fasilitas->bukuNikah = $request->bukuNikah;
+            $fasilitas->aktaCerai = $request->aktaCerai;
+            $fasilitas->fotoPeminjam = $request->fotoPeminjam;
+            $fasilitas->idCard = $request->idCard;
+            $fasilitas->suratHrd = $request->suratHrd;
+            $fasilitas->suratBekerja = $request->suratBekerja;
+            $fasilitas->slipGaji = $request->slipGaji;
+            $fasilitas->mutasiRekening = $request->mutasiRekening;
+            $fasilitas->kartuBpjs = $request->kartuBpjs;
+            $fasilitas->ijazahTerakhir = $request->ijazahTerakhir;
+            $fasilitas->institusiLk = $request->institusiLk;
+            $fasilitas->verifPerusahaan = $request->verifPerusahaan;
+            $fasilitas->kerjaAnalisis = $request->kerjaAnalisis;
+            $fasilitas->surveiLingkungan = $request->surveiLingkungan;
+            $fasilitas->fotoRumah = $request->fotoRumah;
+            $fasilitas->skoringKredit = $request->skoringKredit;
+            $fasilitas->denahLokasi = $request->denahLokasi;
+            $fasilitas->mpp = $request->mpp;
+            $fasilitas->buktiKepemilikan = $request->buktiKepemilikan;
+            $fasilitas->shm = $request->shm;
+            $fasilitas->fotoAtm = $request->fotoAtm;
+            $fasilitas->payrollPelunasan = $request->payrollPelunasan;
+            $fasilitas->executiveSummary = $request->executiveSummary;
+            $fasilitas->dokumenTambahan = $request->dokumenTambahan;
+            $fasilitas->status = '3';
+            $fasilitas->save();
+        }else{
+            $fasilitas->debitur_id = $request->debitur_id;
+            $fasilitas->cabang_id = $request->cabang_id;
+            $fasilitas->noFasilitas = $request->noFasilitas;
+            $fasilitas->noDebitur = $request->noDebitur;
+            $fasilitas->tglLahir = $request->tglLahir;
+            $fasilitas->tmpLahir = $request->tmpLahir;
+            $fasilitas->namaPasangan = $request->namaPasangan;
+            $fasilitas->tglLahirPasangan = $request->tglLahirPasangan;
+            $fasilitas->pendidikan = $request->pendidikan;
+            $fasilitas->stsKawin = $request->stsKawin;
+            $fasilitas->npwp = $request->npwp;
+            $fasilitas->alamatSkrng = $request->alamatSkrng;
+            $fasilitas->stsTinggal = $request->stsTinggal;
+            $fasilitas->jnsPekerjaan = $request->jnsPekerjaan;
+            $fasilitas->namaPerusahaan = $request->namaPerusahaan;
+            $fasilitas->tlpPerusahaan = $request->tlpPerusahaan;
+            $fasilitas->lamaBekerja = $request->lamaBekerja;
+            $fasilitas->penghasilan = $request->penghasilan;
+            $fasilitas->bukuNikah = $request->bukuNikah;
+            $fasilitas->aktaCerai = $request->aktaCerai;
+            $fasilitas->fotoPeminjam = $request->fotoPeminjam;
+            $fasilitas->idCard = $request->idCard;
+            $fasilitas->suratHrd = $request->suratHrd;
+            $fasilitas->suratBekerja = $request->suratBekerja;
+            $fasilitas->slipGaji = $request->slipGaji;
+            $fasilitas->mutasiRekening = $request->mutasiRekening;
+            $fasilitas->kartuBpjs = $request->kartuBpjs;
+            $fasilitas->ijazahTerakhir = $request->ijazahTerakhir;
+            $fasilitas->institusiLk = $request->institusiLk;
+            $fasilitas->verifPerusahaan = $request->verifPerusahaan;
+            $fasilitas->kerjaAnalisis = $request->kerjaAnalisis;
+            $fasilitas->surveiLingkungan = $request->surveiLingkungan;
+            $fasilitas->fotoRumah = $request->fotoRumah;
+            $fasilitas->skoringKredit = $request->skoringKredit;
+            $fasilitas->denahLokasi = $request->denahLokasi;
+            $fasilitas->mpp = $request->mpp;
+            $fasilitas->buktiKepemilikan = $request->buktiKepemilikan;
+            $fasilitas->shm = $request->shm;
+            $fasilitas->fotoAtm = $request->fotoAtm;
+            $fasilitas->payrollPelunasan = $request->payrollPelunasan;
+            $fasilitas->executiveSummary = $request->executiveSummary;
+            $fasilitas->dokumenTambahan = $request->dokumenTambahan;
+            $fasilitas->status = '3';
+            $fasilitas->save();
+        }
+
+
+
+        return redirect('fasilitas')->with('success', 'Data Berhasil Di Update');
     }
 
     Public function revisifasilitas(Request $request,$id)

@@ -18,8 +18,6 @@
                         <a href="{{ route('fasilitas.index') }}" class="btn btn-secondary btn-xl mb-03">Back</a>
                         <a href="{{ route('fasilitas.approve', $data->id) }}" class="btn btn-primary btn-xl">Approve
                             Fasilitas</a>
-                        <a href="{{ route('fasilitas.reject', $data->id) }}" class="btn btn-danger btn-xl">Reject
-                            Fasilitas</a>
                         <a class="btn btn-warning btn-xl" href="javascript:void(0)" id="revisiBtn">Revisi
                             Berkas<a>
                             @elseif($data->status == 4)

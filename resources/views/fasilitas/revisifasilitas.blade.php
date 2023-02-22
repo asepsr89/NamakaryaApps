@@ -112,6 +112,17 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-4 col-form-label">No Fasilitas</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control @error('noFasilitas') is-invalid @enderror"
+                                            type="text" value="{{ $data->noFasilitas }}" id="noFasilitas"
+                                            name="noFasilitas" readonly>
+                                        @error('noFasilitas')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label for="example-date-input" class="col-sm-4 col-form-label">Tanggal
                                         Lahir</label>
                                     <div class="col-sm-8">
@@ -223,8 +234,7 @@
                                         Sekarang</label>
                                     <div class="col-sm-8">
                                         <textarea id="alamatSkrng" value="{{ $data->alamatSkrng }}" name="alamatSkrng"
-                                            class="form-control @error('alamatSkrng') is-invalid @enderror" maxlength="225" rows="3"
-                                            placeholder="{{ $data->alamatSkrng }}"></textarea>
+                                            class="form-control @error('alamatSkrng') is-invalid @enderror" maxlength="225" rows="3" placeholder="">{{ $data->alamatSkrng }}</textarea>
                                         @error('alamatSkrng')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
@@ -528,7 +538,8 @@
                                         <select class="form-control @error('ijazahTerakhir') is-invalid @enderror"
                                             name="ijazahTerakhir" id="ijazahTerakhir">
                                             <option value="0">Select</option>
-                                            <option value="Ada" {{ $data->ijazahTerakhir == 'Ada' ? 'selected' : '' }}>
+                                            <option value="Ada"
+                                                {{ $data->ijazahTerakhir == 'Ada' ? 'selected' : '' }}>
                                                 Ada
                                             </option>
                                             <option value="Tidak ada"
