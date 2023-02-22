@@ -10,8 +10,9 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <form method="POST" action="{{ route('fasilitas.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('fasilitas.update', $data->id) }}" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="card m-b-30">
                     <div class="card-body">
                         <h4 class="card-header mt-0">Data Debitur</h4>
@@ -881,16 +882,11 @@
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <h6>
-                                    <p class="text-muted m-b-30 font-14">Semua berkas dalam satu folder dan dicompress
-                                        dengan
-                                        format ZIP,RAR.
-                                    </p>
-                                </h6>
-                                @error('fileBerkas')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                                <input type="file" data-allowed-file-extensions="zip rar" data-max-file-size="10M"
-                                    name="fileBerkas" id="fileBerkas" class="dropify" />
+                                    @error('fileBerkas')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                    <input type="file" data-allowed-file-extensions="zip rar" data-max-file-size="10M"
+                                        name="fileBerkas" id="fileBerkas" class="dropify" />
                             </div>
                         </div>
                         <div class="form-group row ">

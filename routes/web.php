@@ -75,4 +75,5 @@ Route::middleware('auth')->group(function(){
     Route::get('fasilitas/{id}/kirimmitra',[FasilitasController::class,'kirimmitra'])->name('fasilitas.kirimmitra');
     Route::put('fasilitas/{id}/revisi',[FasilitasController::class,'revisi'])->name('fasilitas.revisi');
     Route::get('fasilitas/{id}/revisifasilitas',[FasilitasController::class,'revisifasilitas'])->name('fasilitas.revisifasilitas');
+    Route::put('fasilitas/{id}',[FasilitasController::class,'update'])->name('fasilitas.update');
 });

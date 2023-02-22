@@ -149,7 +149,7 @@ class FasilitasController extends Controller
         $data['status'] = '1';
         $data['noFasilitas'] = $nomor_fasilitas;
         $fasilitas = Fasilitas::create($data);
-        $fasilitas->addMediaFromRequest('fileBerkas')->toMediaCollection('docs');
+        $fasilitas->addMediaFromRequest('fileBerkas')->usingName($fasilitas->noFasilitas)->toMediaCollection('docs');
 
         return redirect('fasilitas')->with('success', 'Data Berhasil Di simpan');
    
@@ -196,7 +196,7 @@ class FasilitasController extends Controller
      */
     public function update(Request $request,$id)
     {
-
+        
     }
 
     Public function revisifasilitas(Request $request,$id)
