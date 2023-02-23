@@ -18,7 +18,6 @@
                         <label for="example-text-input" class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-10">
                             <table class="table table-bordered table-responsive">
-                                <caption style="color: red">* Hapus terlebih Gambar apabila ingin menganti foto</caption>
                                 <thead>
                                     <tr>
                                         <th>Foto KTP</th>
@@ -29,8 +28,7 @@
                                 <tbody>
                                     <tr>
                                         @foreach ($image as $foto)
-                                            <td><img src="{{ $foto->getUrl('thumb') }}"><br /><br /><a href=""
-                                                    class="btn btn-danger"> Hapus</a></td>
+                                            <td><img src="{{ $foto->getUrl('thumb') }}"><br /><br /></td>
                                         @endforeach
                                     </tr>
                                 </tbody>

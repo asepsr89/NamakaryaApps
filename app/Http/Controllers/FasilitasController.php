@@ -243,7 +243,7 @@ class FasilitasController extends Controller
             $fasilitas->payrollPelunasan = $request->payrollPelunasan;
             $fasilitas->executiveSummary = $request->executiveSummary;
             $fasilitas->dokumenTambahan = $request->dokumenTambahan;
-            $fasilitas->status = '3';
+            $fasilitas->status = '2';
             $fasilitas->save();
         }else{
             $fasilitas->debitur_id = $request->debitur_id;

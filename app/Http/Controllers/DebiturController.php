@@ -171,9 +171,9 @@ class DebiturController extends Controller
     {
         
         $debitur = Debitur::create($request->all());
-        $debitur->addMediaFromRequest('imgKtp')->toMediaCollection('images');
-        $debitur->addMediaFromRequest('imgKK')->toMediaCollection('images');
-        $debitur->addMediaFromRequest('imgPsKtp')->toMediaCollection('images');
+        $debitur->addMediaFromRequest('imgKtp')->usingName($debitur->name)->toMediaCollection('images');
+        $debitur->addMediaFromRequest('imgKK')->usingName($debitur->name)->toMediaCollection('images');
+        $debitur->addMediaFromRequest('imgPsKtp')->usingName($debitur->name)->toMediaCollection('images');
     
         return redirect('debitur')->with('success', 'Data berhasil di simpan!');
     }

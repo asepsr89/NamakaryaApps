@@ -30,6 +30,10 @@
     <!--Wysiwig js-->
     <script src="{{ asset('') }}assets/plugins/tinymce/tinymce.min.js"></script>
 
+    <!-- Bootstrap inputmask js -->
+    <script src="{{ asset('') }}assets/plugins/bootstrap-inputmask/bootstrap-inputmask.min.js" type="text/javascript">
+    </script>
+
 
 
 </head>
