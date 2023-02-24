@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('namaPerusahaan');
             $table->string('tlpPerusahaan');
             $table->string('lamaBekerja');
-            $table->string('penghasilan');
+            $table->float('penghasilan');
             $table->string('bukuNikah');
             $table->string('aktaCerai')->nullable();
             $table->string('fotoPeminjam');

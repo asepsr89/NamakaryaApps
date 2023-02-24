@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('noKtp')->nullable();
             $table->string('alamat')->nullable();
             $table->string('tlp')->nullable();
-            $table->string('plafond')->nullable();
+            $table->bigInteger('plafond')->nullable();
             $table->string('ibuKandung')->nullable();
             $table->integer('sttsDebitu')->nullable();
             $table->integer('sttsPengajuan')->nullable();

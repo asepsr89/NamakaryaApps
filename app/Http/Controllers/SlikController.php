@@ -53,7 +53,7 @@ class SlikController extends Controller
          return view('slik.index');
     }
 
-    public function cekslik(Slik $image,$id)
+    public function cekslik(Slik $slik,$id)
     {
         $data=Debitur::find($id);
         $image=$data->getMedia('images');
@@ -181,7 +181,7 @@ class SlikController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Slik $data,$id)
+    public function update(SlikRequest $request, Slik $data,$id)
     {
  
             $debitur= new Debitur();

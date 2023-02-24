@@ -707,13 +707,13 @@
                                 <h6>
                                     <p class="text-muted m-b-30 font-14">Semua berkas dalam satu folder dan dicompress
                                         dengan
-                                        format ZIP,RAR.
+                                        format ZIP,RAR,PDF.
                                     </p>
                                 </h6>
                                 @error('fileBerkas')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <input type="file" data-allowed-file-extensions="zip rar" data-max-file-size="10M"
+                                <input type="file" data-allowed-file-extensions="zip rar pdf" data-max-file-size="10M"
                                     name="fileBerkas" id="fileBerkas" class="dropify" />
                             </div>
                         </div>

@@ -11,7 +11,7 @@
                     <!--</a>-->
                     <!-- Image Logo -->
                     <a href="index.html" class="logo">
-                        <img src="{{ asset('') }}assets/images/logo-sm.png" alt="" height="22"
+                        <img src="{{ asset('') }}assets/images/logo.png" alt="" height="22"
                             class="logo-small">
                         <img src="{{ asset('') }}assets/images/logo.png" alt="" height="16"
                             class="logo-large">
@@ -79,7 +79,7 @@
                         <li class="list-inline-item dropdown notification-list">
                             <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown"
                                 href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="{{ asset('') }}assets/images/users/avatar-1.jpg" alt="user"
+                                <img src="{{ asset('') }}assets/images/users/avatar-1.png" alt="user"
                                     class="rounded-circle">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">

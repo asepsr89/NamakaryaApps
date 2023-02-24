@@ -30,7 +30,7 @@ class DebiturRequest extends FormRequest
         'name' => 'required',
         'ibuKandung' => 'required',
         'noKtp'=>['required', Rule::unique('debiturs')->ignore($this->debitur)],
-        'tlp' => 'required|numeric|min:0.01|max:15',
+        'tlp' => 'required|numeric',
         'plafond' => 'required',
         'alamat' => 'required',
         'cabang_id' => 'required|not_in:0',

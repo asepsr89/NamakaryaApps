@@ -25,21 +25,17 @@ class SlikRequest extends FormRequest
     {
         return [
             'tglSlik'=>'required',
-            'statusKolek'=>'required',
-            'keterangan'=>'required',
-            'note'=>'required',
-            'status'=>'required',
+            'statusKolek'=>'required|not_in:0',
+            'statusSlik'=>'required|not_in:0',
         ];
     }
 
     public function messages()
     {
         return [
-        'tglSlik.required' => 'Tanggal tidak boleh kosong',
-        'statusKolek.required' => 'Status tidak boleh kosong',
-        'keterangan.required' => 'Keterangan tidak boleh kosong',
-        'note.required' => 'Note tidak boleh kosong',
-        'status.required' => 'Status tidak boleh kosong',
+        'tglSlik' => 'Tanggal tidak boleh kosong',
+        'statusKolek' => 'Status tidak boleh kosong',
+        'statusSlik' => 'Status tidak boleh kosong',
         ];
     }
 }

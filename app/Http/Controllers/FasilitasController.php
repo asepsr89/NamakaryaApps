@@ -343,8 +343,8 @@ class FasilitasController extends Controller
     public function download(Fasilitas $fasilitas,$id)
     {
         $fasilitas = Fasilitas::findOrFail($id);
-        $imagesToDownload = $fasilitas->getMedia('docs');    
-        return MediaStream::create('File-berkas.zip')->addMedia($imagesToDownload);
+        $imagesToDownload = $fasilitas->getMedia('docs');
+        return MediaStream::create($fasilitas->noFasilitas.'.zip')->addMedia($imagesToDownload);
     }
 
     public function approve(Fasilitas $fasilitas,$id)

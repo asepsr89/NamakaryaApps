@@ -109,17 +109,17 @@
                             <div class="col-sm-10">
                                 <select class="form-control @error('statusKolek') is-invalid @enderror" name="statusKolek"
                                     id="statusKolek">
-                                    <option>--Select--</option>
+                                    <option value="0">--Select--</option>
                                     <option value="1-Lancar">Lancar</option>
                                     <option value="2-Dalam Perhatian Khusus">Dalam Perhatian Khusus</option>
                                     <option value="3-Kurang Lancar">Kurang lancar</option>
                                     <option value="4-Diragukan">Diragukan</option>
                                     <option value="5-Macet">Macet</option>
                                 </select>
+                                @error('statusKolek')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
-                            @error('statusKolek')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Keterangan</label>
@@ -146,14 +146,14 @@
                             <div class="col-sm-10">
                                 <select class="form-control @error('statusSlik') is-invalid @enderror" name="statusSlik"
                                     id="statusSlik">
-                                    <option>--Select--</option>
+                                    <option value="0">--Select--</option>
                                     <option value="2">Approve</option>
                                     <option value="3">Reject</option>
                                 </select>
+                                @error('statusSlik')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
-                            @error('statusSlik')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
                         </div>
                         </br>
                         <div class="form-group row">
