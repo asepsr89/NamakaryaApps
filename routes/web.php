@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnalisController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CabangController;
 use App\Http\Controllers\DebiturController;
@@ -12,11 +13,8 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SlikController;
 use App\Http\Controllers\UsersController;
-use App\Models\Navigation;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use RealRashid\SweetAlert\Facades\Alert;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,4 +74,5 @@ Route::middleware('auth')->group(function(){
     Route::put('fasilitas/{id}/revisi',[FasilitasController::class,'revisi'])->name('fasilitas.revisi');
     Route::get('fasilitas/{id}/revisifasilitas',[FasilitasController::class,'revisifasilitas'])->name('fasilitas.revisifasilitas');
     Route::put('fasilitas/{id}',[FasilitasController::class,'update'])->name('fasilitas.update');
+    Route::resource('analis',AnalisController::class);
 });

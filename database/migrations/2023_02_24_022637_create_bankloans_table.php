@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('bankloans', function (Blueprint $table) {
             $table->id();
+            $table->date('tglMpp');
             $table->string('bankName');
             $table->float('loan');
             $table->float('outstanding');

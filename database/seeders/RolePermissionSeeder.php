@@ -109,6 +109,12 @@ class RolePermissionSeeder extends Seeder
          $permisson = Permission::create(['name'=>'read slik/dataslik']);
          $permisson = Permission::create(['name'=>'read slik/allslik']);
 
+         Permission::create((['name'=>'read analis']));;
+         $permisson = Permission::create(['name'=>'create analis']);
+         $permisson = Permission::create(['name'=>'update analis']);
+         $permisson = Permission::create(['name'=>'delete analis']);
+         $permisson = Permission::create(['name'=>'edit analis']);
+
          $role_it->givePermissionTo('read Parameter');
          $role_it->givePermissionTo('read roles');
          $role_it->givePermissionTo('create roles');
@@ -158,6 +164,28 @@ class RolePermissionSeeder extends Seeder
         $role_it->givePermissionTo(['name'=>'delete pinjaman']);
         $role_it->givePermissionTo(['name'=>'edit pinjaman']);
 
+        $role_it->givePermissionTo('read slik');
+        $role_it->givePermissionTo('read slik/dataslik');
+        $role_it->givePermissionTo('read slik/allslik');
+        $role_it->givePermissionTo(['name'=>'create slik']);
+        $role_it->givePermissionTo(['name'=>'update slik']);
+        $role_it->givePermissionTo(['name'=>'delete slik']);
+        $role_it->givePermissionTo(['name'=>'edit slik']);
+
+        $role_it->givePermissionTo('read analis');
+        $role_it->givePermissionTo(['name'=>'create analis']);
+        $role_it->givePermissionTo(['name'=>'update analis']);
+        $role_it->givePermissionTo(['name'=>'delete analis']);
+        $role_it->givePermissionTo(['name'=>'edit analis']);
+
+
+        $role_mitra->givePermissionTo('read slik');
+        $role_mitra->givePermissionTo('read slik/dataslik');
+        $role_mitra->givePermissionTo(['name'=>'create slik']);
+        $role_mitra->givePermissionTo(['name'=>'update slik']);
+        $role_mitra->givePermissionTo(['name'=>'delete slik']);
+        $role_mitra->givePermissionTo(['name'=>'edit slik']);
+
         $role_cabang->givePermissionTo('read fasilitas');
         $role_cabang->givePermissionTo(['name'=>'read debitur']);
         $role_cabang->givePermissionTo(['name'=>'create debitur']);
@@ -170,20 +198,6 @@ class RolePermissionSeeder extends Seeder
         $role_cabang->givePermissionTo(['name'=>'delete pinjaman']);
         $role_cabang->givePermissionTo(['name'=>'edit pinjaman']);
 
-        $role_it->givePermissionTo('read slik');
-        $role_it->givePermissionTo('read slik/dataslik');
-        $role_it->givePermissionTo('read slik/allslik');
-        $role_it->givePermissionTo(['name'=>'create slik']);
-        $role_it->givePermissionTo(['name'=>'update slik']);
-        $role_it->givePermissionTo(['name'=>'delete slik']);
-        $role_it->givePermissionTo(['name'=>'edit slik']);
-
-        $role_mitra->givePermissionTo('read slik');
-        $role_mitra->givePermissionTo('read slik/dataslik');
-        $role_mitra->givePermissionTo(['name'=>'create slik']);
-        $role_mitra->givePermissionTo(['name'=>'update slik']);
-        $role_mitra->givePermissionTo(['name'=>'delete slik']);
-        $role_mitra->givePermissionTo(['name'=>'edit slik']);
 
          $cabang->assignRole('cabang');
          $mitra->assignRole('mitra');

@@ -106,5 +106,17 @@ class NavigationSeeder extends Seeder
             'icon'=>'',
             'main_menu'=>12,
         ]);
+            Navigation::create([
+            'name' => 'Analis Kredit',
+            'url' =>'analis',
+            'icon'=>'ti-setting',
+            'main_menu'=>null,
+        ]);
+            Navigation::create([
+            'name' => 'Data Analis',
+            'url' =>'analis',
+            'icon'=>'',
+            'main_menu'=>16,
+        ]);
     }
 }
