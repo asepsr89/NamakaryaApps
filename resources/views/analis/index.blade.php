@@ -9,176 +9,226 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-lg-12">
             <div class="card m-b-30">
                 <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-md-4">
 
-                    <h4 class="mt-0 header-title mb-3">Input Data Analis</h4>
-
-                    <div class="row grid-col">
-                        <div class="col-sm-4">
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">No Fasilitas</label>
-                                <div class="col-sm-6">
-                                    <input type="text" id="fasilitas_id" name="fasilitas_id" class="form-control">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="name">Nomor Fasilitas</label>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="input-group">
+                                        <a href="" class="btn btn-primary"><i class="fa fa-search"></i></a>
+                                        <input type="text" id="example-input1-group2" name="example-input1-group2"
+                                            class="form-control" placeholder="Search nomor fasilitas">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Nama Debitur</label>
-                                <div class="col-sm-6">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="phone">Nama Debitur</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="namDebitur" name="namDebitur" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Tempat Lahir</label>
-                                <div class="col-sm-6">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="phone">Tempat Lahir</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="tmptLahir" name="tmptLahir" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Tanggal Lahir</label>
-                                <div class="col-sm-6">
-                                    <input type="text" id="tglLahir" name="tglLahir" class="form-control">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="phone">Tanggal Lahir</label>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <input type="date" id="tglLahir" name="tglLahir" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Nama Perusahaan</label>
-                                <div class="col-sm-6">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="phone">Nama Perusahaan</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="namaPerusahaan" name="namaPerusahaan" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Alamat Perusahaan</label>
-                                <div class="col-sm-6">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="phone">Alamat Perusahaan</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="alamatPerusahaan" name="alamatPerusahaan"
                                         class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Plafond</label>
-                                <div class="col-sm-6">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="phone">Plafond</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="plafond" name="plafond" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Cabang Pengajuan</label>
-                                <div class="col-sm-6">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="phone">Cabang Pengajuan</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="cabang_id" name="cabang_id" class="form-control">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Tanggal MPP</label>
-                                <div class="col-sm-6">
-                                    <input type="text" id="tglMpp" name="tglMpp" value="{{ date('d-m-Y') }}"
-                                        class="form-control">
+
+                        <div class="col-12 col-md-4">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="lastname">Tanggal Mpp</label>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <input type="date" id="tglMpp" name="tglMpp" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Jenis Fasilitas</label>
-                                <div class="col-sm-6">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="email">Jenis Fasilitas</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="jenisFasilitas" name="jenisFasilitas" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Nomor Surat</label>
-                                <div class="col-sm-6">
-                                    <input type="text" id="noSurat" name="noSurat" class="form-control">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="email">Nomor Surat</label>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <input type="text" id="jenisFasilitas" name="jenisFasilitas"
+                                        class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Tujuan Fasilitas</label>
-                                <div class="col-sm-6">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="email">Tujuan Fasilitas</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="tujuanFasilitas" name="tujuanFasilitas"
                                         class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Area Pengajuan</label>
-                                <div class="col-sm-6">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="email">Area Pengajuan</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="area" name="area" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Nama LO</label>
-                                <div class="col-sm-6">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="email">Nama Lending Officer</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="namaLo" name="namaLo" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Nama Collection</label>
-                                <div class="col-sm-6">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="email">Nama Collection</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="namaCollection" name="namaCollection"
                                         class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Nama TL</label>
-                                <div class="col-sm-6">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="email">Nama Team Leader</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="namaTl" name="namaTl" class="form-control">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Rate Bunga</label>
-                                <div class="col-sm-6">
+
+                        <div class="col-12 col-md-4">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="email">Rate Bunga</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="rate" name="rate" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Tenor</label>
-                                <div class="col-sm-6">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="email">Tenor</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="tenor" name="tenor" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">No Kontrak</label>
-                                <div class="col-sm-6">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="email">Nomor Kontrak</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="noKontrak" name="noKontrak" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Data Jaminan</label>
-                                <div class="col-sm-6">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="email">Data Jaminan</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="dataJaminan" name="dataJaminan" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Nomor BPJS</label>
-                                <div class="col-sm-6">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="email">Nomor BPJS</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="noBPJS" name="noBPJS" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Saldo BPJS</label>
-                                <div class="col-sm-6">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="email">Saldo BPJS</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="saldoBpjs" name="saldoBpjs" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Jenis Pengajuan</label>
-                                <div class="col-sm-6">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="email">Jenis Pengajuan</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="jenisPengajuan" name="jenisPengajuan"
                                         class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 control-label" for="example-input-normal">Deskripsi</label>
-                                <div class="col-sm-6">
+                            <div class="row mb-2">
+                                <div class="col-12 col-md-6">
+                                    <label for="email">Deskripsi</label>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <input type="text" id="deskripsi" name="deskripsi" class="form-control">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div> <!-- end col -->
-    </div> <!-- end row -->
+            </div> <!-- end col -->
+        </div> <!-- end row -->
 
-    <div class="row">
-        <div class="col-12">
+        <div class="col-lg-12">
             <div class="card m-b-30">
                 <div class="card-body">
 
@@ -226,18 +276,11 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="form-group row">
-                            <div class="col-sm-12">
-                                <a href="" class="btn btn-sm btn-primary">Proses</a>
-                                <a href="" class="btn btn-sm btn-primary">Proses</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
             </div>
-        </div>
-    </div> <!-- end col -->
+        </div> <!-- end col -->
     </div> <!-- end row -->
 @endsection
 @push('scripts')
