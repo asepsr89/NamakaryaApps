@@ -11,6 +11,7 @@ class Analis extends Model
 
         protected $fillable = [
             'debitur_id',
+            'fasilitas_id',
             'cabang_id',
             'tglMpp',
             'jenisFasilitas',
@@ -20,12 +21,13 @@ class Analis extends Model
             'namaLo',
             'namaCollection',
             'namaTl',
-            'rateBunga',
+            'rate',
             'tenor',
             'noKontrak',
             'dataJaminan',
             'noBPJS',
             'saldoBpjs',
-            'desPengajuan',
+            'jenisPengajuan',
+            'deskripsi',
         ];
 }

@@ -74,5 +74,7 @@ Route::middleware('auth')->group(function(){
     Route::put('fasilitas/{id}/revisi',[FasilitasController::class,'revisi'])->name('fasilitas.revisi');
     Route::get('fasilitas/{id}/revisifasilitas',[FasilitasController::class,'revisifasilitas'])->name('fasilitas.revisifasilitas');
     Route::put('fasilitas/{id}',[FasilitasController::class,'update'])->name('fasilitas.update');
-    Route::resource('analis',AnalisController::class);
+    Route::post('analis/getdata',[AnalisController::class,'getdata'])->name('analis.getdata');
+    Route::get('analis',[AnalisController::class,'index'])->name('analis.index');
+    Route::post('analis',[AnalisController::class,'store'])->name('analis.store');
 });

@@ -17,10 +17,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('debitur_id')->constrained();
             $table->foreignId('cabang_id')->constrained();
+            $table->foreignId('fasilitas_id')->constrained();
+            $table->string('analis_number');
             $table->date('tglMpp');
             $table->string('jenisFasilitas');
             $table->string('noSurat');
             $table->string('tujuanFasilitas');
+            $table->string('alamatPerusahaan');
             $table->string('area');
             $table->string('namaLo');
             $table->string('namaCollection');

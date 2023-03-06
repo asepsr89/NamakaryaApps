@@ -40,7 +40,7 @@
 
 
 <body>
-
+    @include('sweetalert::alert')
     <!-- Loader -->
     <div id="preloader">
         <div id="status">

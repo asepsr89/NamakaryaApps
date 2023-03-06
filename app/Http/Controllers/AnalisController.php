@@ -2,7 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Analis;
+use App\Models\Cabang;
+use App\Models\Debitur;
+use App\Models\Fasilitas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert as FacadesAlert;
+use Alert;
 
 class AnalisController extends Controller
 {
@@ -11,9 +18,26 @@ class AnalisController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('analis.index');
+                $fasilitas = DB::table('debiturs')
+                ->join('fasilitas','debiturs.id','=','fasilitas.debitur_id')
+                ->select('debiturs.*','fasilitas.*')
+                ->get();
+
+                $cabang = Cabang::all();
+
+        return view('analis.index',compact('fasilitas','cabang'));
+    }
+
+    public function getdata(Request $request)
+    {
+         $data = DB::table('debiturs')
+         ->join('fasilitas', 'debiturs.id', '=', 'fasilitas.debitur_id')
+         ->where('debiturs.noDebitur', $request->noDebitur)
+         ->select('debiturs.*','fasilitas.*')
+         ->first();
+         return response()->json($data);
     }
 
     /**
@@ -34,7 +58,29 @@ class AnalisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $analis = new Analis;
+        $analis->debitur_id = $request->debitur_id;
+        $analis->fasilitas_id = $request->debitur_id;
+        $analis->cabang_id = $request->cabang_id;
+        $analis->tglMpp = $request->tglMpp;
+        $analis->jenisFasilitas = $request->jenisFasilitas;
+        $analis->noSurat = $request->tujuanFasilitas;
+        $analis->tujuanFasilitas = $request->debitur_id;
+        $analis->area = $request->debitur_id;
+        $analis->namaLo = $request->namaLo;
+        $analis->namaCollection = $request->namaCollection;
+        $analis->namaTl = $request->namaTl;
+        $analis->rate = $request->rate;
+        $analis->tenor = $request->tenor;
+        $analis->noKontrak = $request->noKontrak;
+        $analis->dataJaminan = $request->dataJaminan;
+        $analis->noBPJS = $request->noBPJS;
+        $analis->saldoBpjs = $request->debitur_id;
+        $analis->jenisPengajuan = $request->jenisPengajuan;
+        $analis->deskripsi = $request->deskripsi;
+        $analis->save();
+
+        return redirect('analis')->with('success', 'Data berhasil di simpan!');
     }
 
     /**
