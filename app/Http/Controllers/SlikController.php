@@ -101,34 +101,30 @@ class SlikController extends Controller
 
     public function allslik(Request $request)
     {
-                $this->authorize('read slik/allslik');
-                if ($request->ajax()) {
-                    
+        $this->authorize('read slik/allslik');
+        if ($request->ajax()) { 
 
-                $data = DB::table('mitras')
+            $data = DB::table('mitras')
                 ->join('debiturs','mitras.id','=','debiturs.mitra_id')
                 ->join('sliks','debiturs.id','=','sliks.debitur_id')
                 ->select('debiturs.*','sliks.*','mitras.name as mitra')
                 ->get();
 
-                return DataTables::of($data)
+            return DataTables::of($data)
                 ->addIndexColumn()
                 ->editColumn('status',function($data){
 
-                if($data->status == 2){
+            if($data->status == 2){
                 return '<span class="badge badge-success">Approve</span>';
-                }elseif($data->status == 3){
+            }elseif($data->status == 3){
                 return '<span class="badge badge-danger">Recject</span>';
-                }
-                })
+            }
+        })
+        ->rawColumns(['status'])
+        ->make(true);
+        }
 
-
-
-                ->rawColumns(['status'])
-                ->make(true);
-                }
-
-                return view('slik.allslik');
+        return view('slik.allslik');
     }
 
     /**

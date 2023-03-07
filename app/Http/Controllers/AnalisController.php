@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert as FacadesAlert;
 use Alert;
+use App\Http\Requests\AnalisRequest;
 use App\Models\Bankloan;
+use Yajra\DataTables\DataTables;
 
 class AnalisController extends Controller
 {
@@ -21,6 +23,7 @@ class AnalisController extends Controller
      */
     public function index(Request $request)
     {
+         $this->authorize('read analis');
         $fasilitas = DB::table('debiturs')
             ->join('fasilitas','debiturs.id','=','fasilitas.debitur_id')
             ->select('debiturs.*','fasilitas.*')
@@ -41,6 +44,38 @@ class AnalisController extends Controller
         return response()->json($data);
     }
 
+    public function dtanalis(Request $request)
+    {
+
+        if ($request->ajax()) { 
+
+            $analis = DB::table('debiturs')
+            ->join('analis','debiturs.id','=','analis.debitur_id')
+            ->select('debiturs.*','analis.*')
+            ->get();
+
+            return DataTables::of($analis)
+                ->addIndexColumn()
+                ->addColumn('action',function($row){
+
+                $action ='';
+                $action = '<button type="button" data-id='.$row->id.' data-jenis="edit"
+                    class="btn btn-primary btn-sm action"><i class="ti-pencil"></i></button>';
+                $action .= ' <button type="button" data-id='.$row->id.' data-jenis="delete"
+                    class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
+
+                return $action;
+                })
+                ->editColumn('saldoBpjs',function($item){
+                    return number_format($item->saldoBpjs);
+                })
+            ->rawColumns(['action','saldoBpjs'])
+            ->make(true);
+        }
+
+        return view('analis.index');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -57,17 +92,17 @@ class AnalisController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AnalisRequest $request)
     {
         $analis = new Analis;
         $analis->debitur_id = $request->debitur_id;
-        $analis->fasilitas_id = $request->debitur_id;
+        $analis->fasilitas_id = $request->fasilitas_id;
         $analis->cabang_id = $request->cabang_id;
         $analis->tglMpp = $request->tglMpp;
         $analis->jenisFasilitas = $request->jenisFasilitas;
         $analis->noSurat = $request->tujuanFasilitas;
-        $analis->tujuanFasilitas = $request->debitur_id;
-        $analis->area = $request->debitur_id;
+        $analis->tujuanFasilitas = $request->jenisPengajuan;
+        $analis->area = $request->cabang_id;
         $analis->namaLo = $request->namaLo;
         $analis->namaCollection = $request->namaCollection;
         $analis->namaTl = $request->namaTl;
@@ -77,7 +112,7 @@ class AnalisController extends Controller
         $analis->noKontrak = $request->noKontrak;
         $analis->dataJaminan = $request->dataJaminan;
         $analis->noBPJS = $request->noBPJS;
-        $analis->saldoBpjs = $request->debitur_id;
+        $analis->saldoBpjs = $request->saldoBpjs;
         $analis->jenisPengajuan = $request->jenisPengajuan;
         $analis->deskripsi = $request->deskripsi;
         $analis->save();

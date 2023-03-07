@@ -116,7 +116,7 @@ class FasilitasController extends Controller
                 return $data->debitur->noKtp;
             })
             ->addColumn('plafond',function($data){
-                return $data->debitur->plafond;
+                return number_format($data->debitur->plafond);
             })
             ->rawColumns(['status','cabang_id'])
             ->make(true);

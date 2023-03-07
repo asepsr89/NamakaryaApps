@@ -9,306 +9,344 @@
         </div>
     </div>
     <div class="row">
-        <form method="post" action="{{ route('analis.store') }}">
-            @csrf
-            <div class="col-lg-12">
-                <div class="card m-b-30">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12 col-md-4">
-                                <input type="text" id="debitur_id" name="debitur_id" class="form-control" hidden>
-                                <input type="text" id="fasilitas_id" name="fasilitas_id" class="form-control" hidden>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="name">Nomor Debitur</label>
+        <div class="col-lg-12">
+            <form method="post" action="{{ route('analis.store') }}">
+                @csrf
+                <div class="col-lg-12">
+                    <div class="card m-b-30">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <input type="text" id="debitur_id" name="debitur_id" class="form-control" hidden>
+                                    <input type="text" id="fasilitas_id" name="fasilitas_id" class="form-control" hidden>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="name">Nomor Debitur</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="input-group">
+                                                <a class="btn btn-primary pencarian"><i class="fa fa-search"></i></a>
+                                                <input type="text" id="noDebitur" name="noDebitur"
+                                                    value="{{ old('noDebitur') }}"
+                                                    class="form-control @error('debitur_id') is-invalid @enderror"
+                                                    placeholder="Search nomor debitur">
+                                                @error('debitur_id')
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="input-group">
-                                            <a class="btn btn-primary pencarian"><i class="fa fa-search"></i></a>
-                                            <input type="text" id="noDebitur" name="noDebitur" class="form-control"
-                                                placeholder="Search nomor debitur">
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="phone">Nomor Fasilitas</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <input type="text" id="noFasilitas" name="noFasilitas" class="form-control"
+                                                readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="phone">Nama Debitur</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <input type="text" id="namaDebitur" name="namaDebitur" class="form-control"
+                                                readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="phone">Tempat Lahir</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <input type="text" id="tmpLahir" name="tmpLahir" class="form-control"
+                                                readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="phone">Tanggal Lahir</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <input type="date" id="tglLahir" name="tglLahir" class="form-control"
+                                                readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="phone">Nama Perusahaan</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <input type="text" id="namaPerusahaan" name="namaPerusahaan"
+                                                class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="phone">Plafond</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <input type="text" id="plafond" name="plafond" class="form-control"
+                                                readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="phone">Alamat Perusahaan</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <textarea id="alamatPerusahaan" name="alamatPerusahaan" class="form-control" maxlength="225" rows="3"
+                                                placeholder=""></textarea>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="phone">Nomor Fasilitas</label>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <input type="text" id="noFasilitas" name="noFasilitas" class="form-control"
-                                            readonly>
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="phone">Nama Debitur</label>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <input type="text" id="namaDebitur" name="namaDebitur" class="form-control"
-                                            readonly>
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="phone">Tempat Lahir</label>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <input type="text" id="tmpLahir" name="tmpLahir" class="form-control" readonly>
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="phone">Tanggal Lahir</label>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <input type="date" id="tglLahir" name="tglLahir" class="form-control" readonly>
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="phone">Nama Perusahaan</label>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <input type="text" id="namaPerusahaan" name="namaPerusahaan" class="form-control"
-                                            readonly>
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="phone">Plafond</label>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <input type="text" id="plafond" name="plafond" class="form-control" readonly>
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="phone">Alamat Perusahaan</label>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <textarea id="alamatPerusahaan" name="alamatPerusahaan" class="form-control" maxlength="225" rows="3"
-                                            placeholder=""></textarea>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="col-12 col-md-4">
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="lastname">Tanggal Mpp</label>
+                                <div class="col-12 col-md-4">
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="lastname">Tanggal Mpp</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <input type="date" value="{{ date('Y-m-d') }}" id="tglMpp"
+                                                name="tglMpp" class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-md-6">
-                                        <input type="date" value="{{ date('Y-m-d') }}" id="tglMpp" name="tglMpp"
-                                            class="form-control">
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="email">Jenis Fasilitas</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <input type="text" id="jenisFasilitas" name="jenisFasilitas"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="email">Nomor Surat</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <input type="text" id="jenisFasilitas" name="jenisFasilitas"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="email">Tujuan Fasilitas</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <input type="text" id="tujuanFasilitas" name="tujuanFasilitas"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="email">Area Pengajuan</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <select class="form-control" id="cabang" name="cabang_id">
+                                                <option value="">---Select---</option>
+                                                @foreach ($cabang as $cabang)
+                                                    <option value="{{ $cabang->id }}">
+                                                        {{ $cabang->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="email">Nama Lending Officer</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <input type="text" id="namaLo" name="namaLo" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="email">Nama Collection</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <input type="text" id="namaCollection" name="namaCollection"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="email">Nama Team Leader</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <input type="text" id="namaTl" name="namaTl" class="form-control">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="email">Jenis Fasilitas</label>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <input type="text" id="jenisFasilitas" name="jenisFasilitas"
-                                            class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="email">Nomor Surat</label>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <input type="text" id="jenisFasilitas" name="jenisFasilitas"
-                                            class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="email">Tujuan Fasilitas</label>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <input type="text" id="tujuanFasilitas" name="tujuanFasilitas"
-                                            class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="email">Area Pengajuan</label>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <select class="form-control" id="cabang" name="cabang_id">
-                                            <option value="">---Select---</option>
-                                            @foreach ($cabang as $cabang)
-                                                <option value="{{ $cabang->id }}">
-                                                    {{ $cabang->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="email">Nama Lending Officer</label>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <input type="text" id="namaLo" name="namaLo" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="email">Nama Collection</label>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <input type="text" id="namaCollection" name="namaCollection"
-                                            class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="email">Nama Team Leader</label>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <input type="text" id="namaTl" name="namaTl" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="col-12 col-md-4">
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="email">Rate Bunga</label>
+                                <div class="col-12 col-md-4">
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="email">Rate Bunga</label>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <input type="text" id="rate" name="rate" class="form-control">
+                                        </div>
+                                        <div class="col-12 col-md-2">
+                                            <label for="email">%</label>
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-md-4">
-                                        <input type="text" id="rate" name="rate" class="form-control">
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="email">Tenor</label>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <input type="text" id="tenor" name="tenor" class="form-control">
+                                        </div>
+                                        <div class="col-12 col-md-2">
+                                            <label for="email">Tahun</label>
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-md-2">
-                                        <label for="email">%</label>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="email">Nomor Kontrak</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <input type="text" id="noKontrak" name="noKontrak" class="form-control">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="email">Tenor</label>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="email">Data Jaminan</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <input type="text" id="dataJaminan" name="dataJaminan"
+                                                class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-md-4">
-                                        <input type="text" id="tenor" name="tenor" class="form-control">
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="email">Nomor BPJS</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <input type="text" id="noBPJS" name="noBPJS" class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-md-2">
-                                        <label for="email">Tahun</label>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="email">Saldo BPJS</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <input type="text" id="saldoBpjs" name="saldoBpjs" class="form-control">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="email">Nomor Kontrak</label>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="email">Jenis Pengajuan</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <input type="text" id="jenisPengajuan" name="jenisPengajuan"
+                                                class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-md-6">
-                                        <input type="text" id="noKontrak" name="noKontrak" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="email">Data Jaminan</label>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <input type="text" id="dataJaminan" name="dataJaminan" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="email">Nomor BPJS</label>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <input type="text" id="noBPJS" name="noBPJS" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="email">Saldo BPJS</label>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <input type="text" id="saldoBpjs" name="saldoBpjs" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="email">Jenis Pengajuan</label>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <input type="text" id="jenisPengajuan" name="jenisPengajuan"
-                                            class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <label for="email">Deskripsi</label>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <input type="text" id="deskripsi" name="deskripsi" class="form-control">
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="email">Deskripsi</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <input type="text" id="deskripsi" name="deskripsi" class="form-control">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div> <!-- end col -->
+                </div> <!-- end row -->
+
+                <div class="col-12">
+                    <div class="card m-b-30">
+                        <div class="card-body">
+
+                            <h4 class="mt-0 header-title mb-3">Pinjaman di tempat lain</h4>
+
+                            <div class="table-responsive">
+                                <table class="table table-hover table-white" id="tableEstimate">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 20px">#</th>
+                                            <th class="col-sm-2">Nama Bank</th>
+                                            <th class="col-sm-2">Loan Plafond</th>
+                                            <th class="col-sm-2">Outstanding</th>
+                                            <th class="col-sm-2">Angsuran</th>
+                                            <th class="col-sm-2">Tujuan Pinjaman</th>
+                                            <th class="col-sm-2">Deskripsi</th>
+                                            <th class="col-sm-2">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td><input class="form-control" style="min-width:150px" type="text"
+                                                    id="bankName" name="bankName[]"></td>
+                                            <td><input class="form-control loan" style="min-width:150px" type="text"
+                                                    id="loan" name="loan[]"></td>
+                                            <td><input class="form-control outstanding" style="min-width:150px"
+                                                    type="text" id="outstanding" name="outstanding[]"></td>
+                                            <td><input class="form-control angsuran" style="min-width:150px"
+                                                    type="text" id="angsuran" name="angsuran[]"></td>
+                                            <td><input class="form-control" style="min-width:150px" type="text"
+                                                    id="tujuanPinjaman" name="tujuanPinjaman[]"></td>
+                                            <td><input class="form-control" style="min-width:150px" type="text"
+                                                    id="keterangan" name="keterangan[]"></td>
+                                            <td><select class="form-control" id="statusPinjaman" name="statusPinjaman[]"
+                                                    style="min-width:150px">
+                                                    <option>--Select--</option>
+                                                    <option value="Pengajuan Bank">Pengajuan Bank</option>
+                                                    <option value="Pengajuan Baru">Pengajuan Baru</option>
+                                                </select>
+                                            </td>
+
+                                            <td><a href="javascript:void(0)" class="text-success font-18" title="Add"
+                                                    id="addBtn"><i class="fa fa-plus"></i></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="col-lg-12 mt-3">
+                                    <div class="submit-section">
+                                        <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+                                        <a href="{{ route('analis.index') }}" type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Reset</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div> <!-- end col -->
-            </div> <!-- end row -->
+            </form>
+        </div>
 
-            <div class="col-12">
-                <div class="card m-b-30">
-                    <div class="card-body">
+        <div class="col-12">
+            <div class="card m-b-30">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-white" id="tableAnalis">
+                            <thead>
+                                <tr>
+                                    <th style="width: 20px">#</th>
+                                    <th class="col-sm-2">Analis Number</th>
+                                    <th class="col-sm-2">Nama Debitur</th>
+                                    <th class="col-sm-2">Tanggal MPP</th>
+                                    <th class="col-sm-2">Jenis Fasilitas</th>
+                                    <th class="col-sm-2">Nomor BPJS</th>
+                                    <th class="col-sm-2">Saldo BPJS</th>
+                                    <th class="col-sm-2">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                        <h4 class="mt-0 header-title mb-3">Pinjaman di tempat lain</h4>
-
-                        <div class="table-responsive">
-                            <table class="table table-hover table-white" id="tableEstimate">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 20px">#</th>
-                                        <th class="col-sm-2">Nama Bank</th>
-                                        <th class="col-sm-2">Loan Plafond</th>
-                                        <th class="col-sm-2">Outstanding</th>
-                                        <th class="col-sm-2">Angsuran</th>
-                                        <th class="col-sm-2">Tujuan Pinjaman</th>
-                                        <th class="col-sm-2">Deskripsi</th>
-                                        <th class="col-sm-2">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td><input class="form-control" style="min-width:150px" type="text"
-                                                id="bankName" name="bankName[]"></td>
-                                        <td><input class="form-control loan" style="min-width:150px" type="text"
-                                                id="loan" name="loan[]"></td>
-                                        <td><input class="form-control outstanding" style="min-width:150px"
-                                                type="text" id="outstanding" name="outstanding[]"></td>
-                                        <td><input class="form-control angsuran" style="min-width:150px" type="text"
-                                                id="angsuran" name="angsuran[]"></td>
-                                        <td><input class="form-control" style="min-width:150px" type="text"
-                                                id="tujuanPinjaman" name="tujuanPinjaman[]"></td>
-                                        <td><input class="form-control" style="min-width:150px" type="text"
-                                                id="keterangan" name="keterangan[]"></td>
-                                        <td><select class="form-control" id="statusPinjaman" name="statusPinjaman[]"
-                                                style="min-width:150px">
-                                                <option>--Select--</option>
-                                                <option value="Pengajuan Bank">Pengajuan Bank</option>
-                                                <option value="Pengajuan Baru">Pengajuan Baru</option>
-                                            </select>
-                                        </td>
-
-                                        <td><a href="javascript:void(0)" class="text-success font-18" title="Add"
-                                                id="addBtn"><i class="fa fa-plus"></i></a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="col-lg-12 mt-3">
-                                <div class="submit-section">
-                                    <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
-                                    <a href="{{ route('analis.index') }}" type="button" class="btn btn-secondary"
-                                        data-dismiss="modal">Reset</a>
-                                </div>
-                            </div>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
-
                 </div>
-            </div> <!-- end col -->
-        </form>
+
+            </div>
+        </div> <!-- end col -->
     </div> <!-- end row -->
 
     <!--  Modal content for the above example -->
@@ -460,6 +498,52 @@
                 }
             });
 
+        });
+
+        // Render DataTable
+        var table = $('#tableAnalis').addClass('nowrap').DataTable({
+            dom: 'lBfrtip',
+            buttons: [
+                'copy', 'excel', 'pdf', 'csv', 'print'
+            ],
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('analis.dtanalis') }}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'userDT_RowIndex_id'
+                },
+                {
+                    data: 'analis_number',
+                    name: 'analis_number'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'tglMpp',
+                    name: 'tglMpp'
+                },
+                {
+                    data: 'jenisFasilitas',
+                    name: 'jenisFasilitas'
+                },
+                {
+                    data: 'noBpjs',
+                    name: 'noBpjs'
+                },
+                {
+                    data: 'saldoBpjs',
+                    name: 'saldoBpjs'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+            ]
         });
     </script>
 @endpush

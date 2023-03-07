@@ -135,6 +135,9 @@ class DebiturController extends Controller
         ->editColumn('cabang_id', function($data) {
             return $data->cabang->name;
         })
+        ->editColumn('plafond',function($data){
+            return number_format($data->plafond);
+        })
          ->rawColumns(['sttsPengajuan','action','sttsDebitu'])
          ->make(true);
          }

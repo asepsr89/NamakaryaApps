@@ -15,15 +15,15 @@ return new class extends Migration
     {
         Schema::create('bankloans', function (Blueprint $table) {
             $table->id();
-            $table->string('analis_number');
-            $table->date('tglMpp');
-            $table->string('bankName');
-            $table->float('loan',19,2);
-            $table->float('outstanding',19,2);
-            $table->float('angsuran',19,2);
-            $table->string('tujuanPinjaman');
-            $table->string('keterangan');
-            $table->string('statusPinjaman');
+            $table->string('analis_number')->nullable();
+            $table->date('tglMpp')->nullable();
+            $table->string('bankName')->nullable();
+            $table->float('loan',19,2)->nullable();
+            $table->float('outstanding',19,2)->nullable();
+            $table->float('angsuran',19,2)->nullable();
+            $table->string('tujuanPinjaman')->nullable();
+            $table->string('keterangan')->nullable();
+            $table->string('statusPinjaman')->nullable();
             $table->timestamps();
         });
     }
