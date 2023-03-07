@@ -10,6 +10,7 @@ class Bankloan extends Model
     use HasFactory;
 
             protected $fillable = [
+                'analis_number',
                 'bankName',
                 'loan',
                 'outstanding',

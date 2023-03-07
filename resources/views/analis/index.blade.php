@@ -286,8 +286,8 @@
                                         <td><select class="form-control" id="statusPinjaman" name="statusPinjaman[]"
                                                 style="min-width:150px">
                                                 <option>--Select--</option>
-                                                <option>Pengajuan Bank</option>
-                                                <option>Pengajuan Baru</option>
+                                                <option value="Pengajuan Bank">Pengajuan Bank</option>
+                                                <option value="Pengajuan Baru">Pengajuan Baru</option>
                                             </select>
                                         </td>
 

@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('analis_number');
             $table->date('tglMpp');
             $table->string('bankName');
-            $table->float('loan');
-            $table->float('outstanding');
-            $table->float('angsuran');
+            $table->float('loan',19,2);
+            $table->float('outstanding',19,2);
+            $table->float('angsuran',19,2);
             $table->string('tujuanPinjaman');
             $table->string('keterangan');
             $table->string('statusPinjaman');

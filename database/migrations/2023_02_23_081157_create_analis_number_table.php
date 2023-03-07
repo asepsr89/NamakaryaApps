@@ -18,7 +18,7 @@ return new class extends Migration
             CREATE TRIGGER id_analis BEFORE INSERT ON analis FOR EACH ROW
             BEGIN
                 INSERT INTO sequence_analis VALUES (NULL);
-                SET NEW.analis_number = CONCAT("EST_", LPAD(LAST_INSERT_ID(), 6, "0"));
+                SET NEW.analis_number = CONCAT("ANA_", LPAD(LAST_INSERT_ID(), 6, "0"));
             END
         ');
     }

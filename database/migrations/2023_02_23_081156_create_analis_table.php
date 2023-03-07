@@ -28,12 +28,12 @@ return new class extends Migration
             $table->string('namaLo');
             $table->string('namaCollection');
             $table->string('namaTl');
-            $table->float('rate');
+            $table->float('rate',8,2);
             $table->string('tenor');
             $table->string('noKontrak');
             $table->string('dataJaminan');
             $table->string('noBpjs');
-            $table->float('saldoBpjs');
+            $table->float('saldoBpjs',19,2);
             $table->string('jenisPengajuan');
             $table->string('deskripsi');
             $table->timestamps();

@@ -21,6 +21,7 @@ class Analis extends Model
             'namaLo',
             'namaCollection',
             'namaTl',
+            'alamatPerusahaan',
             'rate',
             'tenor',
             'noKontrak',

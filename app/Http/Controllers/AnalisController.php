@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert as FacadesAlert;
 use Alert;
+use App\Models\Bankloan;
 
 class AnalisController extends Controller
 {
@@ -20,24 +21,24 @@ class AnalisController extends Controller
      */
     public function index(Request $request)
     {
-                $fasilitas = DB::table('debiturs')
-                ->join('fasilitas','debiturs.id','=','fasilitas.debitur_id')
-                ->select('debiturs.*','fasilitas.*')
-                ->get();
+        $fasilitas = DB::table('debiturs')
+            ->join('fasilitas','debiturs.id','=','fasilitas.debitur_id')
+            ->select('debiturs.*','fasilitas.*')
+            ->get();
 
-                $cabang = Cabang::all();
+        $cabang = Cabang::all();
 
         return view('analis.index',compact('fasilitas','cabang'));
     }
 
     public function getdata(Request $request)
     {
-         $data = DB::table('debiturs')
-         ->join('fasilitas', 'debiturs.id', '=', 'fasilitas.debitur_id')
-         ->where('debiturs.noDebitur', $request->noDebitur)
-         ->select('debiturs.*','fasilitas.*')
-         ->first();
-         return response()->json($data);
+        $data = DB::table('debiturs')
+            ->join('fasilitas', 'debiturs.id', '=', 'fasilitas.debitur_id')
+            ->where('debiturs.noDebitur', $request->noDebitur)
+            ->select('debiturs.*','fasilitas.*')
+            ->first();
+        return response()->json($data);
     }
 
     /**
@@ -70,6 +71,7 @@ class AnalisController extends Controller
         $analis->namaLo = $request->namaLo;
         $analis->namaCollection = $request->namaCollection;
         $analis->namaTl = $request->namaTl;
+        $analis->alamatPerusahaan = $request->alamatPerusahaan;
         $analis->rate = $request->rate;
         $analis->tenor = $request->tenor;
         $analis->noKontrak = $request->noKontrak;
@@ -79,6 +81,25 @@ class AnalisController extends Controller
         $analis->jenisPengajuan = $request->jenisPengajuan;
         $analis->deskripsi = $request->deskripsi;
         $analis->save();
+
+        $analis_number = DB::table('analis')->orderBy('analis_number','DESC')->select('analis_number')->first();
+        $analis_number = $analis_number->analis_number;
+
+        foreach($request->bankName as $key => $bankNames)
+            {
+                $bankLoan['analis_number']  = $analis_number;
+                $bankLoan['bankName']       = $bankNames;
+                $bankLoan['loan']           = $request->loan[$key];
+                $bankLoan['outstanding']    = $request->outstanding[$key];
+                $bankLoan['angsuran']       = $request->angsuran[$key];
+                $bankLoan['tujuanPinjaman'] = $request->tujuanPinjaman[$key];
+                $bankLoan['keterangan']     = $request->keterangan[$key];
+                $bankLoan['statusPinjaman'] = $request->statusPinjaman[$key];
+
+
+
+                Bankloan::create($bankLoan);
+            }
 
         return redirect('analis')->with('success', 'Data berhasil di simpan!');
     }
