@@ -76,6 +76,11 @@ class AnalisController extends Controller
         return view('analis.index');
     }
 
+    public function mppanalis(Request $request)
+    {
+        return view('analis.mppanalis');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

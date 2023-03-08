@@ -30,7 +30,7 @@
             <div class="card-body">
 
                 <h3 class="text-center mt-0 m-b-15">
-                    <img src="{{ asset('') }}assets/images/logo.png" alt="" height="16"
+                    <img src="{{ asset('') }}assets/images/logo.png" alt="" height="30"
                         class="logo-large">
                     <h5 class="text-center mt-0 m-b-15">
                         Silahkan Masukan Akun

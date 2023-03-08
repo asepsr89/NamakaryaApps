@@ -363,8 +363,8 @@
                         <table id="datatable2" class="table">
                             <thead>
                                 <tr>
-                                    <th>Nomor fasilitas</th>
                                     <th>Nomor Debitur</th>
+                                    <th>Nomor Fasilitas</th>
                                     <th>Nama Debitur</th>
                                     <th>Nama Perusahaan</th>
                                     <th>Plafond</th>
