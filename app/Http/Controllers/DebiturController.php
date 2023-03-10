@@ -161,7 +161,7 @@ class DebiturController extends Controller
     private function generateNomorAnggota()
     {
     // Generate nomor registrasi, misalnya dengan format "REG-yyyymmdd-xxx", di mana "xxx" adalah nomor urut
-    return 'REG'.date('Y').'-'.str_pad(Debitur::count() + 1, 6, 0, STR_PAD_LEFT);
+    return 'REG'.date('md').str_pad(Debitur::count() + 1, 6, 0, STR_PAD_LEFT);
     }
     
     /**

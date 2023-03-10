@@ -125,8 +125,7 @@
                                             <label for="email">Nomor Surat</label>
                                         </div>
                                         <div class="col-12 col-md-6">
-                                            <input type="text" id="jenisFasilitas" name="jenisFasilitas"
-                                                class="form-control">
+                                            <input type="text" id="noSurat" name="noSurat" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -296,8 +295,8 @@
                                             <td><select class="form-control" id="statusPinjaman" name="statusPinjaman[]"
                                                     style="min-width:150px">
                                                     <option>--Select--</option>
-                                                    <option value="Pengajuan Bank">Pengajuan Bank</option>
-                                                    <option value="Pengajuan Baru">Pengajuan Baru</option>
+                                                    <option value="1">Pengajuan Bank</option>
+                                                    <option value="2">Pengajuan Baru</option>
                                                 </select>
                                             </td>
 
@@ -413,8 +412,8 @@
                                     <td><select class="form-control" id="statusPinjaman" name="statusPinjaman[]"
                                             style="min-width:150px">
                                             <option>--Select--</option>
-                                            <option>Pengajuan Bank</option>
-                                            <option>Pengajuan Baru</option>
+                                            <option value="1">Pengajuan Bank</option>
+                                            <option value="2">Pengajuan Baru</option>
                                         </select>
                                     </td>
                     <td><a href="javascript:void(0)" class="text-danger font-18 remove" title="Remove"><i class="fa fa-trash-o"></i></a></td>

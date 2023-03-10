@@ -59,8 +59,8 @@ class AnalisController extends Controller
                 ->addColumn('action',function($row){
 
                 $action ='';
-                $action = '<button type="button" data-id='.$row->id.' data-jenis="edit"
-                    class="btn btn-primary btn-sm action"><i class="ti-pencil"></i></button>';
+                $action = '<a href="analis/'.$row->id.'/mppanalis" data-toggle="tooltip" data-id="'.$row->id.'"
+                    data-original-title="Edit" class="btn btn-success btn-sm"><i class="ti-pencil"></i></a>';
                 $action .= ' <button type="button" data-id='.$row->id.' data-jenis="delete"
                     class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
 
@@ -76,9 +76,29 @@ class AnalisController extends Controller
         return view('analis.index');
     }
 
-    public function mppanalis(Request $request)
+    public function mppanalis(Request $request,$id)
     {
-        return view('analis.mppanalis');
+        $analis = Analis::find($id);
+        $analis_number = $analis->analis_number;
+
+        $debitur_id = $analis->debitur_id;
+                $data = DB::table('debiturs')
+                ->join('fasilitas', 'debiturs.id', '=', 'fasilitas.debitur_id')
+                ->where('fasilitas.debitur_id', $debitur_id)
+                ->select('debiturs.*','fasilitas.*')
+                ->first();
+
+        $cabang = Cabang::all();
+        
+
+        // $bankloan = DB::table('bankloans')->where('statusPinjaman','=','2')->get();
+
+        $bankloan2 = Bankloan::where('analis_number',$analis_number)->get();
+
+        $bankloan1 = Bankloan::where('analis_number',$analis_number)->where('statusPinjaman',1)->get();
+
+
+        return view('analis.mppanalis',compact('data','analis','cabang','bankloan2','bankloan1'));
     }
 
     /**

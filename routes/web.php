@@ -78,5 +78,5 @@ Route::middleware('auth')->group(function(){
     Route::get('analis',[AnalisController::class,'index'])->name('analis.index');
     Route::post('analis',[AnalisController::class,'store'])->name('analis.store');
     Route::get('analis/dtanalis',[AnalisController::class,'dtanalis'])->name('analis.dtanalis');
-    Route::get('analis/mppanalis',[AnalisController::class,'mppanalis'])->name('analis.mppanalis');
+    Route::get('analis/{id}/mppanalis',[AnalisController::class,'mppanalis'])->name('analis.mppanalis');
 });
