@@ -28,6 +28,7 @@ class Analis extends Model
             'dataJaminan',
             'noBPJS',
             'saldoBpjs',
+            'hasilLain',
             'jenisPengajuan',
             'deskripsi',
         ];

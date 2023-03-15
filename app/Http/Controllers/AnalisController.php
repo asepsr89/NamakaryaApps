@@ -13,6 +13,7 @@ use Alert;
 use App\Http\Requests\AnalisRequest;
 use App\Models\Bankloan;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Blade;
 
 class AnalisController extends Controller
 {
@@ -90,15 +91,26 @@ class AnalisController extends Controller
 
         $cabang = Cabang::all();
         
-
-        // $bankloan = DB::table('bankloans')->where('statusPinjaman','=','2')->get();
-
-        $bankloan2 = Bankloan::where('analis_number',$analis_number)->get();
-
+       
         $bankloan1 = Bankloan::where('analis_number',$analis_number)->where('statusPinjaman',1)->get();
 
+        $total = [];
+        $total['totLoan']     = Bankloan::where('analis_number',$analis_number)->where('statusPinjaman',1)->sum('loan');
+        $total['totOs']       = Bankloan::where('analis_number',$analis_number)->where('statusPinjaman',1)->sum('outstanding');
+        $total['totAngsuran'] = Bankloan::where('analis_number',$analis_number)->where('statusPinjaman',1)->sum('angsuran');
 
-        return view('analis.mppanalis',compact('data','analis','cabang','bankloan2','bankloan1'));
+        $total2 = [];
+        $total2['totAngsuran']= Bankloan::where('analis_number',$analis_number)->where('statusPinjaman',2)->sum('angsuran');
+        
+        $subTot = [];
+        $subTot['subTotal'] = $total2['totAngsuran']== 0 ? 0 : $total2['totAngsuran']-$total['totAngsuran'];
+        // $subTot['subPersen'] = $subTot['subTotal']== 0 ? 0 : ($subTot['subTotal']/$total['totAngsuran'])*100;
+
+        $iir = [];
+        $iir['iirTotal'] = $total2['totAngsuran']== 0 ? 0 : $total2['totAngsuran']+$total['totAngsuran'];
+        // $subTot['subPersen'] = $subTot['subTotal']== 0 ? 0 : ($subTot['subTotal']/$total['totAngsuran'])*100;
+
+        return view('analis.mppanalis',compact('data','analis','cabang','bankloan1','total','total2','subTot','iir'));
     }
 
     /**
@@ -138,6 +150,7 @@ class AnalisController extends Controller
         $analis->dataJaminan = $request->dataJaminan;
         $analis->noBPJS = $request->noBPJS;
         $analis->saldoBpjs = $request->saldoBpjs;
+        $analis->hasilLain = $request->grand_total;
         $analis->jenisPengajuan = $request->jenisPengajuan;
         $analis->deskripsi = $request->deskripsi;
         $analis->save();

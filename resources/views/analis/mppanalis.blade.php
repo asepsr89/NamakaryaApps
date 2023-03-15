@@ -276,54 +276,6 @@
                         </div>
                     </div> <!-- end col -->
                 </div> <!-- end row -->
-
-                <div class="col-12">
-                    <div class="card m-b-30">
-                        <div class="card-body">
-                            <h4 class="mt-0 header-title mb-3">ANALISA KEUANGAN (per Bulan) (berdasarkan Slip Gaji
-                                Terakhir)</h4>
-                            <div class="table-responsive">
-                                <table class="table table-hover table-white" id="tableEstimate">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 20px">#</th>
-                                            <th class="col-sm-10">Penghasilan Bersih Lainnya</th>
-                                            <th class="col-sm-2">Nominal</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><input class="form-control" style="min-width:150px" type="text"
-                                                    id="bankName" name="bankName[]"></td>
-                                            <td><input class="form-control loan" style="min-width:150px" type="text"
-                                                    id="loan" name="loan[]"></td>
-
-                                            <td><a href="javascript:void(0)" class="text-success font-18" title="Add"
-                                                    id="addBtn"><i class="fa fa-plus"></i></a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover table-white">
-                                    <tbody>
-                                        <tr>
-                                            <td colspan="5" style="text-align: right; font-weight: bold">
-                                                Total Penghasilan Bersih
-                                            </td>
-                                            <td style="font-size: 16px;width: 230px">
-                                                <input class="form-control text-right" type="text" id="grand_total"
-                                                    name="grand_total" value="Rp 0.00" readonly>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-                </div> <!-- end col -->
                 <div class="col-12">
                     <div class="card m-b-30">
                         <div class="card-body">
@@ -345,16 +297,22 @@
                                                 @foreach ($bankloan1 as $bankloan1)
                                                     <tr>
                                                         <td>{{ $bankloan1->bankName }}</td>
-                                                        <td>{{ number_format($bankloan1->loan) }}</td>
-                                                        <td>{{ number_format($bankloan1->outstanding) }}</td>
-                                                        <td>{{ number_format($bankloan1->angsuran) }}</td>
+                                                        <td>Rp.{{ number_format($bankloan1->loan) }}</td>
+                                                        <td>Rp.{{ number_format($bankloan1->outstanding) }}</td>
+                                                        <td>Rp.{{ number_format($bankloan1->angsuran) }}</td>
                                                     </tr>
                                                 @endforeach
                                                 <tr>
-                                                    <td class="table-secondary">Total</td>
-                                                    <td class="table-secondary">Total</td>
-                                                    <td class="table-secondary">Total</td>
-                                                    <td class="table-secondary">Total</td>
+                                                    <td class="table-secondary"><b>Total</b></td>
+                                                    <td class="table-secondary">
+                                                        <b>Rp.{{ number_format($total['totLoan']) }}</b>
+                                                    </td>
+                                                    <td class="table-secondary">
+                                                        <b>Rp.{{ number_format($total['totOs']) }}</b>
+                                                    </td>
+                                                    <td class="table-secondary">
+                                                        <b>Rp.{{ number_format($total['totAngsuran']) }}</b>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -362,126 +320,149 @@
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <h5 class="mt-0 header-title mb-3"> Baru Setelah Disetujui</h5>
-                                    <div class="table-responsive">
-                                        <table id="tablebankloan2" class="table table-bordered">
-                                            <thead>
-                                                <tr class="table-primary">
-                                                    <th>Nama Bank</th>
-                                                    <th>Plafond</th>
-                                                    <th>Outstanding</th>
-                                                    <th>Cicilan</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($bankloan2 as $bankloan2)
-                                                    <tr>
-                                                        <td>{{ $bankloan2->bankName }}</td>
-                                                        <td>{{ number_format($bankloan2->loan) }}</td>
-                                                        <td>{{ number_format($bankloan2->outstanding) }}</td>
-                                                        <td>{{ number_format($bankloan2->angsuran) }}</td>
-                                                    </tr>
-                                                @endforeach
-                                                <tr>
-                                                    <td class="table-secondary">Total</td>
-                                                    <td class="table-secondary">Total</td>
-                                                    <td class="table-secondary">Total</td>
-                                                    <td class="table-secondary">Total</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-4">
+                                            <label for="email">Total Angsuran Pijaman Awal :</label>
+                                        </div>
+                                        <div class="col-12 col-md-8">
+                                            Rp. {{ number_format($total['totAngsuran']) }}
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-4">
+                                            <label for="email">Total Angsuran Baru Namastra :</label>
+                                        </div>
+                                        <div class="col-12 col-md-8">
+                                            Rp. {{ number_format($total2['totAngsuran']) }}
+                                        </div>
+                                    </div>
+                                    <hr class="hr" />
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-4">
+                                            <label for="email" style="color:red">Terjadi Kenaikan / Penurunan Angsuran
+                                                sebesar :</label>
+                                        </div>
+                                        <div class="col-12 col-md-8" style="color: red">
+                                            Rp. {{ number_format($subTot['subTotal']) }}
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12 col-md-4">
+                                            <label for="email" style="color: red">Persentase :</label>
+                                        </div>
+                                        <div class="col-12 col-md-8">
+                                            {{-- <label style="color: red">  {{ number_format($subTot['subPersen']) }}
+                                                %</label> --}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div> <!-- end col -->
-            </form>
+                </div>
+                <div class="col-12">
+                    <div class="card m-b-30">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <h2 class="mt-0 header-title">ANALISA KEMAMPUAN MEMBAYAR ANGSURAN</h2>
+                            </div>
+                            <hr class="hr" />
+                            <div class="text-center">
+                                <div class="row grid-col">
+                                    <div class="col-md-12 mx-auto">
+                                        <div class="row nested-col">
+                                            <div class="col-sm-6">
+                                                <div class="row mb-2">
+                                                    <div class="col-12 col-md-4">
+                                                        <label for="email" style="color: blue">Saldo BPJS:</label>
+                                                    </div>
+                                                    <div class="col-12 col-md-4">
+                                                        <label style="color: blue"> Rp.
+                                                            {{ number_format($total2['totAngsuran']) }}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="text-center">
+                                                    <div class="row mb-2">
+                                                        <div class="col-12 col-md-8">
+                                                            <label for="email" style="color: blue">IIR (Installment to
+                                                                Income Ratio)</label>
+                                                        </div>
+                                                        <div class="col-12 col-md-8">
+                                                            <label for="email" style="color: blue">Rp.
+                                                                {{ number_format($iir['iirTotal']) }}<label>
+                                                        </div>
+                                                        <div class="col-12 col-md-8">
+                                                            <label for="email" style="color: blue">=
+                                                                ---------------------------------------------<label>
+                                                        </div>
+                                                        <div class="col-12 col-md-8">
+                                                            <label for="email" style="color: blue">Rp.
+                                                                {{ number_format($analis->hasilLain) }}<label>
+                                                        </div>
+                                                        <div class="col-12 col-md-8">
+                                                            <label for="email" style="color: blue">= Total Penghasilan
+                                                                Bersih<label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="row mb-2">
+                                                    <div class="col-12 col-md-8">
+                                                        <label for="email" style="color: blue">Total Angsuran Saat
+                                                            ini:</label>
+                                                    </div>
+                                                    <div class="col-12 col-md-4">
+                                                        <label style="color: blue"> Rp.
+                                                            {{ number_format($analis->saldoBpjs) }}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="text-center">
+                                                    <div class="row mb-2">
+                                                        <div class="col-12 col-md-8">
+                                                            <label for="email" style="color: blue">LTV { Loan To Value
+                                                                }</label>
+                                                        </div>
+                                                        <div class="col-12 col-md-8">
+                                                            <label for="email" style="color: blue">{ Plafond kredit
+                                                                }<label>
+                                                        </div>
+                                                        <div class="col-12 col-md-8">
+                                                            <label for="email" style="color: blue">=
+                                                                ---------------------------------------------<label>
+                                                        </div>
+                                                        <div class="col-12 col-md-8">
+                                                            <label for="email" style="color: blue">Saldo Jamsostek
+                                                                tenaga kerja<label>
+                                                        </div>
+                                                        <div class="col-12 col-md-8">
+                                                            <label for="email" style="color: blue"> = Saldo Jamsostek
+                                                                tenaga kerja<label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <hr class="hr" />
+                                                <div class="text-center">
+                                                    <div class="col-12 col-md-12">
+                                                        <label for="email" style="color: blue">
+                                                            <h1>Saldo Jamsostek
+                                                                tenaga kerja</h1><label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
-    @endsection
-    @push('scripts')
-        <script>
-            var rowIdx = 1;
-            $("#addBtn").on("click", function() {
-                // Adding a row inside the tbody.
-                $("#tableEstimate tbody").append(`
-                <tr id="R${++rowIdx}">
-                    <td class="row-index"><p> ${rowIdx}</p></td>
-                    <td><input class="form-control" style="min-width:150px" type="text"
-                            id="bankName" name="bankName[]"></td>
-                    <td><input class="form-control loan" style="min-width:150px" type="text"
-                            id="loan" name="loan[]"></td>
-                    <td><a href="javascript:void(0)" class="text-danger font-18 remove" title="Remove"><i class="fa fa-trash-o"></i></a></td>
-                </tr>`);
-            });
-            $("#tableEstimate tbody").on("click", ".remove", function() {
-                // Getting all the rows next to the row
-                // containing the clicked button
-                var child = $(this).closest("tr").nextAll();
-                // Iterating across all the rows
-                // obtained to change the index
-                child.each(function() {
-                    // Getting <tr> id.
-                    var id = $(this).attr("id");
-
-                    // Getting the <p> inside the .row-index class.
-                    var idx = $(this).children(".row-index").children("p");
-
-                    // Gets the row number from <tr> id.
-                    var dig = parseInt(id.substring(1));
-
-                    // Modifying row index.
-                    idx.html(`${dig - 1}`);
-
-                    // Modifying row id.
-                    $(this).attr("id", `R${dig - 1}`);
-                });
-
-                // Removing the current row.
-                $(this).closest("tr").remove();
-
-                // Decreasing total number of rows by 1.
-                rowIdx--;
-            });
-
-            // function in berfungsi untuk memindahkan data kolom yang di klik menuju text box
-            function masuk(txt, data) {
-                document.getElementById('noDebitur').value = data; // ini berfungsi mengisi value  yang ber id textbox
-                $("#myModal").modal('hide'); // ini berfungsi untuk menyembunyikan modal
-            }
-
-            $("#noDebitur").focusout(function(e) {
-                e.preventDefault();
-
-                var noDebitur = $(this).val();
-
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('analis.getdata') }}",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data: {
-                        'noDebitur': noDebitur
-                    },
-                    dataType: 'json',
-                    success: function(data) {
-                        $('#debitur_id').val(data.debitur_id);
-                        $('#fasilitas_id').val(data.id);
-                        $('#namaDebitur').val(data.name);
-                        $('#tmpLahir').val(data.tmpLahir);
-                        $('#cabang_id').val(data.cabang_id);
-                        $('#namaPerusahaan').val(data.namaPerusahaan);
-                        $('#noFasilitas').val(data.noFasilitas);
-                        $('#plafond').val(data.plafond);
-                        $('#tmptLahir').val(data.tmptLahir);
-                        $('#tglLahir').val(data.tglLahir);
-
-                    },
-                    error: function(response) {
-                        alert(response.responseJSON.message);
-                    }
-                });
-
-            });
-        </script>
-    @endpush
+    </div> <!-- end col -->
+    </form>
+    </div>
+@endsection
+@push('scripts')
+@endpush
