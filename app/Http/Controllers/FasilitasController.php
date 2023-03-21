@@ -101,7 +101,7 @@ class FasilitasController extends Controller
                         return '<span class="badge badge-warning">Proses Mitra</span>';
                     }
                 }
-  
+
             })
             ->editColumn('cabang_id',function($data){
                 return $data->cabang->name;
