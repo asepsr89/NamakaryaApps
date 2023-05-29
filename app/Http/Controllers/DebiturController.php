@@ -45,9 +45,9 @@ class DebiturController extends Controller
 
          return DataTables::of($debitur)
          ->addIndexColumn()
-         ->editColumn('tglPengajuan',function($row){
-         return $row->created_at->format('d-m-Y');
-         })
+        //  ->editColumn('tglPengajuan',function($row){
+        //  return $row->tglPengajuan->format('d-m-Y');
+        //  })
          ->editColumn('created_at',function($row){
          return $row->created_at->format('d-m-Y');
          })
@@ -172,13 +172,47 @@ class DebiturController extends Controller
      */
     public function store(DebiturRequest $request)
     {
-        
-        $debitur = Debitur::create($request->all());
-        $debitur->addMediaFromRequest('imgKtp')->usingName($debitur->name)->toMediaCollection('images');
-        $debitur->addMediaFromRequest('imgKK')->usingName($debitur->name)->toMediaCollection('images');
-        $debitur->addMediaFromRequest('imgPsKtp')->usingName($debitur->name)->toMediaCollection('images');
-    
+
+        $debitur = Debitur::create([
+            'noDebitur' => $request->noDebitur, 
+            'tglPengajuan' => $request->tglPengajuan,
+            'name' => $request->name,
+            'ibuKandung' => $request->ibuKandung,
+            'noKtp' => $request->noKtp,
+            'tlp' => $request->tlp,
+            'plafond' => $request->plafond,
+            'alamat' => $request->alamat,
+            'cabang_id' => $request->cabang_id,
+            'namaPerusahaan' => $request->namaPerusahaan,
+        ]);
+
+        foreach ($request->input('document', []) as $file) {
+
+            $debitur->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('document');
+        }
+
+
         return redirect('debitur')->with('success', 'Data berhasil di simpan!');
+    }
+
+    public function storeMedia(Request $request)
+    {
+        $path = storage_path('tmp/uploads');
+
+        if (!file_exists($path)) {
+        mkdir($path, 0777, true);
+        }
+
+        $file = $request->file('file');
+
+        $name = uniqid() . '_' . trim($file->getClientOriginalName());
+
+        $file->move($path, $name);
+
+        return response()->json([
+        'name' => $name,
+        'original_name' => $file->getClientOriginalName(),
+        ]);
     }
 
     /**
@@ -198,13 +232,12 @@ class DebiturController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Debitur $image,$id)
+    public function edit($id)
     {
  
         $data=Debitur::find($id);
         $mitra=Mitra::all();
-        $image=$data->getMedia('images');
-        return view('debitur.edit',compact('image','data','mitra'));
+        return view('debitur.edit',compact('data','mitra'));
     }
 
     public function editdata(Debitur $image,$id)
@@ -213,6 +246,7 @@ class DebiturController extends Controller
         $mitra=Mitra::all();
         $cabang=Cabang::all();
         $image=$data->getMedia('images');
+        
         return view('debitur.editdata',compact('image','data','mitra','cabang'));
     }
 
@@ -231,16 +265,22 @@ class DebiturController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Debitur $debitur)
+    public function update(Request $request, $id)
     {
-         $debitur->name =$request->name;
-         $debitur->noKtp =$request->noKtp;
-         $debitur->tlp =$request->tlp;
-         $debitur->plafond =$request->plafond;
-         $debitur->alamat =$request->alamat;
-         $debitur->save();
+        $debitur =  Debitur::findOrFail($id);
+        $debitur->update($request->all());
 
-         return redirect('debitur')->with('success', 'Data Berhasil Di Update');
+        
+        if($request->input('new_document',[]) == !null){
+            $debitur->clearMediaCollection('document');
+        foreach ($request->input('new_document', []) as $file) {
+                $debitur->addMedia(storage_path('tmp/uploads/' .
+                $file))->toMediaCollection('document');
+            }
+
+        }
+
+        return redirect('debitur')->with('success', 'Data Berhasil Di Update');
     }
 
     public function pengajuanslik(Request $request,$id)

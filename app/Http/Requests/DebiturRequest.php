@@ -34,9 +34,9 @@ class DebiturRequest extends FormRequest
         'plafond' => 'required',
         'alamat' => 'required',
         'cabang_id' => 'required|not_in:0',
-        'imgKtp' => 'required',
-        'imgKK' => 'required',
-        'imgPsKtp' => 'required',
+        // 'imgKtp' => 'required',
+        // 'imgKK' => 'required',
+        // 'imgPsKtp' => 'required',
         
         ];
     }
@@ -57,9 +57,9 @@ class DebiturRequest extends FormRequest
             'alamat.required' => 'Alamat tidak boleh kosong',
             'cabang_id.required' => 'Cabang tidak boleh kosong',
             'cabang_id.not_in' => 'cabang tidak boleh kosong pilih salah satu cabang',
-            'imgKtp' => 'Foto KTP tidak boleh kosong',
-            'imgKK' => 'Foto Kartu keluarga tidak boleh kosong',
-            'imgPsKtp' => 'Foto KTP pasangan tidak boleh kosong',
+            // 'imgKtp' => 'Foto KTP tidak boleh kosong',
+            // 'imgKK' => 'Foto Kartu keluarga tidak boleh kosong',
+            // 'imgPsKtp' => 'Foto KTP pasangan tidak boleh kosong',
         ];
     }
 }

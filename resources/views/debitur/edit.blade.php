@@ -13,27 +13,6 @@
             <div class="card m-b-30">
                 <div class="card-body">
                     <h4 class="mt-0 header-title">Data Debitur</h4>
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-sm-2 col-form-label"></label>
-                        <div class="col-sm-10">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Foto KTP</th>
-                                        <th>Foto Kartu Keluarga</th>
-                                        <th>Foto KTP Pasangan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        @foreach ($image as $foto)
-                                            <td><img src="{{ $foto->getUrl('thumb') }}"></td>
-                                        @endforeach
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
                     <form method="POST" action="{{ route('debitur.pengajuanslik', $data->id) }}" enctype="form-data">
                         @csrf
                         @method('PUT')
@@ -94,6 +73,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Nama Perusahaan</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" value="{{ $data->namaPerusahaan }}"
+                                    id="example-text-input" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Pengajuan Slik</label>
                             <div class="col-sm-10">
                                 <select class="form-control @error('mitra_id') is-invalid @enderror" name="mitra_id"
@@ -109,9 +95,16 @@
                             @enderror
                         </div>
                         <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Data Dokumen</label>
+                            @foreach ($data->getMedia('document') as $document)
+                                <img src="{{ $document->getUrl() }}" alt="{{ $document->getUrl() }}" class="img-thumbnail"
+                                    width="300px">>
+                            @endforeach
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-primary">Ajukan Slik</button>
                                 <a href="{{ route('debitur.index') }}" type="button" class="btn btn-secondary"
                                     data-dismiss="modal">Close</a>
                             </div>

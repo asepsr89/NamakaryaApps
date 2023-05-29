@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('tlp')->nullable();
             $table->bigInteger('plafond')->nullable();
             $table->string('ibuKandung')->nullable();
+            $table->string('namaPerusahaan')->nullable();
             $table->integer('sttsDebitu')->nullable();
             $table->integer('sttsPengajuan')->nullable();
             $table->timestamps();

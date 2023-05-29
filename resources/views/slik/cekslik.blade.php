@@ -17,22 +17,12 @@
                     <div class="form-group row">
                         <label for="example-text-input" class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-10">
-                            <table class="table table-bordered table-responsive">
-                                <thead>
-                                    <tr>
-                                        <th>Foto KTP</th>
-                                        <th>Foto Kartu Keluarga</th>
-                                        <th>Foto KTP Pasangan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        @foreach ($image as $foto)
-                                            <td><img src="{{ $foto->getUrl('thumb') }}">
-                                        @endforeach
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="form-group row">
+                                @foreach ($data->getMedia('document') as $document)
+                                    <img src="{{ $document->getUrl() }}" alt="{{ $document->getUrl() }}"
+                                        class="img-thumbnail" width="300px">
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                     <form method="POST" action="{{ route('slik.update', $data->id) }}" enctype="form-data">

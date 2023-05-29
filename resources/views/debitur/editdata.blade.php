@@ -13,28 +13,6 @@
             <div class="card m-b-30">
                 <div class="card-body">
                     <h4 class="mt-0 header-title">Data Debitur</h4>
-
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-sm-2 col-form-label"></label>
-                        <div class="col-sm-10">
-                            <table class="table table-bordered table-responsive">
-                                <thead>
-                                    <tr>
-                                        <th>Foto KTP</th>
-                                        <th>Foto Kartu Keluarga</th>
-                                        <th>Foto KTP Pasangan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        @foreach ($image as $foto)
-                                            <td><img src="{{ $foto->getUrl('thumb') }}"><br /><br /></td>
-                                        @endforeach
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
                     <form method="POST" action="{{ route('debitur.update', $data->id) }}" enctype="form-data">
                         @csrf
                         @method('PUT')
@@ -88,6 +66,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Nama Perusahaan</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" value="{{ $data->namaPerusahaan }}"
+                                    id="namaPerusahaan" name="namaPerusahaan">
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Pengajuan Slik</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="mitra_id" id="mitra_id" readonly>
@@ -114,81 +99,74 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Upload KTP</label>
-                            <div class="col-sm-10">
-                                <input type="file" id="input-file-now-custom-1" name="imgKtp" id="imgKtp"
-                                    class="dropify" />
-                            </div>
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Data Dokumen</label>
+                            @foreach ($data->getMedia('document') as $document)
+                                <img src="{{ $document->getUrl() }}" alt="{{ $document->getUrl() }}"
+                                    class="img-thumbnail" width="300px">>
+                            @endforeach
                         </div>
                         <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Upload KK</label>
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Upload Dokumen</label>
                             <div class="col-sm-10">
-                                <input type="file" id="input-file-now-custom-1" name="imgKK" id="imgKK"
-                                    value="" class="dropify" />
+                                <div class="form-group">
+                                    <div class="needsclick dropzone" id="document-dropzone">
+                                    </div>
+                                </div>
+                                Note : Apabila dokument tidak diganti maka abaikan untuk upload dokument
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Upload KTP Pasangan</label>
-                            <div class="col-sm-10">
-                                <input type="file" id="input-file-now-custom-1" name="imgPsKtp" id="imgPsKtp"
-                                    class="dropify" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label"></label>
-                            <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                                <a href="{{ route('debitur.index') }}" type="button" class="btn btn-secondary"
-                                    data-dismiss="modal">Close</a>
-                            </div>
-                        </div>
-                    </form>
                 </div>
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <a href="{{ route('debitur.index') }}" type="button" class="btn btn-secondary"
+                            data-dismiss="modal">Close</a>
+                    </div>
+                </div>
+                </form>
             </div>
-        </div> <!-- end col -->
+        </div>
+    </div> <!-- end col -->
     </div>
 @endsection
 @push('scripts')
     <script>
-        $(document).ready(function() {
-            // Basic
-            $('.dropify').dropify();
-
-            // Translated
-            $('.dropify-fr').dropify({
-                messages: {
-                    default: 'Glissez-déposez un fichier ici ou cliquez',
-                    replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
-                    remove: 'Supprimer',
-                    error: 'Désolé, le fichier trop volumineux'
-                }
-            });
-
-            // Used events
-            var drEvent = $('#input-file-events').dropify();
-
-            drEvent.on('dropify.beforeClear', function(event, element) {
-                return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
-            });
-
-            drEvent.on('dropify.afterClear', function(event, element) {
-                alert('File deleted');
-            });
-
-            drEvent.on('dropify.errors', function(event, element) {
-                console.log('Has Errors');
-            });
-
-            var drDestroy = $('#input-file-to-destroy').dropify();
-            drDestroy = drDestroy.data('dropify')
-            $('#toggleDropify').on('click', function(e) {
-                e.preventDefault();
-                if (drDestroy.isDropified()) {
-                    drDestroy.destroy();
+        var uploadedDocumentMap = {}
+        Dropzone.options.documentDropzone = {
+            url: '{{ route('debitur.storeMedia') }}',
+            maxFilesize: 10, // MB
+            addRemoveLinks: true,
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            },
+            success: function(file, response) {
+                $('form').append('<input type="hidden" name="new_document[]" value="' + response.name + '">')
+                uploadedDocumentMap[file.name] = response.name
+            },
+            removedfile: function(file) {
+                file.previewElement.remove()
+                var name = ''
+                if (typeof file.file_name !== 'undefined') {
+                    name = file.file_name
                 } else {
-                    drDestroy.init();
+                    name = uploadedDocumentMap[file.name]
                 }
-            })
-        });
+                $('form').find('input[name="new_document[]"][value="' + name + '"]').remove()
+            },
+            init: function() {
+                @if (isset($project) && $project->document)
+                    var files =
+                        {!! json_encode($project->document) !!}
+                    for (var i in files) {
+                        var file = files[i]
+                        this.options.addedfile.call(this, file)
+                        file.previewElement.classList.add('dz-complete')
+                        $('form').append('<input type="hidden" name="new_document[]" value="' + file.file_name +
+                            '">')
+                    }
+                @endif
+            }
+        }
     </script>
 @endpush

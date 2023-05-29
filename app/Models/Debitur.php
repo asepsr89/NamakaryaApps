@@ -24,6 +24,7 @@ class Debitur extends Model implements HasMedia
             'alamat',
             'tlp',
             'plafond',
+            'namaPerusahaan',
             'sttsDebitu',
             'sttsPengajuan',
         ];
@@ -44,11 +45,11 @@ class Debitur extends Model implements HasMedia
         }
 
 
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $this->addMediaConversion('thumb')
-              ->width(497)
-              ->height(290)
-              ->sharpen(10);
-    }
+    // public function registerMediaConversions(Media $media = null): void
+    // {
+    //     $this->addMediaConversion('thumb')
+    //             ->width(497)
+    //             ->height(290)
+    //             ->sharpen(10);
+    // }
 }

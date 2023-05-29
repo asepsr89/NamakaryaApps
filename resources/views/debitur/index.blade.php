@@ -28,10 +28,10 @@
                                     <th scope="col">Tgl Pengajuan</th>
                                     <th scope="col-3">Nama Debitur</th>
                                     <th scope="col">No KTP</th>
-                                    <th scope="col">Alamat</th>
                                     <th scope="col">Telepon</th>
                                     <th scope="col">Plafond</th>
                                     <th scope="col">Cabang</th>
+                                    <th scope="col">Nama Perusahaan</th>
                                     <th scope="col">Created_at</th>
                                     <th scope="col">Status Debitur</th>
                                     <th scope="col">Status Pengajuan</th>
@@ -97,10 +97,6 @@
                             name: 'noKtp'
                         },
                         {
-                            data: 'alamat',
-                            name: 'alamat'
-                        },
-                        {
                             data: 'tlp',
                             name: 'tlp'
                         },
@@ -111,6 +107,10 @@
                         {
                             data: 'cabang_id',
                             name: 'cabang_id'
+                        },
+                        {
+                            data: 'namaPerusahaan',
+                            name: 'namaPerusahaan'
                         },
                         {
                             data: 'created_at',

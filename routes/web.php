@@ -54,6 +54,8 @@ Route::middleware('auth')->group(function(){
     Route::resource('jabatan',JabatanController::class);
     Route::resource('debitur',DebiturController::class);
     Route::get('debitur/{id}/editdata',[DebiturController::class,'editdata']);
+    Route::get('debitur/{id}/edit',[DebiturController::class,'edit'])->name('debitur.edit');
+    Route::post('debitur/media',[DebiturController::class, 'storeMedia'])->name('debitur.storeMedia');
     Route::put('pengajuanslik/{id}', [DebiturController::class, 'pengajuanslik'])->name('debitur.pengajuanslik');
     Route::get('debitur/{id}/kirim', [DebiturController::class, 'kirim']);
     Route::get('slik', [SlikController::class,'index'])->name('slik.index');
