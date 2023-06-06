@@ -24,6 +24,10 @@
                         @enderror
                         <div class="form-group row">
                             <div class="col-sm-10">
+                                <input class="form-control " type="text" value="{{ $data->mitra_id }}" id="mitra_id"
+                                    name="mitra_id" hidden>
+                            </div>
+                            <div class="col-sm-10">
                                 <input class="form-control " type="text" value="{{ $data->id }}" id="debitur_id"
                                     name="debitur_id" hidden>
                             </div>

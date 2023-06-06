@@ -20,8 +20,9 @@ ini halaman fasilitas
                                 <tr class="table-info">
                                     <th scope="col-3">No.</th>
                                     <th scope="col">Tanggal Pengajuan</th>
-                                    <th scope="col">Cabang</th>
                                     <th scope="col">No Fasilitas</th>
+                                    <th scope="col">Cabang</th>
+                                    <th scope="col">Mitra</th>
                                     <th scope="col-3">Nama Debitur</th>
                                     <th scope="col">Perusahaan</th>
                                     <th scope="col">No KTP</th>
@@ -74,12 +75,16 @@ ini halaman fasilitas
                         name: 'tglPengajuan'
                     },
                     {
+                        data: 'noFasilitas',
+                        name: 'noFasilitas'
+                    },
+                    {
                         data: 'cabang_id',
                         name: 'cabang_id'
                     },
                     {
-                        data: 'noFasilitas',
-                        name: 'noFasilitas'
+                        data: 'mitra_id',
+                        name: 'mitra_id'
                     },
                     {
                         data: 'debitur_id',

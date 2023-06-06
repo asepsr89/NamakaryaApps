@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('dataJaminan');
             $table->string('noBpjs');
             $table->float('saldoBpjs',19,2);
+            $table->float('hasilLain',19,2);
             $table->string('jenisPengajuan');
             $table->string('deskripsi');
             $table->timestamps();

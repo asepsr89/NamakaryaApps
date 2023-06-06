@@ -33,57 +33,61 @@ class FasilitasController extends Controller
         $this->authorize('read pinjaman');
         if ($request->ajax()) {
 
-            $data = Fasilitas::latest()->get();
-            $user = auth()->user()->cabang_id;
+        $data = Fasilitas::latest()->get();
+        $cabang = auth()->user()->cabang_id;
+        $mitra = auth()->user()->mitra_id;
 
-                if($user == 0){
-                    $fasilitas = $data;
-                }elseif($user > 1){
-                    $fasilitas = $data->where('cabang_id',$user);
-                }
+        if($cabang == !null ){
+            $fasilitas = $data->where('cabang_id',$cabang);
+        }elseif($mitra == !null){
+            $fasilitas = $data->where('mitra_id',$mitra);
+        }else{
+            $fasilitas = $data;
+        }
 
             return DataTables::of($fasilitas)
                 ->addIndexColumn()
 
             ->editColumn('status',function($data){
 
-                $var = Gate::allows('read status');
-                if($var == 1){
-                    
+                if(Gate::allows('read status')){
+                    $cekfasilitas = '<a href="fasilitas/'.$data->id.'/cekFasilitas" data-toggle="tooltip" data-id="'.$data->id.'"
+                        class="edit btn btn-success btn-sm ">Cek Fasilitas</a>';
 
-                $cekfasilitas = '<a href="fasilitas/'.$data->id.'/cekFasilitas" data-toggle="tooltip" data-id="'.$data->id.'"
-                    class="edit btn btn-success btn-sm ">Cek Fasilitas</a>';
+                        
+                    $cekfasilitas .= ' <a href="fasilitas/'.$data->id.'/download" data-toggle="tooltip" data-id="'.$data->id.'"
+                        class="edit btn btn-primary btn-sm ">Download Berkas</a>';
 
-                    
-                $cekfasilitas .= ' <a href="fasilitas/'.$data->id.'/download" data-toggle="tooltip" data-id="'.$data->id.'"
-                    class="edit btn btn-primary btn-sm ">Download Berkas</a>';
+                    $kirimMitra = '<a href="fasilitas/'.$data->id.'/kirimmitra" data-toggle="tooltip" data-id="'.$data->id.'"
+                        class="edit btn btn-warning btn-sm ">Kirim Mitra</a>';
+                        
+                    $kirimMitra .= ' <a href="fasilitas/'.$data->id.'/download" data-toggle="tooltip" data-id="'.$data->id.'"
+                        class="edit btn btn-primary btn-sm ">Download Berkas</a>';
 
-                $kirimMitra = '<a href="fasilitas/'.$data->id.'/kirimmitra" data-toggle="tooltip" data-id="'.$data->id.'"
-                    class="edit btn btn-warning btn-sm ">Kirim Mitra</a>';
-                    
-                $kirimMitra .= ' <a href="fasilitas/'.$data->id.'/download" data-toggle="tooltip" data-id="'.$data->id.'"
-                    class="edit btn btn-primary btn-sm ">Download Berkas</a>';
+                    $kirimMitra .=  ' <a href="fasilitas/'.$data->id.'/cekFasilitas" data-toggle="tooltip" data-id="'.$data->id.'" 
+                        class="edit btn btn-secondary btn-sm ">Info Fasiitas</a>';
 
-                $kirimMitra .=  ' <a href="fasilitas/'.$data->id.'/cekFasilitas" data-toggle="tooltip" data-id="'.$data->id.'" 
-                    class="edit btn btn-secondary btn-sm ">Info Fasiitas</a>';
+                    if($data->status == 2){
+                        return $cekfasilitas;
+                    }elseif($data->status == 3){
+                        return '<span class="badge badge-danger">Revisi Cabang</span>';
+                    }elseif($data->status == 4){
+                        return $kirimMitra;
+                    }elseif($data->status == 5){
+                        return '<span class="badge badge-danger">Reject Fasilitas</span>';
+                    }elseif($data->status == 6){
+                        return '<span class="badge badge-warning">Proses Mitra</span>';
+                    }elseif($data->status == 7){
+                        return '<span class="badge badge-warning">Revisi Pusat</span>';
+                    }elseif($data->status == 8){
+                        return '<span class="badge badge-info">Approve Fasilitas Mitra</span>';
+                    }
 
-                if($data->status == 2){
-                    return $cekfasilitas;
-                }elseif($data->status == 3){
-                    return '<span class="badge badge-danger">Revisi Cabang</span>';
-                }elseif($data->status == 4){
-                    return $kirimMitra;
-                }elseif($data->status == 5){
-                    return '<span class="badge badge-danger">Reject Fasilitas</span>';
-                }elseif($data->status == 6){
-                    return '<span class="badge badge-warning">Proses Mitra</span>';
-                }
-        
-                }elseif($var == 0){
-                $otorisasi = '<a href="fasilitas/'.$data->id.'/otorisasi" data-toggle="tooltip" data-id="'.$data->id.'"
+                }elseif(Gate::allows('read status cabang')){
+                    $otorisasi = '<a href="fasilitas/'.$data->id.'/otorisasi" data-toggle="tooltip" data-id="'.$data->id.'"
                         class="edit btn btn-success btn-sm ">Otorisasi Fasilitas</a>';
 
-                $revisi = '<a href="fasilitas/'.$data->id.'/revisifasilitas" data-toggle="tooltip" data-id="'.$data->id.'"
+                    $revisi = '<a href="fasilitas/'.$data->id.'/revisifasilitas" data-toggle="tooltip" data-id="'.$data->id.'"
                         class="edit btn btn-success btn-sm ">Revisi Fasilitas</a>';
 
                 
@@ -99,12 +103,47 @@ class FasilitasController extends Controller
                         return '<span class="badge badge-danger">Reject Fasilitas</span>';
                     }elseif($data->status == 6){
                         return '<span class="badge badge-warning">Proses Mitra</span>';
+                    }elseif($data->status == 7){
+                        return '<span class="badge badge-warning">Revisi Mitra</span>';
+                    }elseif($data->status == 8){
+                        return '<span class="badge badge-info">Approve Fasilitas Mitra</span>';
+                    }
+
+                }elseif(Gate::allows('read status mitra')){
+
+                    $cekfasilitasmitra = '<a href="fasilitas/'.$data->id.'/cekFasilitasmitra" data-toggle="tooltip" data-id="'.$data->id.'"
+                        class="edit btn btn-success btn-sm ">Cek Fasilitas</a>';
+
+                        
+                    $cekfasilitasmitra .= ' <a href="fasilitas/'.$data->id.'/download" data-toggle="tooltip" data-id="'.$data->id.'"
+                        class="edit btn btn-primary btn-sm ">Download Berkas</a>';
+
+
+                   if($data->status == 2){
+                     return '<span class="badge badge-info">Cek Fasilitas Pusat</span>';
+                   }elseif($data->status == 3){
+                        return '<span class="badge badge-info">Revisi cabang</span>';
+                    }elseif($data->status == 4){
+                        return '<span class="badge badge-success">Approve Pusat</span>';
+                    }elseif($data->status == 5){
+                        return '<span class="badge badge-danger">Reject Fasilitas</span>';
+                    }elseif($data->status == 6){
+                        return $cekfasilitasmitra;
+                    }elseif($data->status == 7){
+                        return '<span class="badge badge-info">Revisi Mitra</span>';
+                    }elseif($data->status == 8){
+                        return '<span class="badge badge-info">Approve Fasilitas Mitra</span>';
+                    }elseif($data->status == 9){
+                        return '<span class="badge badge-danger">Reject fasilitas</span>';
                     }
                 }
 
             })
             ->editColumn('cabang_id',function($data){
                 return $data->cabang->name;
+            })
+            ->editColumn('mitra_id',function($data){
+                return $data->mitra->name;
             })
             ->editColumn('debitur_id',function($data){
                 return $data->debitur->name;
@@ -118,7 +157,7 @@ class FasilitasController extends Controller
             ->addColumn('plafond',function($data){
                 return number_format($data->debitur->plafond);
             })
-            ->rawColumns(['status','cabang_id'])
+            ->rawColumns(['status','cabang_id','mitra_id'])
             ->make(true);
         }
 
@@ -197,99 +236,25 @@ class FasilitasController extends Controller
     public function update(Request $request,$id)
     {
         $fasilitas = Fasilitas::find($id);
+        $fasilitas->status='2';
+        $fasilitas->save();
 
-        if($request->hasFile('fileBerkas')){
+         $fasilitas->update($request->all());
+        
+        if($request->input('new_document',[]) == !null){
             $fasilitas->clearMediaCollection('docs');
-            $fasilitas->addMediaFromRequest('fileBerkas')->usingName($fasilitas->noFasilitas)->toMediaCollection('docs');
-            $fasilitas->debitur_id = $request->debitur_id;
-            $fasilitas->cabang_id = $request->cabang_id;
-            $fasilitas->noFasilitas = $request->noFasilitas;
-            $fasilitas->noDebitur = $request->noDebitur;
-            $fasilitas->tglLahir = $request->tglLahir;
-            $fasilitas->tmpLahir = $request->tmpLahir;
-            $fasilitas->namaPasangan = $request->namaPasangan;
-            $fasilitas->tglLahirPasangan = $request->tglLahirPasangan;
-            $fasilitas->pendidikan = $request->pendidikan;
-            $fasilitas->stsKawin = $request->stsKawin;
-            $fasilitas->npwp = $request->npwp;
-            $fasilitas->alamatSkrng = $request->alamatSkrng;
-            $fasilitas->stsTinggal = $request->stsTinggal;
-            $fasilitas->jnsPekerjaan = $request->jnsPekerjaan;
-            $fasilitas->namaPerusahaan = $request->namaPerusahaan;
-            $fasilitas->tlpPerusahaan = $request->tlpPerusahaan;
-            $fasilitas->lamaBekerja = $request->lamaBekerja;
-            $fasilitas->penghasilan = $request->penghasilan;
-            $fasilitas->bukuNikah = $request->bukuNikah;
-            $fasilitas->aktaCerai = $request->aktaCerai;
-            $fasilitas->fotoPeminjam = $request->fotoPeminjam;
-            $fasilitas->idCard = $request->idCard;
-            $fasilitas->suratHrd = $request->suratHrd;
-            $fasilitas->suratBekerja = $request->suratBekerja;
-            $fasilitas->slipGaji = $request->slipGaji;
-            $fasilitas->mutasiRekening = $request->mutasiRekening;
-            $fasilitas->kartuBpjs = $request->kartuBpjs;
-            $fasilitas->ijazahTerakhir = $request->ijazahTerakhir;
-            $fasilitas->institusiLk = $request->institusiLk;
-            $fasilitas->verifPerusahaan = $request->verifPerusahaan;
-            $fasilitas->kerjaAnalisis = $request->kerjaAnalisis;
-            $fasilitas->surveiLingkungan = $request->surveiLingkungan;
-            $fasilitas->fotoRumah = $request->fotoRumah;
-            $fasilitas->skoringKredit = $request->skoringKredit;
-            $fasilitas->denahLokasi = $request->denahLokasi;
-            $fasilitas->mpp = $request->mpp;
-            $fasilitas->buktiKepemilikan = $request->buktiKepemilikan;
-            $fasilitas->shm = $request->shm;
-            $fasilitas->fotoAtm = $request->fotoAtm;
-            $fasilitas->payrollPelunasan = $request->payrollPelunasan;
-            $fasilitas->executiveSummary = $request->executiveSummary;
-            $fasilitas->dokumenTambahan = $request->dokumenTambahan;
-            $fasilitas->status = '2';
-            $fasilitas->save();
-        }else{
-            $fasilitas->debitur_id = $request->debitur_id;
-            $fasilitas->cabang_id = $request->cabang_id;
-            $fasilitas->noFasilitas = $request->noFasilitas;
-            $fasilitas->noDebitur = $request->noDebitur;
-            $fasilitas->tglLahir = $request->tglLahir;
-            $fasilitas->tmpLahir = $request->tmpLahir;
-            $fasilitas->namaPasangan = $request->namaPasangan;
-            $fasilitas->tglLahirPasangan = $request->tglLahirPasangan;
-            $fasilitas->pendidikan = $request->pendidikan;
-            $fasilitas->stsKawin = $request->stsKawin;
-            $fasilitas->npwp = $request->npwp;
-            $fasilitas->alamatSkrng = $request->alamatSkrng;
-            $fasilitas->stsTinggal = $request->stsTinggal;
-            $fasilitas->jnsPekerjaan = $request->jnsPekerjaan;
-            $fasilitas->namaPerusahaan = $request->namaPerusahaan;
-            $fasilitas->tlpPerusahaan = $request->tlpPerusahaan;
-            $fasilitas->lamaBekerja = $request->lamaBekerja;
-            $fasilitas->penghasilan = $request->penghasilan;
-            $fasilitas->bukuNikah = $request->bukuNikah;
-            $fasilitas->aktaCerai = $request->aktaCerai;
-            $fasilitas->fotoPeminjam = $request->fotoPeminjam;
-            $fasilitas->idCard = $request->idCard;
-            $fasilitas->suratHrd = $request->suratHrd;
-            $fasilitas->suratBekerja = $request->suratBekerja;
-            $fasilitas->slipGaji = $request->slipGaji;
-            $fasilitas->mutasiRekening = $request->mutasiRekening;
-            $fasilitas->kartuBpjs = $request->kartuBpjs;
-            $fasilitas->ijazahTerakhir = $request->ijazahTerakhir;
-            $fasilitas->institusiLk = $request->institusiLk;
-            $fasilitas->verifPerusahaan = $request->verifPerusahaan;
-            $fasilitas->kerjaAnalisis = $request->kerjaAnalisis;
-            $fasilitas->surveiLingkungan = $request->surveiLingkungan;
-            $fasilitas->fotoRumah = $request->fotoRumah;
-            $fasilitas->skoringKredit = $request->skoringKredit;
-            $fasilitas->denahLokasi = $request->denahLokasi;
-            $fasilitas->mpp = $request->mpp;
-            $fasilitas->buktiKepemilikan = $request->buktiKepemilikan;
-            $fasilitas->shm = $request->shm;
-            $fasilitas->fotoAtm = $request->fotoAtm;
-            $fasilitas->payrollPelunasan = $request->payrollPelunasan;
-            $fasilitas->executiveSummary = $request->executiveSummary;
-            $fasilitas->dokumenTambahan = $request->dokumenTambahan;
-            $fasilitas->status = '3';
-            $fasilitas->save();
+        foreach ($request->input('new_document', []) as $file) {
+                $fasilitas->addMedia(storage_path('tmp/uploads/' .
+                $file))->toMediaCollection('docs');
+            }
+
+        $debitur_id = $fasilitas->debitur_id;
+        $debitur = Debitur::find($debitur_id);
+        $debitur->status='5';
+        $debitur->save();
+
+
+
         }
 
 
@@ -375,6 +340,7 @@ class FasilitasController extends Controller
         return redirect('debitur')->with('success','Fasilitas Reject');
 
     }
+
     public function revisi(Request $request,$id)
     {
         $fasilitas = Fasilitas::find($id);
@@ -391,6 +357,40 @@ class FasilitasController extends Controller
         $fasilitas->status='6';
         $fasilitas->save();
         return redirect('fasilitas')->with('success','Data fasilitas terkirim mitra');
+    }   
+
+    public function checkFasilitasmitra(Fasilitas $fasilitas,$id)
+    {
+        $data = Fasilitas::find($id);
+        $debitur_id = $data->debitur_id;
+
+        $debitur = Debitur::find($debitur_id);
+
+        return view('mitra.cekfasilitasmitra',['fasilitas'=>new Fasilitas()],compact('data','debitur'));
+    }
+
+    public function approvemitra(Fasilitas $fasilitas,$id)
+    {
+        $fasilitas = Fasilitas::findOrFail($id);
+        $fasilitas->status='8';
+        $fasilitas->save();
+
+        $debitur_id = $fasilitas->debitur_id;
+        $debitur = Debitur::find($debitur_id);
+        $debitur->sttsPengajuan='8';
+        $debitur->save();
+
+        return redirect('fasilitas')->with('success','Fasilitas berhasil approve');
+    }
+
+    public function revisimitra(Request $request,$id)
+    {
+        $fasilitas = Fasilitas::find($id);
+        $fasilitas->notemitra = $request->notemitra;
+        $fasilitas->status = '7';
+        $fasilitas->save();
+
+         return redirect('fasilitas')->with('success','Revisi Fasilitas Berhasil disimpan');
     }   
 
 

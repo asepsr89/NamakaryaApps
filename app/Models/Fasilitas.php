@@ -15,6 +15,7 @@ class Fasilitas extends Model implements HasMedia
     protected $fillable = [
     'debitur_id',
     'cabang_id',
+    'mitra_id',
     'tmpLahir',
     'tglLahir',
     'ibuKandung',
@@ -56,12 +57,18 @@ class Fasilitas extends Model implements HasMedia
     'dokumenTambahan',
     'status',
     'noDebitur',
-    'noFasilitas'
+    'noFasilitas',
+    'PlafondRekomen'
     ];
 
     public function cabang()
     {
         return $this->belongsTo(Cabang::class,'cabang_id','id');
+    }
+
+    public function mitra()
+    {
+        return $this->belongsTo(Mitra::class,'mitra_id','id');
     }
 
     public function debitur()

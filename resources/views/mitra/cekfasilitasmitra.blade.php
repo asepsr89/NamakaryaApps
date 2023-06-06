@@ -14,13 +14,13 @@
                 <div class="card-body">
                     <h4 class="card-header mt-0">No Fasilitas : {{ $data->noFasilitas }}</h4>
                     <hr>
-                    @if ($data->status == 2)
+                    @if ($data->status == 6)
                         <a href="{{ route('fasilitas.index') }}" class="btn btn-secondary btn-xl mb-03">Back</a>
-                        <a href="{{ route('fasilitas.approve', $data->id) }}" class="btn btn-primary btn-xl">Approve
+                        <a href="{{ route('fasilitas.approvemitra', $data->id) }}" class="btn btn-primary btn-xl">Approve
                             Fasilitas</a>
                         <a class="btn btn-warning btn-xl" href="javascript:void(0)" id="revisiBtn">Revisi
                             Berkas<a>
-                            @elseif($data->status == 4)
+                            @elseif($data->status == 9)
                                 <span class="badge badge-success">
                                     <h4>APPROVE FASILITAS</h4>
                                 </span>
@@ -340,45 +340,8 @@
                             </div>
                         </div>
                     </div>
-                </div> <!-- end col -->
-            </div>
-            <div class="card m-b-30">
-                <div class="card-body">
-                    <h4 class="card-header mt-0">Plafond Rekomendasi</h4>
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-sm-2 col-form-label"></label>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <form id="revisiPlafond" name="revisiPlafond" action="" class="form-horizontal"
-                                {{-- action="{{ route('fasilitas.revisiPlafond', $data->id) }}" class="form-horizontal" --}} method="POST">
-                                @csrf
-                                @if ($data->id)
-                                    @method('PUT')
-                                @endif
-                                <div class="form-group">
-                                    <label for="example-text-input" class="col-sm-4 col-form-label">Plafond
-                                        Rekomendasi</label>
-                                    <div class="col-sm-8">
-                                        <input class="form-control" type="text" value="" id="plafondRekomen"
-                                            name="plafondRekomen">
-                                    </div>
-                                </div>
-                                <label class="col-sm-2 control-label">Note Rekomendasi</label>
-                                <div class="col-sm-12">
-                                    <textarea id="note" name="note" placeholder="Enter Details" class="form-control form-control-lg mb-3"></textarea>
-                                </div>
-                                <br />
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save
-                                        changes
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
                 </div>
-            </div>
+            </div> <!-- end col -->
         </div>
     </div>
     <div class="modal fade" id="ajaxModel" aria-hidden="true">
@@ -388,7 +351,7 @@
                     <h4 class="modal-title" id="modelHeading"></h4>
                 </div>
                 <div class="modal-body">
-                    <form id="revisi" name="revisi" action="{{ route('fasilitas.revisi', $data->id) }}"
+                    <form id="revisi" name="revisi" action="{{ route('fasilitas.revisimitra', $data->id) }}"
                         class="form-horizontal" method="POST">
                         @csrf
                         @if ($data->id)
@@ -397,13 +360,12 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Note Revisi</label>
                             <div class="col-sm-12">
-                                <textarea id="note" name="note" placeholder="Enter Details" class="form-control form-control-lg mb-3"></textarea>
+                                <textarea id="notemitra" name="notemitra" placeholder="Enter Details" class="form-control form-control-lg mb-3"></textarea>
                             </div>
                         </div>
 
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save
-                                changes
+                            <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes
                             </button>
                         </div>
                     </form>
@@ -434,9 +396,9 @@
 
 
         $(document).ready(function() {
-            if ($("#note").length > 0) {
+            if ($("#notemitra").length > 0) {
                 tinymce.init({
-                    selector: "textarea#note",
+                    selector: "textarea#notemitra",
                     theme: "modern",
                     height: 300,
                     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l      ink image | print preview media fullpage | forecolor backcolor emoticons",

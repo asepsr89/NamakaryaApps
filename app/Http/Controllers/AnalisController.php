@@ -24,7 +24,7 @@ class AnalisController extends Controller
      */
     public function index(Request $request)
     {
-         $this->authorize('read analis');
+        $this->authorize('read analis');
         $fasilitas = DB::table('debiturs')
             ->join('fasilitas','debiturs.id','=','fasilitas.debitur_id')
             ->select('debiturs.*','fasilitas.*')
@@ -91,7 +91,7 @@ class AnalisController extends Controller
 
         $cabang = Cabang::all();
         
-       
+
         $bankloan1 = Bankloan::where('analis_number',$analis_number)->where('statusPinjaman',1)->get();
 
         $total = [];
@@ -101,16 +101,49 @@ class AnalisController extends Controller
 
         $total2 = [];
         $total2['totAngsuran']= Bankloan::where('analis_number',$analis_number)->where('statusPinjaman',2)->sum('angsuran');
+
+        // return dd($total2['totAngsuran']);
         
         $subTot = [];
-        $subTot['subTotal'] = $total2['totAngsuran']== 0 ? 0 : $total2['totAngsuran']-$total['totAngsuran'];
+        $subTot['subTotal'] =  $total2['totAngsuran']+$total['totAngsuran'];
         // $subTot['subPersen'] = $subTot['subTotal']== 0 ? 0 : ($subTot['subTotal']/$total['totAngsuran'])*100;
+
+        // return dd($subTot['subTotal']);
 
         $iir = [];
-        $iir['iirTotal'] = $total2['totAngsuran']== 0 ? 0 : $total2['totAngsuran']+$total['totAngsuran'];
+        $iir['iirTotal'] =  $total2['totAngsuran']+$total['totAngsuran'];
         // $subTot['subPersen'] = $subTot['subTotal']== 0 ? 0 : ($subTot['subTotal']/$total['totAngsuran'])*100;
 
-        return view('analis.mppanalis',compact('data','analis','cabang','bankloan1','total','total2','subTot','iir'));
+        $iir2 = [];
+        $iir2['iirhasil'] = $subTot['subTotal']== 0 ? 0 :($iir['iirTotal']/$analis->hasilLain)*100;
+
+        $ltv = [];
+        $ltv['ltvtotal'] = $data->plafond == 0 ? 0 :($data->plafond/$analis->saldoBpjs)*100;
+
+        // return dd($ltv['ltvtotal']);
+
+        $a = $iir2['iirhasil'];
+        $b = $ltv['ltvtotal'];
+
+        $aThreshold = 40;
+        $bThreshold = 90;
+
+        if ($a < $aThreshold && $b < $bThreshold) {
+            $result = "Di Terima";
+        } elseif ($a < $aThreshold && $b > $bThreshold) {
+            $result = "Di Tolak";
+        }elseif($a > $aThreshold && $b > $bThreshold){
+            $result = "Di Tolak";
+        }elseif($a > $aThreshold && $b < $bThreshold){
+            $result = "Di Tolak";
+        } else {
+            $result = "hasil tidak valid";
+        }
+
+
+        // return dd($a);
+
+        return view('analis.mppanalis',compact('data','analis','cabang','bankloan1','total','total2','subTot','iir','iir2','ltv','result'));
     }
 
     /**

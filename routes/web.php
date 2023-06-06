@@ -69,12 +69,15 @@ Route::middleware('auth')->group(function(){
     Route::get('fasilitas/{id}/otorisasi',[FasilitasController::class,'otorisasi']);
     Route::get('fasilitas/{id}/kirimpusat',[FasilitasController::class,'kirimpusat']);
     Route::get('fasilitas/{id}/cekFasilitas',[FasilitasController::class,'checkFasilitas']);
+    Route::get('fasilitas/{id}/cekFasilitasmitra',[FasilitasController::class,'checkFasilitasmitra']);
     Route::get('fasilitas/{id}/download',[FasilitasController::class,'download']);
     Route::get('fasilitas/{id}/approve',[FasilitasController::class,'approve'])->name('fasilitas.approve');
+    Route::get('fasilitas/{id}/approvemitra',[FasilitasController::class,'approvemitra'])->name('fasilitas.approvemitra');
     Route::get('fasilitas/{id}/reject',[FasilitasController::class,'reject'])->name('fasilitas.reject');
     Route::get('fasilitas/{id}/kirimmitra',[FasilitasController::class,'kirimmitra'])->name('fasilitas.kirimmitra');
     Route::put('fasilitas/{id}/revisi',[FasilitasController::class,'revisi'])->name('fasilitas.revisi');
     Route::get('fasilitas/{id}/revisifasilitas',[FasilitasController::class,'revisifasilitas'])->name('fasilitas.revisifasilitas');
+    Route::put('fasilitas/{id}/revisimitra',[FasilitasController::class,'revisimitra'])->name('fasilitas.revisimitra');
     Route::put('fasilitas/{id}',[FasilitasController::class,'update'])->name('fasilitas.update');
     Route::post('analis/getdata',[AnalisController::class,'getdata'])->name('analis.getdata');
     Route::get('analis',[AnalisController::class,'index'])->name('analis.index');

@@ -113,8 +113,14 @@ class NavigationSeeder extends Seeder
             'main_menu'=>null,
         ]);
             Navigation::create([
-            'name' => 'Data Analis',
+            'name' => 'Input Analis',
             'url' =>'analis',
+            'icon'=>'',
+            'main_menu'=>16,
+        ]);
+            Navigation::create([
+            'name' => 'Data Analis',
+            'url' =>'dtAnalis',
             'icon'=>'',
             'main_menu'=>16,
         ]);

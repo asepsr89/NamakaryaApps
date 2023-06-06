@@ -374,7 +374,8 @@
                                             <div class="col-sm-6">
                                                 <div class="row mb-2">
                                                     <div class="col-12 col-md-4">
-                                                        <label for="email" style="color: blue">Saldo BPJS:</label>
+                                                        <label for="email" style="color: blue">Total Angsuran Saat ini
+                                                            :</label>
                                                     </div>
                                                     <div class="col-12 col-md-4">
                                                         <label style="color: blue"> Rp.
@@ -389,7 +390,8 @@
                                                         </div>
                                                         <div class="col-12 col-md-8">
                                                             <label for="email" style="color: blue">Rp.
-                                                                {{ number_format($iir['iirTotal']) }}<label>
+                                                                {{ number_format($iir['iirTotal']) }}<label> -->Total
+                                                                    Angsuran
                                                         </div>
                                                         <div class="col-12 col-md-8">
                                                             <label for="email" style="color: blue">=
@@ -398,10 +400,11 @@
                                                         <div class="col-12 col-md-8">
                                                             <label for="email" style="color: blue">Rp.
                                                                 {{ number_format($analis->hasilLain) }}<label>
+                                                                    -->penghasilan lain
                                                         </div>
                                                         <div class="col-12 col-md-8">
-                                                            <label for="email" style="color: blue">= Total Penghasilan
-                                                                Bersih<label>
+                                                            <label for="email" style="color: blue">=
+                                                                {{ number_format((float) $iir2['iirhasil'] . 2) }}%<label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -409,8 +412,7 @@
                                             <div class="col-sm-6">
                                                 <div class="row mb-2">
                                                     <div class="col-12 col-md-8">
-                                                        <label for="email" style="color: blue">Total Angsuran Saat
-                                                            ini:</label>
+                                                        <label for="email" style="color: blue">Saldo BPJS:</label>
                                                     </div>
                                                     <div class="col-12 col-md-4">
                                                         <label style="color: blue"> Rp.
@@ -424,20 +426,23 @@
                                                                 }</label>
                                                         </div>
                                                         <div class="col-12 col-md-8">
-                                                            <label for="email" style="color: blue">{ Plafond kredit
-                                                                }<label>
+                                                            <label for="email" style="color: blue">Rp.
+                                                                {{ number_format($data->plafond) }}<label> --> Palfond
+                                                                    Pengajuan
                                                         </div>
                                                         <div class="col-12 col-md-8">
                                                             <label for="email" style="color: blue">=
                                                                 ---------------------------------------------<label>
                                                         </div>
                                                         <div class="col-12 col-md-8">
-                                                            <label for="email" style="color: blue">Saldo Jamsostek
-                                                                tenaga kerja<label>
+                                                            <label for="email" style="color: blue">Rp.
+                                                                {{ number_format($analis->saldoBpjs) }}<label> --> Saldo
+                                                                    BPJS
                                                         </div>
                                                         <div class="col-12 col-md-8">
-                                                            <label for="email" style="color: blue"> = Saldo Jamsostek
-                                                                tenaga kerja<label>
+                                                            <label for="email" style="color: blue"> =
+                                                                {{ number_format((float) $ltv['ltvtotal'] . 2) }}%<label>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -446,9 +451,11 @@
                                                 <hr class="hr" />
                                                 <div class="text-center">
                                                     <div class="col-12 col-md-12">
+                                                        <label>Hasil Kesimpulan Analis<label>
+                                                    </div>
+                                                    <div class="col-12 col-md-12">
                                                         <label for="email" style="color: blue">
-                                                            <h1>Saldo Jamsostek
-                                                                tenaga kerja</h1><label>
+                                                            <h1>{{ $result }}</h1><label>
                                                     </div>
                                                 </div>
                                             </div>

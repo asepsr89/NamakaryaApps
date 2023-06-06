@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('namaPerusahaan');
             $table->string('tlpPerusahaan');
             $table->string('lamaBekerja');
-            $table->float('penghasilan');
+            $table->bigInteger('penghasilan');
             $table->string('bukuNikah');
             $table->string('aktaCerai')->nullable();
             $table->string('fotoPeminjam');
@@ -60,6 +60,8 @@ return new class extends Migration
             $table->string('status');
             $table->string('alasan')->nullable();
             $table->string('note')->nullable();
+            $table->string('notemitra')->nullable();
+            $table->bigInteger('PlafondRekomen');
             $table->timestamps();
         });
     }

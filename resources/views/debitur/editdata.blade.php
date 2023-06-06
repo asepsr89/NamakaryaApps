@@ -102,7 +102,7 @@
                             <label for="example-text-input" class="col-sm-2 col-form-label">Data Dokumen</label>
                             @foreach ($data->getMedia('document') as $document)
                                 <img src="{{ $document->getUrl() }}" alt="{{ $document->getUrl() }}"
-                                    class="img-thumbnail" width="300px">>
+                                    class="img-thumbnail" width="300px">
                             @endforeach
                         </div>
                         <div class="form-group row">

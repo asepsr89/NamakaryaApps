@@ -891,13 +891,23 @@
 
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-12">
-                                <h6>
-                                    @error('fileBerkas')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                    <input type="file" data-allowed-file-extensions="zip rar" data-max-file-size="10M"
-                                        name="fileBerkas" id="fileBerkas" class="dropify" />
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Data Dokumen</label>
+                            <div class="col-sm-10">
+
+                                @foreach ($data->getMedia('docs') as $document)
+                                    <a href="{{ $document->getUrl() }}" class="edit btn btn-primary btn-sm ">Download
+                                        Berkas</a>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Upload Dokumen</label>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <div class="needsclick dropzone" id="document-dropzone">
+                                    </div>
+                                </div>
+                                Note : Apabila dokument tidak diganti maka abaikan untuk upload dokument
                             </div>
                         </div>
                         <div class="form-group row ">
@@ -908,6 +918,8 @@
                                     data-dismiss="modal">Close</a>
                             </div>
                         </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -918,46 +930,42 @@
 @push('scripts')
     @include('sweetalert::alert')
     <script>
-        $(document).ready(function() {
-            // Basic
-            $('.dropify').dropify();
-
-            // Translated
-            $('.dropify-fr').dropify({
-                messages: {
-                    default: 'Glissez-déposez un fichier ici ou cliquez',
-                    replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
-                    remove: 'Supprimer',
-                    error: 'Désolé, le fichier trop volumineux'
-                }
-            });
-
-            // Used events
-            var drEvent = $('#input-file-events').dropify();
-
-            drEvent.on('dropify.beforeClear', function(event, element) {
-                return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
-            });
-
-            drEvent.on('dropify.afterClear', function(event, element) {
-                alert('File deleted');
-            });
-
-            drEvent.on('dropify.errors', function(event, element) {
-                console.log('Has Errors');
-            });
-
-            var drDestroy = $('#input-file-to-destroy').dropify();
-            drDestroy = drDestroy.data('dropify')
-            $('#toggleDropify').on('click', function(e) {
-                e.preventDefault();
-                if (drDestroy.isDropified()) {
-                    drDestroy.destroy();
+        var uploadedDocumentMap = {}
+        Dropzone.options.documentDropzone = {
+            url: '{{ route('debitur.storeMedia') }}',
+            maxFilesize: 10, // MB
+            addRemoveLinks: true,
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            },
+            success: function(file, response) {
+                $('form').append('<input type="hidden" name="new_document[]" value="' + response.name + '">')
+                uploadedDocumentMap[file.name] = response.name
+            },
+            removedfile: function(file) {
+                file.previewElement.remove()
+                var name = ''
+                if (typeof file.file_name !== 'undefined') {
+                    name = file.file_name
                 } else {
-                    drDestroy.init();
+                    name = uploadedDocumentMap[file.name]
                 }
-            })
-        });
+                $('form').find('input[name="new_document[]"][value="' + name + '"]').remove()
+            },
+            init: function() {
+                @if (isset($project) && $project->document)
+                    var files =
+                        {!! json_encode($project->document) !!}
+                    for (var i in files) {
+                        var file = files[i]
+                        this.options.addedfile.call(this, file)
+                        file.previewElement.classList.add('dz-complete')
+                        $('form').append('<input type="hidden" name="new_document[]" value="' + file.file_name +
+                            '">')
+                    }
+                @endif
+            }
+        }
 
         $(document).ready(function() {
             if ($("#note").length > 0) {

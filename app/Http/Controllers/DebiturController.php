@@ -95,7 +95,9 @@ class DebiturController extends Controller
                 }elseif($data->sttsPengajuan == 7){
                     return '<div class="d-inline p-2 bg-warning text-white">Proses Mitra</div>';
                 }elseif($data->sttsPengajuan == 8){
-                    return '<div class="d-inline p-2 bg-danger text-white">Reject Fasilitas</div>';
+                    return '<div class="d-inline p-2 bg-success text-white">Approve Fasilitas Mitra</div>';
+                }elseif($data->sttsPengajuan == 9){
+                    return '<a class="btn btn-danger btn-sm text-white">Reject Fasilitas</a>';
                 }
             }elseif($var == 0){
                 $inputpinjaman = '<a href="fasilitas/'.$data->id.'/edit" data-toggle="tooltip" data-id="'.$data->id.'"
@@ -121,6 +123,8 @@ class DebiturController extends Controller
                 }elseif($data->sttsPengajuan == 7){
                     return '<a class="btn btn-primary btn-sm text-white">Proses Proses Mitra</a>';
                 }elseif($data->sttsPengajuan == 8){
+                    return '<a class="btn btn-success btn-sm text-white">Approve Fasilitas Mitra</a>';
+                }elseif($data->sttsPengajuan == 9){
                     return '<a class="btn btn-danger btn-sm text-white">Reject Fasilitas</a>';
                 }
             }

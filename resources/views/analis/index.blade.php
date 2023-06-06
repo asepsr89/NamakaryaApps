@@ -260,6 +260,54 @@
                 <div class="col-12">
                     <div class="card m-b-30">
                         <div class="card-body">
+                            <h4 class="mt-0 header-title mb-3">ANALISA KEUANGAN (per Bulan) (berdasarkan Slip Gaji
+                                Terakhir)</h4>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-white" id="tablePenghasilan">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 20px">#</th>
+                                            <th class="col-sm-10">Penghasilan Bersih Lainnya</th>
+                                            <th class="col-sm-2">Nominal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td><input class="form-control" style="min-width:150px" type="text"
+                                                    id="hasilLain" name="hasilLain[]"></td>
+                                            <td><input class="form-control amount" style="min-width:150px" type="text"
+                                                    id="amount" name="amount[]"></td>
+
+                                            <td><a href="javascript:void(0)" class="text-success font-18" title="Add2"
+                                                    id="addBtn2"><i class="fa fa-plus"></i></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-white">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="5" style="text-align: right; font-weight: bold">
+                                                Total Penghasilan Bersih
+                                            </td>
+                                            <td style="font-size: 16px;width: 230px">
+                                                <input class="form-control text-right grand_total" type="text"
+                                                    id="grand_total" name="grand_total" value="0" readonly>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div> <!-- end col -->
+
+                <div class="col-12">
+                    <div class="card m-b-30">
+                        <div class="card-body">
 
                             <h4 class="mt-0 header-title mb-3">Pinjaman di tempat lain</h4>
 
@@ -312,53 +360,6 @@
                                             data-dismiss="modal">Reset</a>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div> <!-- end col -->
-                <div class="col-12">
-                    <div class="card m-b-30">
-                        <div class="card-body">
-                            <h4 class="mt-0 header-title mb-3">ANALISA KEUANGAN (per Bulan) (berdasarkan Slip Gaji
-                                Terakhir)</h4>
-                            <div class="table-responsive">
-                                <table class="table table-hover table-white" id="tablePenghasilan">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 20px">#</th>
-                                            <th class="col-sm-10">Penghasilan Bersih Lainnya</th>
-                                            <th class="col-sm-2">Nominal</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><input class="form-control" style="min-width:150px" type="text"
-                                                    id="hasilLain" name="hasilLain[]"></td>
-                                            <td><input class="form-control amount" style="min-width:150px" type="text"
-                                                    id="amount" name="amount[]"></td>
-
-                                            <td><a href="javascript:void(0)" class="text-success font-18" title="Add2"
-                                                    id="addBtn2"><i class="fa fa-plus"></i></a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover table-white">
-                                    <tbody>
-                                        <tr>
-                                            <td colspan="5" style="text-align: right; font-weight: bold">
-                                                Total Penghasilan Bersih
-                                            </td>
-                                            <td style="font-size: 16px;width: 230px">
-                                                <input class="form-control text-right grand_total" type="text"
-                                                    id="grand_total" name="grand_total" value="0" readonly>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
 
