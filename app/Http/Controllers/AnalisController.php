@@ -92,12 +92,18 @@ class AnalisController extends Controller
         $cabang = Cabang::all();
         
 
-        $bankloan1 = Bankloan::where('analis_number',$analis_number)->where('statusPinjaman',1)->get();
+        $bankloan1 = Bankloan::where('analis_number',$analis_number)->whereIn('statusPinjaman',[1,2])->get();
+        $bankloan2 = Bankloan::where('analis_number',$analis_number)->whereIn('statusPinjaman',[1])->get();
 
         $total = [];
-        $total['totLoan']     = Bankloan::where('analis_number',$analis_number)->where('statusPinjaman',1)->sum('loan');
-        $total['totOs']       = Bankloan::where('analis_number',$analis_number)->where('statusPinjaman',1)->sum('outstanding');
-        $total['totAngsuran'] = Bankloan::where('analis_number',$analis_number)->where('statusPinjaman',1)->sum('angsuran');
+        $total['totLoan']     = Bankloan::where('analis_number',$analis_number)->whereIn('statusPinjaman',[1,2])->sum('loan');
+        $total['totOs']       = Bankloan::where('analis_number',$analis_number)->whereIn('statusPinjaman',[1,2])->sum('outstanding');
+        $total['totAngsuran'] = Bankloan::where('analis_number',$analis_number)->whereIn('statusPinjaman',[1,2])->sum('angsuran');
+
+        $total3 = [];
+        $total3['totLoan3']     = Bankloan::where('analis_number',$analis_number)->whereIn('statusPinjaman',[1])->sum('loan');
+        $total3['totOs3']       = Bankloan::where('analis_number',$analis_number)->whereIn('statusPinjaman',[1])->sum('outstanding');
+        $total3['totAngsuran3'] = Bankloan::where('analis_number',$analis_number)->whereIn('statusPinjaman',[1])->sum('angsuran');
 
         $total2 = [];
         $total2['totAngsuran']= Bankloan::where('analis_number',$analis_number)->where('statusPinjaman',2)->sum('angsuran');
@@ -105,8 +111,10 @@ class AnalisController extends Controller
         // return dd($total2['totAngsuran']);
         
         $subTot = [];
-        $subTot['subTotal'] =  $total2['totAngsuran']+$total['totAngsuran'];
-        // $subTot['subPersen'] = $subTot['subTotal']== 0 ? 0 : ($subTot['subTotal']/$total['totAngsuran'])*100;
+        $subTot['subTotal'] =  $total2['totAngsuran']-$total['totAngsuran'];
+
+        $subTot2 = [];
+        $subTot2['subPersen'] = ($subTot['subTotal']/$total3['totAngsuran3']);
 
         // return dd($subTot['subTotal']);
 
@@ -115,7 +123,7 @@ class AnalisController extends Controller
         // $subTot['subPersen'] = $subTot['subTotal']== 0 ? 0 : ($subTot['subTotal']/$total['totAngsuran'])*100;
 
         $iir2 = [];
-        $iir2['iirhasil'] = $subTot['subTotal']== 0 ? 0 :($iir['iirTotal']/$analis->hasilLain)*100;
+        $iir2['iirhasil'] = $iir['iirTotal'] == 0 ? 0 :($iir['iirTotal']/$analis->hasilLain)*100;
 
         $ltv = [];
         $ltv['ltvtotal'] = $data->plafond == 0 ? 0 :($data->plafond/$analis->saldoBpjs)*100;
@@ -129,13 +137,13 @@ class AnalisController extends Controller
         $bThreshold = 90;
 
         if ($a < $aThreshold && $b < $bThreshold) {
-            $result = "Di Terima";
+            $result = "Pengajuan Approve";
         } elseif ($a < $aThreshold && $b > $bThreshold) {
-            $result = "Di Tolak";
+            $result = "Pengajuan Tolak";
         }elseif($a > $aThreshold && $b > $bThreshold){
-            $result = "Di Tolak";
+            $result = "Pengajuan Tolak";
         }elseif($a > $aThreshold && $b < $bThreshold){
-            $result = "Di Tolak";
+            $result = "Pengajuan Tolak";
         } else {
             $result = "hasil tidak valid";
         }
@@ -143,7 +151,8 @@ class AnalisController extends Controller
 
         // return dd($a);
 
-        return view('analis.mppanalis',compact('data','analis','cabang','bankloan1','total','total2','subTot','iir','iir2','ltv','result'));
+        return
+        view('analis.mppanalis',compact('data','analis','cabang','bankloan1','bankloan2','total','total2','total3','subTot','subTot2','iir','iir2','ltv','result'));
     }
 
     /**

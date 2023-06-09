@@ -17,12 +17,14 @@
     <link href="{{ asset('') }}assets/css/style.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
     <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
-
-
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
 
     <!-- Dropzone css -->
     <link href="{{ asset('') }}assets/plugins/dropzone/dist/dropzone.css" rel="stylesheet" type="text/css">
     <link href="{{ asset('') }}assets/plugins/dropify/css/dropify.min.css" rel="stylesheet">
+
+
 
     <script src="{{ asset('') }}assets/js/jquery.min.js"></script>
     <script src="https://use.fontawesome.com/releases/vVERSION/js/all.js" data-auto-replace-svg="nest"></script>

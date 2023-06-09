@@ -67,6 +67,9 @@ class FasilitasController extends Controller
                     $kirimMitra .=  ' <a href="fasilitas/'.$data->id.'/cekFasilitas" data-toggle="tooltip" data-id="'.$data->id.'" 
                         class="edit btn btn-secondary btn-sm ">Info Fasiitas</a>';
 
+                    $revisimitra = '<a href="fasilitas/'.$data->id.'/revisifasilitasmitra" data-toggle="tooltip" data-id="'.$data->id.'"
+                        class="edit btn btn-success btn-sm ">Revisi Fasilitas</a>';
+
                     if($data->status == 2){
                         return $cekfasilitas;
                     }elseif($data->status == 3){
@@ -78,7 +81,7 @@ class FasilitasController extends Controller
                     }elseif($data->status == 6){
                         return '<span class="badge badge-warning">Proses Mitra</span>';
                     }elseif($data->status == 7){
-                        return '<span class="badge badge-warning">Revisi Pusat</span>';
+                        return $revisimitra;
                     }elseif($data->status == 8){
                         return '<span class="badge badge-info">Approve Fasilitas Mitra</span>';
                     }
@@ -104,7 +107,7 @@ class FasilitasController extends Controller
                     }elseif($data->status == 6){
                         return '<span class="badge badge-warning">Proses Mitra</span>';
                     }elseif($data->status == 7){
-                        return '<span class="badge badge-warning">Revisi Mitra</span>';
+                        return '<span class="badge badge-warning">Revisi Pusat</span>';
                     }elseif($data->status == 8){
                         return '<span class="badge badge-info">Approve Fasilitas Mitra</span>';
                     }
@@ -130,7 +133,7 @@ class FasilitasController extends Controller
                     }elseif($data->status == 6){
                         return $cekfasilitasmitra;
                     }elseif($data->status == 7){
-                        return '<span class="badge badge-info">Revisi Mitra</span>';
+                        return '<span class="badge badge-info">Revisi Pusat</span>';
                     }elseif($data->status == 8){
                         return '<span class="badge badge-info">Approve Fasilitas Mitra</span>';
                     }elseif($data->status == 9){
@@ -252,12 +255,33 @@ class FasilitasController extends Controller
         $debitur = Debitur::find($debitur_id);
         $debitur->status='5';
         $debitur->save();
-
-
-
+        
         }
 
+        return redirect('fasilitas')->with('success', 'Data Berhasil Di Update');
+    }
 
+    public function updatemitra(Request $request,$id)
+    {
+        $fasilitas = Fasilitas::find($id);
+        $fasilitas->status='6';
+        $fasilitas->save();
+
+         $fasilitas->update($request->all());
+        
+        if($request->input('new_document',[]) == !null){
+            $fasilitas->clearMediaCollection('docs');
+        foreach ($request->input('new_document', []) as $file) {
+                $fasilitas->addMedia(storage_path('tmp/uploads/' .
+                $file))->toMediaCollection('docs');
+            }
+
+        $debitur_id = $fasilitas->debitur_id;
+        $debitur = Debitur::find($debitur_id);
+        $debitur->status='7';
+        $debitur->save();
+        
+        }
 
         return redirect('fasilitas')->with('success', 'Data Berhasil Di Update');
     }
@@ -271,6 +295,17 @@ class FasilitasController extends Controller
 
         return view('fasilitas.revisifasilitas',compact('data','debitur'));
     }
+
+    Public function revisifasilitasmitra(Request $request,$id)
+    {
+        $data = Fasilitas::find($id);
+        $debitur_id = $data->debitur_id;
+
+        $debitur = Debitur::find($debitur_id);
+
+        return view('fasilitas.revisifasilitasmitra',compact('data','debitur'));
+    }
+    
 
     public function otorisasi(Fasilitas $fasilitas,$id)
     {

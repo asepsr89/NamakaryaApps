@@ -316,6 +316,40 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                        <br />
+                                        <h5 class="mt-0 header-title mb-3"> Pinjaman Baru Setelah Disetujui</h5>
+                                        <table id="tablebankloan" class="table table-bordered">
+                                            <thead>
+                                                <tr class="table-primary">
+                                                    <th>Nama Bank</th>
+                                                    <th>Plafond</th>
+                                                    <th>Outstanding</th>
+                                                    <th>Cicilan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($bankloan2 as $bankloan2)
+                                                    <tr>
+                                                        <td>{{ $bankloan2->bankName }}</td>
+                                                        <td>Rp.{{ number_format($bankloan2->loan) }}</td>
+                                                        <td>Rp.{{ number_format($bankloan2->outstanding) }}</td>
+                                                        <td>Rp.{{ number_format($bankloan2->angsuran) }}</td>
+                                                    </tr>
+                                                @endforeach
+                                                <tr>
+                                                    <td class="table-secondary"><b>Total</b></td>
+                                                    <td class="table-secondary">
+                                                        <b>Rp.{{ number_format($total3['totLoan3']) }}</b>
+                                                    </td>
+                                                    <td class="table-secondary">
+                                                        <b>Rp.{{ number_format($total3['totOs3']) }}</b>
+                                                    </td>
+                                                    <td class="table-secondary">
+                                                        <b>Rp.{{ number_format($total3['totAngsuran3']) }}</b>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
@@ -351,8 +385,9 @@
                                             <label for="email" style="color: red">Persentase :</label>
                                         </div>
                                         <div class="col-12 col-md-8">
-                                            {{-- <label style="color: red">  {{ number_format($subTot['subPersen']) }}
-                                                %</label> --}}
+                                            <label style="color: red">
+                                                {{ number_format((float) $subTot2['subPersen'] . 2) }}
+                                                %</label>
                                         </div>
                                     </div>
                                 </div>

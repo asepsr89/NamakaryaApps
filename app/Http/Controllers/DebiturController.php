@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DebiturRequest;
 use App\Models\Cabang;
 use App\Models\Debitur;
+use App\Models\Fasilitas;
 use App\Models\Mitra;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -64,6 +65,12 @@ class DebiturController extends Controller
              class="btn btn-danger btn-sm action">Delete</button>';
          }
 
+        if(Gate::allows('update debitur')){
+
+        $btn .= ' <a href="debitur/'.$row->id.'/viewdata" data-toggle="tooltip" data-id="'.$row->id.'"
+            data-original-title="view" class="edit btn btn-info btn-sm editCabang">View</a>';
+        }
+
          return $btn;
          })
 
@@ -95,7 +102,8 @@ class DebiturController extends Controller
                 }elseif($data->sttsPengajuan == 7){
                     return '<div class="d-inline p-2 bg-warning text-white">Proses Mitra</div>';
                 }elseif($data->sttsPengajuan == 8){
-                    return '<div class="d-inline p-2 bg-success text-white">Approve Fasilitas Mitra</div>';
+                    return '<a class="btn btn-success btn-sm text-white"><i class="fa fa-check-square"> Approve
+                            Fasilitas</i></a>';
                 }elseif($data->sttsPengajuan == 9){
                     return '<a class="btn btn-danger btn-sm text-white">Reject Fasilitas</a>';
                 }
@@ -123,7 +131,8 @@ class DebiturController extends Controller
                 }elseif($data->sttsPengajuan == 7){
                     return '<a class="btn btn-primary btn-sm text-white">Proses Proses Mitra</a>';
                 }elseif($data->sttsPengajuan == 8){
-                    return '<a class="btn btn-success btn-sm text-white">Approve Fasilitas Mitra</a>';
+                    return '<a class="btn btn-success btn-sm text-white"><i class="fa fa-check-square"> Approve
+                            Fasilitas</i></a>';
                 }elseif($data->sttsPengajuan == 9){
                     return '<a class="btn btn-danger btn-sm text-white">Reject Fasilitas</a>';
                 }
@@ -238,10 +247,28 @@ class DebiturController extends Controller
      */
     public function edit($id)
     {
- 
+
         $data=Debitur::find($id);
         $mitra=Mitra::all();
         return view('debitur.edit',compact('data','mitra'));
+    }
+
+    public function viewdata(Debitur $image,$id)
+    {
+        $data = Debitur::find($id);
+        $debitur_id = $data->id;
+
+        // $tes = $data->fasilitas()->where('debitur_id',$debitur_id)->get();
+
+                $data = DB::table('debiturs')
+                ->join('fasilitas','debiturs.id','=','fasilitas.debitur_id')
+                ->where('debitur_id',$debitur_id)
+                ->select('debiturs.*','fasilitas.*')
+                ->get();
+
+                // return dd($data);
+
+        return view('debitur.viewdata',['fasilitas'=>new Fasilitas()],compact('data'));
     }
 
     public function editdata(Debitur $image,$id)

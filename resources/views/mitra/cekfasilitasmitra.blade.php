@@ -360,7 +360,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Note Revisi</label>
                             <div class="col-sm-12">
-                                <textarea id="notemitra" name="notemitra" placeholder="Enter Details" class="form-control form-control-lg mb-3"></textarea>
+                                <textarea id="notemitra" name="notemitra" placeholder="Enter Details" class="form-control form-control-lg mb-3">{{ $data->notemitra }}</textarea>
                             </div>
                         </div>
 
