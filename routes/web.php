@@ -36,15 +36,17 @@ Route::get('/', function () {
     }
 });
 
-// Route::get('/', [LoginController::class, 'login'])->name('login');
+Route::get('/', [LoginController::class, 'login'])->name('login');
+Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
 
-Route::get('/home', function () {
-    return view('home');
-    })->middleware(['auth', 'verified'])->name('home');
+// Route::get('/home', function () {
+//     return view('home');
+//     })->middleware(['auth', 'verified'])->name('home');
 
 Auth::routes();
 
 Route::middleware('auth')->group(function(){
+    // Route::get('index',[HomeController::class])->middleware(['auth','verified'])->name('home');
     Route::resource('users',UsersController::class);
     Route::resource('cabang',CabangController::class);
     Route::resource('roles',RoleController::class);

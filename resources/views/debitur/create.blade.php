@@ -40,7 +40,7 @@
                             <label for="example-text-input" class="col-sm-2 col-form-label">Nama Debitur</label>
                             <div class="col-sm-10">
                                 <input class="form-control @error('name') is-invalid @enderror" type="text"
-                                    value="{{ old('name') }}" name="name" id="name">
+                                    value="{{ old('name') }}" name="name" id="name" onkeyup="myFunction()>
                                 @error('name')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -181,5 +181,11 @@
                 @endif
             }
         }
+		
+		
+	function myFunction() {
+		var x = document.getElementById("name");
+		x.value = x.value.toUpperCase();
+	}
     </script>
 @endpush

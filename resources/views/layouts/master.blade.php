@@ -84,10 +84,15 @@
     <script src="{{ asset('') }}assets/js/jquery.nicescroll.js"></script>
     <script src="{{ asset('') }}assets/js/jquery.scrollTo.min.js"></script>
 
+    <!-- Chart JS -->
+    <script src="{{ asset('') }}assets/plugins/chart.js/chart.min.js"></script>
+    <script src="{{ asset('') }}assets/pages/chartjs.init.js"></script>
+
     <script src="{{ asset('') }}assets/plugins/skycons/skycons.min.js"></script>
     <script src="{{ asset('') }}assets/plugins/raphael/raphael-min.js"></script>
     <script src="{{ asset('') }}assets/plugins/morris/morris.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+
     <!-- Buttons examples -->
     <script src="{{ asset('') }}assets/plugins/datatables/dataTables.buttons.min.js"></script>
     <script src="{{ asset('') }}assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
@@ -97,9 +102,11 @@
     <script src="{{ asset('') }}assets/plugins/datatables/buttons.html5.min.js"></script>
     <script src="{{ asset('') }}assets/plugins/datatables/buttons.print.min.js"></script>
     <script src="{{ asset('') }}assets/plugins/datatables/buttons.colVis.min.js"></script>
+
     <!-- Responsive examples -->
     <script src="assets/plugins/datatables/dataTables.responsive.min.js"></script>
     <script src="assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
+
 
 
     <!-- Sweet-Alert  -->

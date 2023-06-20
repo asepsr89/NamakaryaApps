@@ -33,7 +33,6 @@
                                     <th scope="col">Cabang</th>
                                     <th scope="col">Nama Perusahaan</th>
                                     <th scope="col">Created_at</th>
-                                    <th scope="col">Status Debitur</th>
                                     <th scope="col">Status Pengajuan</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
@@ -69,6 +68,11 @@
             $(document).ready(function() {
                 $('#tabeldebitur').addClass('nowrap').DataTable(({
                     dom: 'lBfrtip',
+                    aLengthMenu: [
+                        [25, 50, 75, -1],
+                        [25, 50, 75, "All"]
+                    ],
+                    pageLength: 25,
                     buttons: [
                         'copy', 'excel', 'pdf', 'csv', 'print'
                     ],
@@ -117,10 +121,6 @@
                             name: 'created_at'
                         },
                         {
-                            data: 'sttsDebitu',
-                            name: 'sttsDebitu'
-                        },
-                        {
                             data: 'sttsPengajuan',
                             name: 'sttsPengajuan'
                         },
@@ -165,6 +165,13 @@
                                         response.status,
                                     )
                                     $('#tabeldebitur').DataTable().ajax.reload();
+                                },
+                                error: function(response) {
+                                    Swal.fire(
+                                        'Not Deleted!',
+                                        response.message,
+                                        response.status,
+                                    )
                                 }
                             });
                         }

@@ -58,17 +58,17 @@ class DebiturController extends Controller
 
             $btn = '<a href="debitur/'.$row->id.'/editdata" data-toggle="tooltip" data-id="'.$row->id.'"
                 data-original-title="Edit"
-                class="edit btn btn-primary btn-sm editCabang">Edit</a>';
+                class="edit btn btn-primary btn-sm editCabang"><i class="fa fa-pencil"></i></a>';
         }
          if(Gate::allows('delete debitur')){
-         $btn .= ' <button type="button" data-id='.$row->id.' data-jenis="delete"
-             class="btn btn-danger btn-sm action">Delete</button>';
+         $btn .= ' <a type="button" data-id='.$row->id.' data-jenis="delete"
+             class="btn btn-danger btn-sm action"><i class="fa fa-trash"></i></a>';
          }
 
         if(Gate::allows('update debitur')){
 
         $btn .= ' <a href="debitur/'.$row->id.'/viewdata" data-toggle="tooltip" data-id="'.$row->id.'"
-            data-original-title="view" class="edit btn btn-info btn-sm editCabang">View</a>';
+            data-original-title="view" class="edit btn btn-info btn-sm editCabang"><i class="fa fa-eye"></a>';
         }
 
          return $btn;
@@ -334,6 +334,7 @@ class DebiturController extends Controller
      */
     public function destroy(Debitur $debitur)
     {
+        
         // delete previous image in the database
         $query = DB::table('media')->where('id', $debitur);
 
@@ -341,12 +342,25 @@ class DebiturController extends Controller
         $query->delete();
         endif;
 
+            $debitur_id = $debitur->id;
 
-        $debitur->delete();
-            return response()->json([
-            'status'=>'success',
-            'message'=>'Data berhasil dihapus'
-        ]);
+        $data = DB::table('debiturs')
+            ->join('fasilitas','debiturs.id','=','fasilitas.debitur_id')
+            ->where('debitur_id',$debitur_id);
+
+            if($data->count() > 0){
+                return response()->json([
+                    'status'=>'error',
+                    'message'=>'Data debitur tidak dapat di hapus fasilitas aktif'
+                ]);
+            } else{
+                $debitur->delete();
+                return response()->json([
+                'status'=>'success',
+                'message'=>'Data berhasil dihapus'
+                ]);
+            }
+                
     }
 
 }
