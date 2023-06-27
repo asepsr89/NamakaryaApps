@@ -79,6 +79,7 @@ class DebiturController extends Controller
             if($var == 1 ){
                 $approve = '<a href="debitur/'.$data->id.'/edit" data-toggle="tooltip" data-id="'.$data->id.'"
                     data-original-title="Edit" class="btn btn-success btn-sm pengajuan">Pengajuan Slik</a>';
+
                 $kirimcabang = '<a href="debitur/'.$data->id.'/kirim" data-toggle="tooltip" data-id="'.$data->id.'"
                     data-original-title="Edit" class="edit btn btn-success btn-sm editCabang">Kirim data cabang</a>';
 
@@ -88,24 +89,25 @@ class DebiturController extends Controller
                 if($data->sttsPengajuan == 0){
                     return $approve;
                 }elseif($data->sttsPengajuan == 1){
-                    return '<a class="btn btn-warning btn-sm text-white">Proses cek slik</a>';
+                    return '<h5><span class="badge badge-info">Proses Cek Slik</span></h5>';
                 }elseif($data->sttsPengajuan == 2){
                     return $kirimcabang;
                 }elseif($data->sttsPengajuan == 3){
-                    return '<a class="btn btn-danger btn-sm text-white">Slik Reject</a>';
+                    return '<h5><span class="badge badge-danger">Reject Slik</span></h5>';
                 }elseif($data->sttsPengajuan == 4){
-                    return '<div class="d-inline p-2 bg-primary text-white">Proses Cabang</div>';
+                    return '<h5><span class="badge badge-info">Proses Cabang</span></h5>';
                 }elseif($data->sttsPengajuan == 5){
-                    return '<div class="d-inline p-2 bg-primary text-white">Proses Cabang</div>';
+                    return '<h5><span class="badge badge-info">Proses Cabang</span></h5>';
                 }elseif($data->sttsPengajuan == 6){
                     return $cekfasilitas;
                 }elseif($data->sttsPengajuan == 7){
-                    return '<div class="d-inline p-2 bg-warning text-white">Proses Mitra</div>';
+                    return '<h5><span class="badge badge-info">Proses Mitra</span></h5>';
                 }elseif($data->sttsPengajuan == 8){
                     return '<a class="btn btn-success btn-sm text-white"><i class="fa fa-check-square"> Approve
                             Fasilitas</i></a>';
                 }elseif($data->sttsPengajuan == 9){
-                    return '<a class="btn btn-danger btn-sm text-white">Reject Fasilitas</a>';
+                    return '<h5><span class="badge badge-danger"><i class="fa fa-times-rectangle"> Reject
+                                Fasilitas</i></span></h5>';
                 }
             }elseif($var == 0){
                 $inputpinjaman = '<a href="fasilitas/'.$data->id.'/edit" data-toggle="tooltip" data-id="'.$data->id.'"
@@ -115,26 +117,27 @@ class DebiturController extends Controller
                     data-original-title="Edit" class="edit btn btn-success btn-sm">Kirim pusat</a>';
 
                 if($data->sttsPengajuan == 0){
-                    return '<div class="d-inline p-2 bg-primary text-white">Proses Pengajuan slik</div>';
+                    return '<h5><span class="badge badge-info">Proses Pengajuan Slik</span></h5>';
                 }elseif($data->sttsPengajuan == 1){
-                    return '<a class="btn btn-warning btn-sm text-white">Proses cek slik</a>';
+                    return '<h5><span class="badge badge-info">Proses Slik</span></h5>';
                 }elseif($data->sttsPengajuan == 2){
-                    return '<a class="btn btn-info btn-sm text-white">Proses cek slik Pusat</a>';
+                    return '<h5><span class="badge badge-info">Proses Slik Pusat</span></h5>';
                 }elseif($data->sttsPengajuan == 3){
-                    return '<a class="btn btn-danger btn-sm text-white">Slik Reject</a>';
+                    return '<h5><span class="badge badge-danger">Reject Slik</span></h5>';
                 }elseif($data->sttsPengajuan == 4){
                     return $inputpinjaman;
                 }elseif($data->sttsPengajuan == 5){
                     return $kirimpusat ;
                 }elseif($data->sttsPengajuan == 6){
-                    return '<a class="btn btn-primary btn-sm text-white">Proses Fasilitas Pusat</a>';
+                    return '<h5><span class="badge badge-info">Proses Fasilitas Pusat</span></h5>';
                 }elseif($data->sttsPengajuan == 7){
-                    return '<a class="btn btn-primary btn-sm text-white">Proses Proses Mitra</a>';
+                    return '<h5><span class="badge badge-info">Proses Mitra</span></h5>';
                 }elseif($data->sttsPengajuan == 8){
                     return '<a class="btn btn-success btn-sm text-white"><i class="fa fa-check-square"> Approve
                             Fasilitas</i></a>';
                 }elseif($data->sttsPengajuan == 9){
-                    return '<a class="btn btn-danger btn-sm text-white">Reject Fasilitas</a>';
+                    return '<h5><span class="badge badge-danger"><i class="fa fa-times-rectangle"> Reject
+                                Fasilitas</i></span></h5>';
                 }
             }
          })
@@ -197,6 +200,7 @@ class DebiturController extends Controller
             'alamat' => $request->alamat,
             'cabang_id' => $request->cabang_id,
             'namaPerusahaan' => $request->namaPerusahaan,
+            'user_id'=>auth()->user()->id,
         ]);
 
         foreach ($request->input('document', []) as $file) {

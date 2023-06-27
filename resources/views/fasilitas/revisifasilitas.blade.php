@@ -29,6 +29,14 @@
                                     name="debitur_id" hidden>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 control-label">Palfond Rekomendasi</label>
+                            <div class="col-sm-10">
+                                <input class="form-control " type="text"
+                                    value=" Rp. {{ number_format($data->PlafondRekomen) }}" id="PlafondRekomen"
+                                    name="PlafondRekomen" disabled>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Note Revisi</label>
                             <div class="col-sm-12">

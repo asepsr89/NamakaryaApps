@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnalisController;
+use App\Http\Controllers\AoController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CabangController;
 use App\Http\Controllers\DebiturController;
@@ -36,8 +37,11 @@ Route::get('/', function () {
     }
 });
 
-Route::get('/', [LoginController::class, 'login'])->name('login');
+// Route::get('/', [LoginController::class, 'login'])->name('login');
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
+
+Auth::routes(['verify' => true]);
+
 
 // Route::get('/home', function () {
 //     return view('home');
@@ -55,9 +59,10 @@ Route::middleware('auth')->group(function(){
     Route::resource('mitra',MitraController::class);
     Route::resource('jabatan',JabatanController::class);
     Route::resource('debitur',DebiturController::class);
+    Route::resource('accountofficer',AoController::class);
     Route::get('debitur/{id}/editdata',[DebiturController::class,'editdata']);
     Route::get('debitur/{id}/viewdata',[DebiturController::class,'viewdata']);
-    Route::get('debitur/{id}/edit',[DebiturController::class,'edit'])->name('debitur.edit');
+    Route::get('debitur/{id}/edit',[DebiturController::class,'edit']);
     Route::post('debitur/media',[DebiturController::class, 'storeMedia'])->name('debitur.storeMedia');
     Route::put('pengajuanslik/{id}', [DebiturController::class, 'pengajuanslik'])->name('debitur.pengajuanslik');
     Route::get('debitur/{id}/kirim', [DebiturController::class, 'kirim']);
@@ -79,6 +84,7 @@ Route::middleware('auth')->group(function(){
     Route::get('fasilitas/{id}/reject',[FasilitasController::class,'reject'])->name('fasilitas.reject');
     Route::get('fasilitas/{id}/kirimmitra',[FasilitasController::class,'kirimmitra'])->name('fasilitas.kirimmitra');
     Route::put('fasilitas/{id}/revisi',[FasilitasController::class,'revisi'])->name('fasilitas.revisi');
+    Route::put('fasilitas/{id}/revisiPlafond',[FasilitasController::class,'revisiPlafond'])->name('fasilitas.revisiPlafond');
     Route::get('fasilitas/{id}/revisifasilitas',[FasilitasController::class,'revisifasilitas'])->name('fasilitas.revisifasilitas');
     Route::get('fasilitas/{id}/revisifasilitasmitra',[FasilitasController::class,'revisifasilitasmitra'])->name('fasilitas.revisifasilitasmitra');
     Route::put('fasilitas/{id}/revisimitra',[FasilitasController::class,'revisimitra'])->name('fasilitas.revisimitra');
@@ -89,4 +95,5 @@ Route::middleware('auth')->group(function(){
     Route::post('analis',[AnalisController::class,'store'])->name('analis.store');
     Route::get('analis/dtanalis',[AnalisController::class,'dtanalis'])->name('analis.dtanalis');
     Route::get('analis/{id}/mppanalis',[AnalisController::class,'mppanalis'])->name('analis.mppanalis');
+
 });

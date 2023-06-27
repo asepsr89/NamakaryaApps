@@ -44,10 +44,16 @@ class RolePermissionSeeder extends Seeder
          'mitra_id' => '1',
          ],$default_user_value));
 
+         $user = User::create(array_merge([
+         'email' => 'user@gmail.com',
+         'name' => 'User Biasa',
+         ],$default_user_value));
+
 
          $role_it = Role::create(['name'=>'it']);
          $role_cabang = Role::create(['name'=>'cabang']);
          $role_mitra = Role::create(['name'=>'mitra']);
+         $role_user = Role::create(['name'=>'user']);
 
          Permission::create((['name'=>'read Parameter']));
          $permisson = Permission::create(['name'=>'read roles']);
@@ -85,6 +91,11 @@ class RolePermissionSeeder extends Seeder
          $permisson = Permission::create(['name'=>'update jabatan']);
          $permisson = Permission::create(['name'=>'delete jabatan']);
          $permisson = Permission::create(['name'=>'edit jabatan']);
+         $permisson = Permission::create(['name'=>'read accountofficer']);
+         $permisson = Permission::create(['name'=>'create accountofficer']);
+         $permisson = Permission::create(['name'=>'update accountofficer']);
+         $permisson = Permission::create(['name'=>'delete accountofficer']);
+         $permisson = Permission::create(['name'=>'edit accountofficer']);
          
 
         Permission::create((['name'=>'read fasilitas']));
@@ -124,37 +135,49 @@ class RolePermissionSeeder extends Seeder
          $role_it->givePermissionTo('update roles');
          $role_it->givePermissionTo('delete roles');
          $role_it->givePermissionTo('edit roles');
+
          $role_it->givePermissionTo('read cabang');
          $role_it->givePermissionTo('create cabang');
          $role_it->givePermissionTo('update cabang');
          $role_it->givePermissionTo('delete cabang');
          $role_it->givePermissionTo('edit cabang');
+
          $role_it->givePermissionTo('read users');
          $role_it->givePermissionTo('create users');
          $role_it->givePermissionTo('update users');
          $role_it->givePermissionTo('delete users');
          $role_it->givePermissionTo('edit users');
+
          $role_it->givePermissionTo('read menu');
          $role_it->givePermissionTo('create menu');
          $role_it->givePermissionTo('update menu');
          $role_it->givePermissionTo('delete menu');
          $role_it->givePermissionTo('edit menu');
+
          $role_it->givePermissionTo('read permission');
          $role_it->givePermissionTo('create permission');
          $role_it->givePermissionTo('update permission');
          $role_it->givePermissionTo('delete permission');
          $role_it->givePermissionTo('edit permission');
+
          $role_it->givePermissionTo('read mitra');
          $role_it->givePermissionTo('create mitra');
          $role_it->givePermissionTo('update mitra');
          $role_it->givePermissionTo('delete mitra');
          $role_it->givePermissionTo('edit mitra');
+
          $role_it->givePermissionTo('read jabatan');
          $role_it->givePermissionTo('create jabatan');
          $role_it->givePermissionTo('update jabatan');
          $role_it->givePermissionTo('delete jabatan');
          $role_it->givePermissionTo('edit jabatan');
          $role_it->givePermissionTo('read status');
+
+         $role_it->givePermissionTo('read accountofficer');
+         $role_it->givePermissionTo('create accountofficer');
+         $role_it->givePermissionTo('update accountofficer');
+         $role_it->givePermissionTo('delete accountofficer');
+         $role_it->givePermissionTo('edit accountofficer');
 
         $role_it->givePermissionTo('read fasilitas');
         $role_it->givePermissionTo(['name'=>'read debitur']);
@@ -215,6 +238,7 @@ class RolePermissionSeeder extends Seeder
          $cabang->assignRole('cabang');
          $mitra->assignRole('mitra');
          $it->assignRole('it');
+         $user->assignRole('user');
 
          DB::commit();
          } catch (\Throwable $th) {

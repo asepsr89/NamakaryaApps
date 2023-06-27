@@ -58,6 +58,7 @@ class Fasilitas extends Model implements HasMedia
     'status',
     'noDebitur',
     'noFasilitas',
+    'note',
     'PlafondRekomen'
     ];
 

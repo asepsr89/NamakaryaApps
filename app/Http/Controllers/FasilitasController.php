@@ -369,7 +369,7 @@ class FasilitasController extends Controller
 
         $debitur_id = $fasilitas->debitur_id;
         $debitur = Debitur::find($debitur_id);
-        $debitur->sttsPengajuan='8';
+        $debitur->sttsPengajuan='9';
         $debitur->save();
 
         return redirect('debitur')->with('success','Fasilitas Reject');
@@ -383,7 +383,18 @@ class FasilitasController extends Controller
         $fasilitas->status = '3';
         $fasilitas->save();
 
-         return redirect('fasilitas')->with('success','Revisi Fasilitas Berhasil disimpan');
+        return redirect('fasilitas')->with('success','Revisi Fasilitas Berhasil disimpan');
+    }  
+    
+    public function revisiPlafond(Request $request,$id)
+    {
+        $fasilitas = Fasilitas::find($id);
+        $fasilitas->PlafondRekomen = $request->plafondRekomen;
+        $fasilitas->note = $request->note;
+        $fasilitas->status = '3';
+        $fasilitas->save();
+
+        return redirect('fasilitas')->with('success','Revisi Fasilitas Berhasil disimpan');
     }   
 
     public function kirimmitra(Fasilitas $fasilitas,$id)

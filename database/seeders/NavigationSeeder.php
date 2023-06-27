@@ -124,5 +124,12 @@ class NavigationSeeder extends Seeder
             'icon'=>'',
             'main_menu'=>16,
         ]);
+
+            Navigation::create([
+            'name' => 'Manage Accountofficer',
+            'url' =>'accountofficer',
+            'icon'=>'',
+            'main_menu'=>1,
+        ]);
     }
 }

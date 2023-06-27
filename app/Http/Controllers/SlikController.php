@@ -27,6 +27,7 @@ class SlikController extends Controller
        $data = Debitur::latest()->get();
        $user = auth()->user()->mitra_id;
 
+
        $slik = $data->where('mitra_id',$user)->where('sttsPengajuan',1);
 
          return DataTables::of($slik)

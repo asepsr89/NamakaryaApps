@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable();
             $table->foreignId('cabang_id')->nullable();
             $table->foreignId('mitra_id')->nullable();
+            $table->foreignId('accountOfficer_id')->nullable();
             $table->string('name')->nullable();
             $table->date('tglPengajuan')->nullable();
             $table->string('noDebitur')->nullable();

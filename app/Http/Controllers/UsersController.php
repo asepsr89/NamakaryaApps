@@ -61,8 +61,7 @@ class UsersController extends Controller
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
 
-        // dd($input);
-
+        
         $user = User::create($input);
         $user->assignRole($request->input('role'));
         return response()->json([

@@ -20,6 +20,20 @@
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
 
+    <!-- Plugins css -->
+    <link href="{{ asset('') }}assets/plugins/timepicker/tempusdominus-bootstrap-4.css" rel="stylesheet">
+    <link href="{{ asset('') }}assets/plugins/timepicker/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <link href="{{ asset('') }}assets/plugins/clockpicker/jquery-clockpicker.min.css" rel="stylesheet">
+    <link href="{{ asset('') }}assets/plugins/colorpicker/asColorPicker.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('') }}assets/plugins/select2/select2.min.css" rel="stylesheet" type="text/css">
+
+    <link href="{{ asset('') }}assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css"
+        rel="stylesheet">
+    <link href="{{ asset('') }}assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css"
+        rel="stylesheet">
+    <link href="{{ asset('') }}assets/plugins/bootstrap-touchspin/css/jquery.bootstrap-touchspin.min.css"
+        rel="stylesheet">
+
     <!-- Dropzone css -->
     <link href="{{ asset('') }}assets/plugins/dropzone/dist/dropzone.css" rel="stylesheet" type="text/css">
     <link href="{{ asset('') }}assets/plugins/dropify/css/dropify.min.css" rel="stylesheet">
@@ -87,6 +101,28 @@
     <!-- Chart JS -->
     <script src="{{ asset('') }}assets/plugins/chart.js/chart.min.js"></script>
     <script src="{{ asset('') }}assets/pages/chartjs.init.js"></script>
+
+
+    <!-- Plugins js -->
+    <script src="{{ asset('') }}assets/plugins/timepicker/moment.js"></script>
+    <script src="{{ asset('') }}assets/plugins/timepicker/tempusdominus-bootstrap-4.js"></script>
+    <script src="{{ asset('') }}assets/plugins/timepicker/bootstrap-material-datetimepicker.js"></script>
+    <script src="{{ asset('') }}assets/plugins/clockpicker/jquery-clockpicker.min.js"></script>
+    <script src="{{ asset('') }}assets/plugins/colorpicker/jquery-asColor.js" type="text/javascript"></script>
+    <script src="{{ asset('') }}assets/plugins/colorpicker/jquery-asGradient.js" type="text/javascript"></script>
+    <script src="{{ asset('') }}assets/plugins/colorpicker/jquery-asColorPicker.min.js" type="text/javascript">
+    </script>
+    <script src="{{ asset('') }}assets/plugins/select2/select2.min.js" type="text/javascript"></script>
+
+    <script src="{{ asset('') }}assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+    <script src="{{ asset('') }}assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="{{ asset('') }}assets/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript">
+    </script>
+    <script src="{{ asset('') }}assets/plugins/bootstrap-touchspin/js/jquery.bootstrap-touchspin.min.js"
+        type="text/javascript"></script>
+
+    <!-- Plugins Init js -->
+    <script src="assets/pages/form-advanced.js"></script>
 
     <script src="{{ asset('') }}assets/plugins/skycons/skycons.min.js"></script>
     <script src="{{ asset('') }}assets/plugins/raphael/raphael-min.js"></script>

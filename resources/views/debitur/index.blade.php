@@ -28,11 +28,10 @@
                                     <th scope="col">Tgl Pengajuan</th>
                                     <th scope="col-3">Nama Debitur</th>
                                     <th scope="col">No KTP</th>
-                                    <th scope="col">Telepon</th>
                                     <th scope="col">Plafond</th>
                                     <th scope="col">Cabang</th>
                                     <th scope="col">Nama Perusahaan</th>
-                                    <th scope="col">Created_at</th>
+                                    <th scope="col">Created At</th>
                                     <th scope="col">Status Pengajuan</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
@@ -69,10 +68,10 @@
                 $('#tabeldebitur').addClass('nowrap').DataTable(({
                     dom: 'lBfrtip',
                     aLengthMenu: [
-                        [25, 50, 75, -1],
-                        [25, 50, 75, "All"]
+                        [10, 25, 50, 75, -1],
+                        [10, 25, 50, 75, "All"]
                     ],
-                    pageLength: 25,
+                    pageLength: 10,
                     buttons: [
                         'copy', 'excel', 'pdf', 'csv', 'print'
                     ],
@@ -99,10 +98,6 @@
                         {
                             data: 'noKtp',
                             name: 'noKtp'
-                        },
-                        {
-                            data: 'tlp',
-                            name: 'tlp'
                         },
                         {
                             data: 'plafond',

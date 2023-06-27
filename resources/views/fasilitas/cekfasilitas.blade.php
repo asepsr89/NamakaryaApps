@@ -17,13 +17,14 @@
                     @if ($data->status == 2)
                         <a href="{{ route('fasilitas.index') }}" class="btn btn-secondary btn-xl mb-03">Back</a>
                         <a href="{{ route('fasilitas.approve', $data->id) }}" class="btn btn-primary btn-xl">Approve
-                            Fasilitas</a>
-                        <a class="btn btn-warning btn-xl" href="javascript:void(0)" id="revisiBtn">Revisi
-                            Berkas<a>
-                            @elseif($data->status == 4)
-                                <span class="badge badge-success">
-                                    <h4>APPROVE FASILITAS</h4>
-                                </span>
+                            <a href="{{ route('fasilitas.reject', $data->id) }}" class="btn btn-danger btn-xl">Reject
+                                Fasilitas</a>
+                            <a class="btn btn-warning btn-xl" href="javascript:void(0)" id="revisiBtn">Revisi
+                                Berkas<a>
+                                @elseif($data->status == 4)
+                                    <span class="badge badge-success">
+                                        <h4>APPROVE FASILITAS</h4>
+                                    </span>
                     @endif
                     <hr>
                     <div class="form-group row">
@@ -350,8 +351,9 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <form id="revisiPlafond" name="revisiPlafond" action="" class="form-horizontal"
-                                {{-- action="{{ route('fasilitas.revisiPlafond', $data->id) }}" class="form-horizontal" --}} method="POST">
+                            <form id="revisiPlafond" name="revisiPlafond"
+                                action="{{ route('fasilitas.revisiPlafond', $data->id) }}" class="form-horizontal"
+                                method="POST">
                                 @csrf
                                 @if ($data->id)
                                     @method('PUT')
@@ -360,13 +362,14 @@
                                     <label for="example-text-input" class="col-sm-4 col-form-label">Plafond
                                         Rekomendasi</label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" type="text" value="" id="plafondRekomen"
+                                        <input class="form-control" type="text"
+                                            value="Rp. {{ number_format($data->PlafondRekomen) }}" id="plafondRekomen"
                                             name="plafondRekomen">
                                     </div>
                                 </div>
                                 <label class="col-sm-2 control-label">Note Rekomendasi</label>
                                 <div class="col-sm-12">
-                                    <textarea id="note" name="note" placeholder="Enter Details" class="form-control form-control-lg mb-3"></textarea>
+                                    <textarea id="note" name="note" placeholder="Enter Details" class="form-control form-control-lg mb-3">{{ $data->note }}</textarea>
                                 </div>
                                 <br />
                                 <div class="col-sm-offset-2 col-sm-10">

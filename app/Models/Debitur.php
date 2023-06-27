@@ -16,6 +16,8 @@ class Debitur extends Model implements HasMedia
         protected $fillable = [
             'user_id',
             'cabang_id',
+            'mitra2',
+            'mitra3',
             'name',
             'ibuKandung',
             'tglPengajuan',
