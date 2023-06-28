@@ -99,6 +99,19 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Account Officer</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="account_id" id="account_id" readonly>
+                                    <option>Select</option>
+                                    @foreach ($account as $account)
+                                        <option value="{{ $account->id }}"
+                                            {{ $account->id == $data->account_id ? 'selected' : '' }}>{{ $account->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Data Dokumen</label>
                             @foreach ($data->getMedia('document') as $document)
                                 <img src="{{ $document->getUrl() }}" alt="{{ $document->getUrl() }}"

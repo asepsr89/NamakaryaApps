@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DebiturRequest;
+use App\Models\AccountOfficer;
 use App\Models\Cabang;
 use App\Models\Debitur;
 use App\Models\Fasilitas;
@@ -171,7 +172,8 @@ class DebiturController extends Controller
     {
         $nomor_anggota = $this->generateNomorAnggota();
         $cabang = Cabang::all();
-        return view('debitur.create',compact('cabang','nomor_anggota'));
+        $account = AccountOfficer::all();
+        return view('debitur.create',compact('cabang','nomor_anggota','account'));
     }
 
     private function generateNomorAnggota()
@@ -199,6 +201,7 @@ class DebiturController extends Controller
             'plafond' => $request->plafond,
             'alamat' => $request->alamat,
             'cabang_id' => $request->cabang_id,
+            'account_id' => $request->account_id,
             'namaPerusahaan' => $request->namaPerusahaan,
             'user_id'=>auth()->user()->id,
         ]);
@@ -280,9 +283,10 @@ class DebiturController extends Controller
         $data=Debitur::find($id);
         $mitra=Mitra::all();
         $cabang=Cabang::all();
+        $account=AccountOfficer::all();
         $image=$data->getMedia('images');
         
-        return view('debitur.editdata',compact('image','data','mitra','cabang'));
+        return view('debitur.editdata',compact('image','data','mitra','cabang','account'));
     }
 
     public function kirim(Debitur $debitur,$id)
@@ -326,6 +330,13 @@ class DebiturController extends Controller
         $debitur->mitra_id=$request->mitra_id;
         $debitur->sttsPengajuan='1';
         $debitur->save();
+
+        //send email
+
+        $user_id = $debitur->mitra_id;
+        $mitra = Mitra::find($user_id);
+
+        dd($mitra);
 
         return redirect('debitur')->with('success','Pengajuan Slik di kirim');
     }

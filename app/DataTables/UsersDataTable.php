@@ -30,6 +30,11 @@ class UsersDataTable extends DataTable
             ->editColumn('updated_at',function($row){
             return $row->updated_at->format('d-m-Y');
             })
+
+            ->addColumn('role', function($data){
+            return $data->roles->first()->name;
+            })
+
             ->addColumn('action',function($row){
 
             $action ='';

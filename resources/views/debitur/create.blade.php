@@ -101,12 +101,27 @@
                             <div class="col-sm-10">
                                 <select class="form-control @error('cabang_id') is-invalid @enderror" name="cabang_id"
                                     id="cabang_id">
-                                    <option value='0'>Select</option>
+                                    <option value='0'>--Select--</option>
                                     @foreach ($cabang as $cabang)
                                         <option value="{{ $cabang->id }}">{{ $cabang->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('cabang_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Account Officer</label>
+                            <div class="col-sm-10">
+                                <select class="form-control @error('account_id') is-invalid @enderror" name="account_id"
+                                    id="account_id">
+                                    <option value='0'>--Select--</option>
+                                    @foreach ($account as $account)
+                                        <option value="{{ $account->id }}">{{ $account->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('account_id')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\AccountOfficerDataTable;
+use App\Http\Requests\AccountRequest;
 use App\Models\AccountOfficer;
 use App\Models\Cabang;
 use Illuminate\Http\Request;
@@ -37,7 +38,9 @@ class AoController extends Controller
      */
     public function create()
     {
-        return view('accountofficer.accountofficer-action',['accountofficer'=>new AccountOfficer()]);
+        $cabang = Cabang::all();
+        return view('accountofficer.accountofficer-action',['accountofficer'=>new
+        AccountOfficer()],compact('cabang'));
     }
 
     /**
@@ -46,7 +49,7 @@ class AoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AccountRequest $request)
     {
          AccountOfficer::create($request->all());
          return response()->json([
@@ -74,7 +77,8 @@ class AoController extends Controller
      */
     public function edit(AccountOfficer $accountofficer)
     {
-         return view('accountofficer.accountofficer-action',compact('accountofficer'));
+        $cabang = Cabang::all();
+         return view('accountofficer.accountofficer-action',compact('accountofficer','cabang'));
     }
 
     /**
@@ -84,9 +88,9 @@ class AoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AccountOfficer $accountofficer)
+    public function update(AccountRequest $request, AccountOfficer $accountofficer)
     {
-         $accountofficer->name =$request->cabang_id;
+         $accountofficer->cabang_id =$request->cabang_id;
          $accountofficer->name =$request->name;
          $accountofficer->tlp =$request->tlp;
          $accountofficer->alamat =$request->alamat;

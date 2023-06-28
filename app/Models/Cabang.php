@@ -20,4 +20,9 @@ class Cabang extends Model
         return $this->hasMany(Fasilitas::class);
     }
 
+    public function accountofficer()
+    {
+        return $this->hasMany(AccountOfficer::class);
+    }
+
 }

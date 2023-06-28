@@ -16,4 +16,9 @@ class AccountOfficer extends Model
      'alamat',
      ];
 
+    public function cabang()
+    {
+        return $this->belongsTo(Cabang::class,'cabang_id','id');
+    }
+
 }

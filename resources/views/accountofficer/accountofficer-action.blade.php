@@ -12,10 +12,16 @@
         </div>
         <div class="modal-body">
             <div class="form-group row">
-                <label for="namacabang" class="col-sm-2 col-form-label">Nama Cabang</label>
+                <label class="col-sm-2 col-form-label">Cabang</label>
                 <div class="col-sm-10">
-                    <input class="form-control" type="text" name="cabang_id" value="{{ $accountofficer->cabang_id }}"
-                        id="cabang_id">
+                    <select class="form-control" id="cabang" name="cabang_id">
+                        <option value="">---Select---</option>
+                        @foreach ($cabang as $cabang)
+                            <option value="{{ $cabang->id }}"
+                                {{ $cabang->id == $accountofficer->cabang_id ? 'selected' : '' }}>
+                                {{ $cabang->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="form-group row">

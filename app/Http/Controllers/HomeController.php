@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cabang;
 use App\Models\Debitur;
 use App\Models\Slik;
 use Illuminate\Http\Request;
@@ -37,6 +38,20 @@ class HomeController extends Controller
         $slikprogress = Debitur::where('sttsPengajuan','1')->count();
 
 
-        return view('home',compact('debitur','plafond','slik','slikapprove','slikreject','slikprogress'));
+    $now = date('Y-m-d');
+    $plafondSums = Cabang::select('account_officers.name','cabangs.name AS cabang', DB::raw('SUM(debiturs.plafond) as total_plafond'),
+    DB::raw('COUNT(debiturs.id) as total_debitur'))
+    ->join('account_officers', 'cabangs.id', '=', 'account_officers.cabang_id')
+    ->join('debiturs', 'account_officers.id', '=', 'debiturs.account_id')
+    ->where('debiturs.created_at', '>=', $now.' 00:00:00')
+    ->where('debiturs.created_at', '<=', $now.' 23:59:59')
+    ->groupBy('account_officers.name', 'cabangs.name')
+    ->get();
+
+
+
+
+
+        return view('home',compact('debitur','plafond','slik','slikapprove','slikreject','slikprogress','plafondSums'));
     }
 }

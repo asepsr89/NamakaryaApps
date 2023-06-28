@@ -30,6 +30,11 @@ class AccountOfficerDataTable extends DataTable
             ->editColumn('updated_at',function($row){
             return $row->updated_at->format('d-m-Y');
             })
+
+            ->editColumn('cabang_id', function($data) {
+            return $data->cabang->name;
+            })
+
            ->addColumn('action',function($row){
 
                 $action ='';
@@ -56,7 +61,7 @@ class AccountOfficerDataTable extends DataTable
      */
     public function query(AccountOfficer $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['cabang']);
     }
 
     /**

@@ -150,35 +150,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>RikY</td>
-                                    <td>Cabang Purwakarta</td>
-                                    <td>34</td>
-                                    <td>Rp. 845000000</td>
-                                <tr>
-                                    <td>Darmaji</td>
-                                    <td>Cabang Purwakarta</td>
-                                    <td>34</td>
-                                    <td>Rp. 845000000</td>
-                                </tr>
-                                <tr>
-                                    <td>Deny</td>
-                                    <td>Cabang Purwakarta</td>
-                                    <td>34</td>
-                                    <td>Rp. 845000000</td>
-                                </tr>
-                                <tr>
-                                    <td>Budin</td>
-                                    <td>Cabang Purwakarta</td>
-                                    <td>34</td>
-                                    <td>Rp. 845000000</td>
-                                </tr>
-                                <tr>
-                                    <td>Tomy</td>
-                                    <td>Cabang Purwakarta</td>
-                                    <td>34</td>
-                                    <td>Rp. 845000000</td>
-                                </tr>
+                                @foreach ($plafondSums as $plafondSums)
+                                    <tr>
+                                        <td>{{ $plafondSums->name }}</td>
+                                        <td>{{ $plafondSums->cabang }}</td>
+                                        <td>{{ $plafondSums->total_debitur }}</td>
+                                        <td>Rp. {{ number_format($plafondSums->total_plafond) }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
 

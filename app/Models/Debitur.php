@@ -16,6 +16,7 @@ class Debitur extends Model implements HasMedia
         protected $fillable = [
             'user_id',
             'cabang_id',
+            'account_id',
             'mitra2',
             'mitra3',
             'name',
@@ -47,11 +48,4 @@ class Debitur extends Model implements HasMedia
         }
 
 
-    // public function registerMediaConversions(Media $media = null): void
-    // {
-    //     $this->addMediaConversion('thumb')
-    //             ->width(497)
-    //             ->height(290)
-    //             ->sharpen(10);
-    // }
 }
