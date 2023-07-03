@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DebiturRequest;
+use App\Mail\PengajuanSlikMaillable;
 use App\Models\AccountOfficer;
 use App\Models\Cabang;
 use App\Models\Debitur;
@@ -14,6 +15,7 @@ use Yajra\DataTables\DataTables;
 use RealRashid\SweetAlert\Facades\Alert;
 use Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Spatie\MediaLibrary\Support\MediaStream;
 
 class DebiturController extends Controller
@@ -325,6 +327,7 @@ class DebiturController extends Controller
     public function pengajuanslik(Request $request,$id)
     {
 
+    try{
         $debitur = Debitur::find($id);
         $debitur->user_id=Auth()->user()->id;
         $debitur->mitra_id=$request->mitra_id;
@@ -336,9 +339,20 @@ class DebiturController extends Controller
         $user_id = $debitur->mitra_id;
         $mitra = Mitra::find($user_id);
 
-        dd($mitra);
+            Mail::to($mitra->email)->send(new PengajuanSlikMaillable($debitur));
 
-        return redirect('debitur')->with('success','Pengajuan Slik di kirim');
+            return redirect('debitur')->with('success','Pengajuan Slik di kirim');
+            
+        }catch(\Exception $e){
+
+            return redirect('debitur')->with('success','Tidak mengirim email');
+        }
+
+    }
+
+    public function kirimEmail()
+    {
+
     }
 
     /**
