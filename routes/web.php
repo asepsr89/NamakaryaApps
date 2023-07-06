@@ -65,8 +65,10 @@ Route::middleware('auth')->group(function(){
     Route::get('debitur/{id}/editdata',[DebiturController::class,'editdata']);
     Route::get('debitur/{id}/viewdata',[DebiturController::class,'viewdata']);
     Route::get('debitur/{id}/edit',[DebiturController::class,'edit']);
+    Route::get('debitur/{id}/nonSlik',[DebiturController::class,'nonSlik']);
     Route::post('debitur/media',[DebiturController::class, 'storeMedia'])->name('debitur.storeMedia');
     Route::put('pengajuanslik/{id}', [DebiturController::class, 'pengajuanslik'])->name('debitur.pengajuanslik');
+    Route::put('pengajuannonslik/{id}', [DebiturController::class, 'pengajuannonslik'])->name('debitur.pengajuannonslik');
     Route::get('debitur/{id}/kirim', [DebiturController::class, 'kirim']);
     Route::get('slik', [SlikController::class,'index'])->name('slik.index');
     Route::get('slik/dataslik', [SlikController::class,'dataslik'])->name('slik.dataslik');

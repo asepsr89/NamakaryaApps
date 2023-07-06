@@ -13,6 +13,7 @@ class Mitra extends Model
          'name',
          'tlp',
          'alamat',
+         'statusSlik',
          ];
 
     public function Slik()

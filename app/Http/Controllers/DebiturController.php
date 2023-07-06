@@ -83,6 +83,8 @@ class DebiturController extends Controller
             if($var == 1 ){
                 $approve = '<a href="debitur/'.$data->id.'/edit" data-toggle="tooltip" data-id="'.$data->id.'"
                     data-original-title="Edit" class="btn btn-success btn-sm pengajuan">Pengajuan Slik</a>';
+                $approve .= ' <a href="debitur/'.$data->id.'/nonSlik" data-toggle="tooltip" data-id="'.$data->id.'"
+                    data-original-title="Edit" class="btn btn-warning btn-sm pengajuan">Non Slik</a>';
 
                 $kirimcabang = '<a href="debitur/'.$data->id.'/kirim" data-toggle="tooltip" data-id="'.$data->id.'"
                     data-original-title="Edit" class="edit btn btn-success btn-sm editCabang">Kirim data cabang</a>';
@@ -309,6 +311,18 @@ class DebiturController extends Controller
         return view('debitur.editdata',compact('image','data','mitra','cabang','account','perusahaan'));
     }
 
+    public function nonSlik(Debitur $image,$id)
+    {
+        $data=Debitur::find($id);
+        $mitra=Mitra::all()->where('statusSlik',2);
+        $cabang=Cabang::all();
+        $account=AccountOfficer::all();
+        $perusahaan=Perusahaan::all();
+        $image=$data->getMedia('images');
+        
+        return view('debitur.nonslik',compact('image','data','mitra','cabang','account','perusahaan'));
+    }
+
     public function kirim(Debitur $debitur,$id)
     {
         $debitur = Debitur::find($id);
@@ -369,9 +383,16 @@ class DebiturController extends Controller
 
     }
 
-    public function kirimEmail()
+    public function pengajuannonslik(Request $request,$id)
     {
+            $debitur = Debitur::find($id);
+            $debitur->user_id=Auth()->user()->id;
+            $debitur->mitra_id=$request->mitra_id;
+            $debitur->sttsPengajuan='4';
+            $debitur->save();
 
+            return redirect('debitur')->with('success','Pengajuan Slik di kirim');
+    
     }
 
     /**

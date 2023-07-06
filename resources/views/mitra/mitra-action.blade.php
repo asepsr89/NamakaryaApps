@@ -30,6 +30,20 @@
                     <textarea class="form-control" type="text" name="alamat" id="alamat">{{ $mitra->alamat }}</textarea>
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Slik Mitra</label>
+                <div class="col-sm-10">
+                    <select class="form-control @error('statusSlik') is-invalid @enderror" name="statusSlik"
+                        id="statusSlik">
+                        <option value="0">--Select--</option>
+                        <option value="1">Slik</option>
+                        <option value="2">Non-Slik</option>
+                    </select>
+                    @error('statusSlik')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Save changes</button>

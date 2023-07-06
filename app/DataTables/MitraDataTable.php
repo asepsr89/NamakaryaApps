@@ -98,6 +98,7 @@ class MitraDataTable extends DataTable
             Column::make('name'),
             Column::make('tlp'),
             Column::make('alamat'),
+            Column::make('statusSlik'),
             Column::make('created_at'),
             Column::make('updated_at'),
             Column::computed('action')

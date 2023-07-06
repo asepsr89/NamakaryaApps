@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('tlp');
             $table->string('alamat');
+            $table->string('statusSlik');
             $table->timestamps();
         });
     }

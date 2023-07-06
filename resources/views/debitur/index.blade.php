@@ -129,6 +129,8 @@
                 }));
             });
 
+
+
             $('#tabeldebitur').on('click', '.action', function() {
                 let data = $(this).data()
                 let id = data.id
