@@ -131,5 +131,12 @@ class NavigationSeeder extends Seeder
             'icon'=>'',
             'main_menu'=>1,
         ]);
+
+            Navigation::create([
+            'name' => 'Manage Perusahaan',
+            'url' =>'perusahaan',
+            'icon'=>'',
+            'main_menu'=>1,
+        ]);
     }
 }

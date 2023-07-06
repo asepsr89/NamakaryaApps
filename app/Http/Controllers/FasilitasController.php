@@ -194,7 +194,7 @@ class FasilitasController extends Controller
         $fasilitas->addMediaFromRequest('fileBerkas')->usingName($fasilitas->noFasilitas)->toMediaCollection('docs');
 
         return redirect('fasilitas')->with('success', 'Data Berhasil Di simpan');
-   
+
     }
 
     

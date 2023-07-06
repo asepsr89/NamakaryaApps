@@ -17,8 +17,9 @@ class Debitur extends Model implements HasMedia
             'user_id',
             'cabang_id',
             'account_id',
-            'mitra2',
-            'mitra3',
+            'accountOfficer_id',
+            'perusahaan_id',
+            'mitra_id',
             'name',
             'ibuKandung',
             'tglPengajuan',
@@ -37,10 +38,16 @@ class Debitur extends Model implements HasMedia
             return $this->belongsTo(Cabang::class);
         }
 
+        public function perusahaan()
+        {
+            return $this->belongsTo(Perusahaan::class);
+        }
+
         public function mitra()
         {
             return $this->hasMany(Mitra::class);
         }
+
 
         public function fasilitas()
         {

@@ -42,16 +42,14 @@ class HomeController extends Controller
     $plafondSums = Cabang::select('account_officers.name','cabangs.name AS cabang', DB::raw('SUM(debiturs.plafond) as total_plafond'),
     DB::raw('COUNT(debiturs.id) as total_debitur'))
     ->join('account_officers', 'cabangs.id', '=', 'account_officers.cabang_id')
-    ->join('debiturs', 'account_officers.id', '=', 'debiturs.account_id')
+    ->join('debiturs', 'account_officers.id', '=', 'debiturs.accountOfficer_id')
     ->where('debiturs.created_at', '>=', $now.' 00:00:00')
     ->where('debiturs.created_at', '<=', $now.' 23:59:59')
     ->groupBy('account_officers.name', 'cabangs.name')
     ->get();
 
-
-
-
-
+    // dd($plafondSums);
+    
         return view('home',compact('debitur','plafond','slik','slikapprove','slikreject','slikprogress','plafondSums'));
     }
 }

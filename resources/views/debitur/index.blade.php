@@ -108,8 +108,8 @@
                             name: 'cabang_id'
                         },
                         {
-                            data: 'namaPerusahaan',
-                            name: 'namaPerusahaan'
+                            data: 'perusahaan_id',
+                            name: 'perusahaan_id'
                         },
                         {
                             data: 'created_at',

@@ -38,5 +38,11 @@ class MitraSeeder extends Seeder
             Jawa Barat, Indonesia',
         ]);
 
+        Mitra::create([
+            'name' => 'BPR Samarason',
+            'tlp' =>'(021) 40643001',
+            'alamat'=>'Apartemen Evenciio Lantai G, Jl. Margonda Raya No. 508 Pondok Cina, Kota Depok',
+        ]);
+
     }
 }

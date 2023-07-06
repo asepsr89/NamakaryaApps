@@ -20,8 +20,8 @@ class Mitra extends Model
         return $this->hasMany(Slik::class);
     }
 
-        public function fasilitas()
-        {
+    public function fasilitas()
+    {
         return $this->hasMany(Fasilitas::class);
-        }
+    }
 }

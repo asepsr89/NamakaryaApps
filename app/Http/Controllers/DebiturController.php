@@ -9,6 +9,7 @@ use App\Models\Cabang;
 use App\Models\Debitur;
 use App\Models\Fasilitas;
 use App\Models\Mitra;
+use App\Models\Perusahaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
@@ -154,6 +155,9 @@ class DebiturController extends Controller
         ->editColumn('cabang_id', function($data) {
             return $data->cabang->name;
         })
+        ->editColumn('perusahaan_id', function($data) {
+            return $data->perusahaan->namaPerusahaan;
+        })
         ->editColumn('plafond',function($data){
             return number_format($data->plafond);
         })
@@ -175,7 +179,9 @@ class DebiturController extends Controller
         $nomor_anggota = $this->generateNomorAnggota();
         $cabang = Cabang::all();
         $account = AccountOfficer::all();
-        return view('debitur.create',compact('cabang','nomor_anggota','account'));
+        $perusahaan = Perusahaan::all();
+
+        return view('debitur.create',compact('cabang','nomor_anggota','account','perusahaan'));
     }
 
     private function generateNomorAnggota()
@@ -193,8 +199,9 @@ class DebiturController extends Controller
     public function store(DebiturRequest $request)
     {
 
-        $debitur = Debitur::create([
-            'noDebitur' => $request->noDebitur, 
+        try {
+            $debitur = Debitur::create([
+            'noDebitur' => $request->noDebitur,
             'tglPengajuan' => $request->tglPengajuan,
             'name' => $request->name,
             'ibuKandung' => $request->ibuKandung,
@@ -203,18 +210,27 @@ class DebiturController extends Controller
             'plafond' => $request->plafond,
             'alamat' => $request->alamat,
             'cabang_id' => $request->cabang_id,
-            'account_id' => $request->account_id,
-            'namaPerusahaan' => $request->namaPerusahaan,
+            'accountOfficer_id' => $request->account_id,
+            'perusahaan_id'=>$request->perusahaan_id,
             'user_id'=>auth()->user()->id,
-        ]);
+            ]);
 
-        foreach ($request->input('document', []) as $file) {
+
+            foreach ($request->input('document', []) as $file) {
 
             $debitur->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('document');
+
+            }
+
+
+            return redirect('debitur')->with('success', 'Data berhasil di simpan!');
+
+        } catch (\Throwable $th) {
+            
+            Alert::error('Kesalahan', 'Terjadi kesalahan, harap coba lagi');
         }
 
-
-        return redirect('debitur')->with('success', 'Data berhasil di simpan!');
+        
     }
 
     public function storeMedia(Request $request)
@@ -259,7 +275,8 @@ class DebiturController extends Controller
 
         $data=Debitur::find($id);
         $mitra=Mitra::all();
-        return view('debitur.edit',compact('data','mitra'));
+        $perusahaan=Perusahaan::all();
+        return view('debitur.edit',compact('data','mitra','perusahaan'));
     }
 
     public function viewdata(Debitur $image,$id)
@@ -286,9 +303,10 @@ class DebiturController extends Controller
         $mitra=Mitra::all();
         $cabang=Cabang::all();
         $account=AccountOfficer::all();
+        $perusahaan=Perusahaan::all();
         $image=$data->getMedia('images');
         
-        return view('debitur.editdata',compact('image','data','mitra','cabang','account'));
+        return view('debitur.editdata',compact('image','data','mitra','cabang','account','perusahaan'));
     }
 
     public function kirim(Debitur $debitur,$id)
@@ -308,6 +326,7 @@ class DebiturController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $debitur =  Debitur::findOrFail($id);
         $debitur->update($request->all());
 

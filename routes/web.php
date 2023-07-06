@@ -11,6 +11,7 @@ use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\MitraController;
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SlikController;
 use App\Http\Controllers\UsersController;
@@ -60,6 +61,7 @@ Route::middleware('auth')->group(function(){
     Route::resource('jabatan',JabatanController::class);
     Route::resource('debitur',DebiturController::class);
     Route::resource('accountofficer',AoController::class);
+    Route::resource('perusahaan',PerusahaanController::class);
     Route::get('debitur/{id}/editdata',[DebiturController::class,'editdata']);
     Route::get('debitur/{id}/viewdata',[DebiturController::class,'viewdata']);
     Route::get('debitur/{id}/edit',[DebiturController::class,'edit']);

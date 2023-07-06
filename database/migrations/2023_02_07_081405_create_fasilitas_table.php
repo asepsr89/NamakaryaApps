@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('debitur_id');
             $table->foreignId('cabang_id');
+            $table->foreignId('mitra_id');
             $table->string('noFasilitas');
             $table->string('noDebitur');
             $table->string('tmpLahir');
@@ -61,7 +62,7 @@ return new class extends Migration
             $table->string('alasan')->nullable();
             $table->string('note')->nullable();
             $table->string('notemitra')->nullable();
-            $table->bigInteger('PlafondRekomen');
+            $table->bigInteger('PlafondRekomen')->nullable();
             $table->timestamps();
         });
     }

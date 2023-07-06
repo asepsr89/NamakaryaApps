@@ -25,4 +25,9 @@ class Cabang extends Model
         return $this->hasMany(AccountOfficer::class);
     }
 
+    public function perusahaan()
+    {
+        return $this->hasMany(Perusahaan::class);
+    }
+
 }

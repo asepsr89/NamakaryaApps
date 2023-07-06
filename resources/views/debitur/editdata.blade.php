@@ -65,18 +65,26 @@
                                     name="alamat">
                             </div>
                         </div>
+
                         <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Nama Perusahaan</label>
+                            <label class="col-sm-2 col-form-label">Perusahaan</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" value="{{ $data->namaPerusahaan }}"
-                                    id="namaPerusahaan" name="namaPerusahaan">
+                                <select class="form-control" name="perusahaan_id" id="perusahaan_id" readonly>
+                                    <option>Select</option>
+                                    @foreach ($perusahaan as $perusahaan)
+                                        <option value="{{ $perusahaan->id }}"
+                                            {{ $perusahaan->id == $data->perusahaan_id ? 'selected' : '' }}>
+                                            {{ $perusahaan->namaPerusahaan }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Pengajuan Slik</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="mitra_id" id="mitra_id" readonly>
-                                    <option>Select</option>
+                                    <option value="0">Select</option>
                                     @foreach ($mitra as $mitra)
                                         <option value="{{ $mitra->id }}"
                                             {{ $mitra->id == $data->mitra_id ? 'selected' : '' }}>{{ $mitra->name }}
@@ -86,26 +94,14 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Cabang</label>
+                            <label class="col-sm-2 col-form-label">Perusahaan</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="cabang_id" id="cabang_id" readonly>
                                     <option>Select</option>
                                     @foreach ($cabang as $cabang)
                                         <option value="{{ $cabang->id }}"
-                                            {{ $cabang->id == $data->cabang_id ? 'selected' : '' }}>{{ $cabang->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Account Officer</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" name="account_id" id="account_id" readonly>
-                                    <option>Select</option>
-                                    @foreach ($account as $account)
-                                        <option value="{{ $account->id }}"
-                                            {{ $account->id == $data->account_id ? 'selected' : '' }}>{{ $account->name }}
+                                            {{ $cabang->id == $data->cabang_id ? 'selected' : '' }}>
+                                            {{ $cabang->name }}
                                         </option>
                                     @endforeach
                                 </select>

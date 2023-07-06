@@ -33,7 +33,6 @@ class FasilitasRequest extends FormRequest
     'alamatSkrng' => 'required',
     'stsTinggal' => 'required|not_in:0',
     'jnsPekerjaan' => 'required|not_in:0',
-    'namaPerusahaan' => 'required',
     'tlpPerusahaan' => 'required',
     'lamaBekerja' => 'required',
     'penghasilan' => 'required',

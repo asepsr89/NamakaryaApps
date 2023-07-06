@@ -25,7 +25,7 @@
                         <div class="form-group row">
                             <div class="col-sm-10">
                                 <input class="form-control " type="text" value="{{ $data->mitra_id }}" id="mitra_id"
-                                    name="mitra_id" hidden>
+                                    name="mitra_id">
                             </div>
                             <div class="col-sm-10">
                                 <input class="form-control " type="text" value="{{ $data->id }}" id="debitur_id"
@@ -246,7 +246,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                {{-- <div class="form-group row">
                                     <label for="example-text-input" class="col-sm-4 col-form-label">Nama
                                         Perusahaan</label>
                                     <div class="col-sm-8">
@@ -257,7 +257,7 @@
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-sm-4 col-form-label">Telepon
                                         Perusahan</label>

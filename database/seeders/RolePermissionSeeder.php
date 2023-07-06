@@ -97,6 +97,12 @@ class RolePermissionSeeder extends Seeder
          $permisson = Permission::create(['name'=>'delete accountofficer']);
          $permisson = Permission::create(['name'=>'edit accountofficer']);
          
+         $permisson = Permission::create(['name'=>'read perusahaan']);
+         $permisson = Permission::create(['name'=>'create perusahaan']);
+         $permisson = Permission::create(['name'=>'update perusahaan']);
+         $permisson = Permission::create(['name'=>'delete perusahaan']);
+         $permisson = Permission::create(['name'=>'edit perusahaan']);
+         
 
         Permission::create((['name'=>'read fasilitas']));
         $permisson = Permission::create(['name'=>'read debitur']);
@@ -178,6 +184,12 @@ class RolePermissionSeeder extends Seeder
          $role_it->givePermissionTo('update accountofficer');
          $role_it->givePermissionTo('delete accountofficer');
          $role_it->givePermissionTo('edit accountofficer');
+
+         $role_it->givePermissionTo('read perusahaan');
+         $role_it->givePermissionTo('create perusahaan');
+         $role_it->givePermissionTo('update perusahaan');
+         $role_it->givePermissionTo('delete perusahaan');
+         $role_it->givePermissionTo('edit perusahaan');
 
         $role_it->givePermissionTo('read fasilitas');
         $role_it->givePermissionTo(['name'=>'read debitur']);

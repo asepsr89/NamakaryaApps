@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('account_id')->nullable();
             $table->foreignId('mitra_id')->nullable();
             $table->foreignId('accountOfficer_id')->nullable();
+            $table->foreignId('perusahaan_id')->nullable();
             $table->string('name')->nullable();
             $table->date('tglPengajuan')->nullable();
             $table->string('noDebitur')->nullable();
@@ -28,7 +29,6 @@ return new class extends Migration
             $table->string('tlp')->nullable();
             $table->bigInteger('plafond')->nullable();
             $table->string('ibuKandung')->nullable();
-            $table->string('namaPerusahaan')->nullable();
             $table->integer('sttsDebitu')->nullable();
             $table->integer('sttsPengajuan')->nullable();
             $table->timestamps();

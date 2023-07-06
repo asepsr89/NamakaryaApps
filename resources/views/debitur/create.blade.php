@@ -50,7 +50,8 @@
                             <label for="example-text-input" class="col-sm-2 col-form-label">Nama Ibu Kandung</label>
                             <div class="col-sm-10">
                                 <input class="form-control @error('ibuKandung') is-invalid @enderror" type="text"
-                                    value="{{ old('ibuKandung') }}" name="ibuKandung" id="ibuKandung">
+                                    value="{{ old('ibuKandung') }}" name="ibuKandung" id="ibuKandung"
+                                    style="text-transform: uppercase">
                                 @error('ibuKandung')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -76,6 +77,7 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">plafond</label>
                             <div class="col-sm-10">
@@ -97,7 +99,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Pilih cabang</label>
+                            <label class="col-sm-2 col-form-label">Cabang</label>
                             <div class="col-sm-10">
                                 <select class="form-control @error('cabang_id') is-invalid @enderror" name="cabang_id"
                                     id="cabang_id">
@@ -127,11 +129,16 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Nama Perusahan</label>
+                            <label class="col-sm-2 col-form-label">Nama perusahaan</label>
                             <div class="col-sm-10">
-                                <input class="form-control @error('namaPerusahaan') is-invalid @enderror" type="text"
-                                    value="{{ old('namaPerusahaan') }}" name="namaPerusahaan" id="namaPerusahaan">
-                                @error('namaPerusahaan')
+                                <select class="form-control @error('perusahaan_id') is-invalid @enderror"
+                                    name="perusahaan_id" id="perusahaan_id">
+                                    <option value='0'>--Select--</option>
+                                    @foreach ($perusahaan as $perusahaan)
+                                        <option value="{{ $perusahaan->id }}">{{ $perusahaan->namaPerusahaan }}</option>
+                                    @endforeach
+                                </select>
+                                @error('perusahaan_id')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>

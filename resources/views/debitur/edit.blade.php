@@ -73,10 +73,17 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Nama Perusahaan</label>
+                            <label class="col-sm-2 col-form-label">Perusahaan</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" value="{{ $data->namaPerusahaan }}"
-                                    id="example-text-input" readonly>
+                                <select class="form-control" name="perusahaan_id" id="perusahaan_id" readonly>
+                                    <option>Select</option>
+                                    @foreach ($perusahaan as $perusahaan)
+                                        <option value="{{ $perusahaan->id }}"
+                                            {{ $perusahaan->id == $data->perusahaan_id ? 'selected' : '' }}>
+                                            {{ $perusahaan->namaPerusahaan }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
